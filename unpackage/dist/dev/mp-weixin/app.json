@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/home/home",
+    "pages/submitBP/submitBP",
+    "pages/index/investment/investment",
+    "pages/index/find/find",
+    "pages/index/my/my"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "color": "#8F8F94",
+    "selectedColor": "#DEB156",
+    "list": [
+      {
+        "pagePath": "pages/index/home/home",
+        "iconPath": "static/img/tabbar/home.png",
+        "selectedIconPath": "static/img/tabbar/homeactive.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/investment/investment",
+        "iconPath": "static/img/tabbar/guanzhu.png",
+        "selectedIconPath": "static/img/tabbar/guanzhuactive.png",
+        "text": "投资"
+      },
+      {
+        "pagePath": "pages/index/find/find",
+        "iconPath": "static/img/tabbar/add.png",
+        "selectedIconPath": "static/img/tabbar/addactive.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/index/my/my",
+        "iconPath": "static/img/tabbar/news.png",
+        "selectedIconPath": "static/img/tabbar/newsactive.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
