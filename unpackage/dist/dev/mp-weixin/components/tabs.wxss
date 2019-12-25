@@ -10,9 +10,14 @@
 	        flex: 1;
 	text-align: center;
 }
+.nav-item text.data-v-08f6d138{
+	color: #999;
+	font-size: 30rpx;
+}
 .current.data-v-08f6d138{
-	color: red;
-	border-bottom: 1rpx solid red;
+	color: #444;
+	font-weight:bold;
+	border-bottom: 1rpx solid #DEB156;
 }
 .list_item.data-v-08f6d138{
 	border-top: 1rpx solid #F1F1F1;
@@ -44,6 +49,7 @@
 .type.data-v-08f6d138{
 	width:113rpx;
 	height:42rpx;
+	line-height: 42rpx;
 	background:rgba(255,243,235,1);
 	border-radius:5rpx;
 }

@@ -4,7 +4,8 @@
     "pages/submitBP/submitBP",
     "pages/index/investment/investment",
     "pages/index/find/find",
-    "pages/index/my/my"
+    "pages/index/my/my",
+    "pages/details/details"
   ],
   "subPackages": [],
   "window": {

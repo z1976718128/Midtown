@@ -11,7 +11,6 @@
 		lineColor="#f1505c"
 		swiperWidth="750">
 		</tabs>
-		
 		<navigator url="../../submitBP/submitBP" open-type="navigate"> 	
 			<botton class="sbmit">提交BP</botton>
 		</navigator>

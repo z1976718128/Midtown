@@ -2,13 +2,13 @@
 	<view class="content">
 		<!-- 头部 -->
 		<view class="navbar">
-			<view v-for="(item, index) in navList" :key="index" class="nav-item" :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">
-				{{ item.text }}
+			<view v-for="(item, index) in navList" :key="index" class="nav-item" >
+				<text :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">{{ item.text }}</text>
 			</view>
 		</view>
 		<!-- 显示区域 -->
 		<view class="list" v-for="(item, index) in navList" :key="index" v-if="tabCurrentIndex === index">
-			<view class="list_item" v-for="(or,index) in item.orderList" :key="index">
+			<view class="list_item" v-for="(or,index) in item.orderList" :key="index" @click="dilt(or.id)">
 				<view>
 					<text class="name">{{or.name}}</text>
 					<text class="title">{{or.title}}</text>
@@ -50,7 +50,7 @@ export default {
 							ll:121
 						},
 						{
-							id:1,
+							id:2,
 							name:"天使轮",
 							title:"伟思医疗｜康复类医疗器械生产销售商",
 							pric:500,
@@ -59,7 +59,7 @@ export default {
 							ll:121
 						},
 						{
-							id:1,
+							id:3,
 							name:"天使轮",
 							title:"伟思医疗｜康复类医疗器械生产销售商",
 							pric:500,
@@ -68,7 +68,7 @@ export default {
 							ll:121
 						},
 						{
-							id:1,
+							id:4,
 							name:"天使轮",
 							title:"伟思医疗｜康复类医疗器械生产销售商",
 							pric:500,
@@ -91,7 +91,9 @@ export default {
 			]
 		};
 	},
-
+	mounted() {
+		console.log(this.navList[0].orderList)
+	},
 	onLoad(options) {
 		// 页面显示是默认选中第一个
 		this.tabCurrentIndex = 0;
@@ -104,6 +106,11 @@ export default {
 		//顶部tab点击
 		tabClick(index) {
 			this.tabCurrentIndex = index;
+		},
+		dilt(id){
+			uni.navigateTo({
+				url:"/pages/details/details?did="+id
+			})
 		}
 	}
 };
@@ -117,9 +124,14 @@ export default {
 		flex: 1;
 		text-align: center;
 	}
+	.nav-item text{
+		color: #999;
+		font-size: 30upx;
+	}
 	.current{
-		color: red;
-		border-bottom: 1upx solid red;
+		color: #444;
+		font-weight:bold;
+		border-bottom: 1upx solid #DEB156;
 	}
 	.list_item{
 		border-top: 1upx solid #F1F1F1;
@@ -151,6 +163,7 @@ export default {
 	.type{
 		width:113upx;
 		height:42upx;
+		line-height: 42upx;
 		background:rgba(255,243,235,1);
 		border-radius:5upx;
 	}

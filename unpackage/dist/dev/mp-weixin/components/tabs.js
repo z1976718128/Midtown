@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -157,7 +157,7 @@ var _default =
           ll: 121 },
 
         {
-          id: 1,
+          id: 2,
           name: "天使轮",
           title: "伟思医疗｜康复类医疗器械生产销售商",
           pric: 500,
@@ -166,7 +166,7 @@ var _default =
           ll: 121 },
 
         {
-          id: 1,
+          id: 3,
           name: "天使轮",
           title: "伟思医疗｜康复类医疗器械生产销售商",
           pric: 500,
@@ -175,7 +175,7 @@ var _default =
           ll: 121 },
 
         {
-          id: 1,
+          id: 4,
           name: "天使轮",
           title: "伟思医疗｜康复类医疗器械生产销售商",
           pric: 500,
@@ -198,7 +198,9 @@ var _default =
 
 
   },
-
+  mounted: function mounted() {
+    console.log(this.navList[0].orderList);
+  },
   onLoad: function onLoad(options) {
     // 页面显示是默认选中第一个
     this.tabCurrentIndex = 0;
@@ -211,7 +213,13 @@ var _default =
     //顶部tab点击
     tabClick: function tabClick(index) {
       this.tabCurrentIndex = index;
+    },
+    dilt: function dilt(id) {
+      uni.navigateTo({
+        url: "/pages/details/details?did=" + id });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

@@ -8434,7 +8434,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@^2.0.0-alpha-24420191128001","_id"
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/home/home": { "navigationBarTitleText": "中城金服" }, "pages/submitBP/submitBP": { "navigationBarTitleText": "提交BP", "navigationBarTextStyle": "black" }, "pages/index/investment/investment": { "navigationBarTitleText": "中城金服" }, "pages/index/find/find": { "navigationBarTitleText": "中城金服" }, "pages/index/my/my": { "navigationBarTitleText": "中城金服" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/home/home": { "navigationBarTitleText": "中城金服", "usingComponents": { "banner": "/components/banner", "tabs": "/components/tabs" } }, "pages/submitBP/submitBP": { "navigationBarTitleText": "提交BP", "navigationBarTextStyle": "black", "usingComponents": { "field": "/components/field" } }, "pages/index/investment/investment": { "navigationBarTitleText": "中城金服", "usingComponents": {} }, "pages/index/find/find": { "navigationBarTitleText": "中城金服", "usingComponents": {} }, "pages/index/my/my": { "navigationBarTitleText": "中城金服", "usingComponents": {} }, "pages/details/details": {} }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
