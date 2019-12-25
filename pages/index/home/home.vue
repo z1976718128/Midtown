@@ -1,6 +1,27 @@
 <template>
 	<view>
 		<banner :banner-list="bannerList" :tabs="tabs" :swiper-config="swiperConfig"></banner>
+		<view class="newsiwper">
+			<view class="">喜讯</view>
+			<view class="uni-padding-wrap">
+				<view class="page-section swiper">
+					<view class="page-section-spacing">
+						<swiper class="swiper"  :autoplay="autoplay"  :duration="duration" :vertical="vertical" :circular="circular">
+							<swiper-item>
+								<view class="swiper-item uni-bg-red">云帐房完成8500万美元A轮融资</view>
+							</swiper-item>
+							<swiper-item>
+								<view class="swiper-item uni-bg-green">云帐房完成9500万美元B轮融资</view>
+							</swiper-item>
+							<swiper-item>
+								<view class="swiper-item uni-bg-blue">云帐房完成1500万美元C轮融资</view>
+							</swiper-item>
+						</swiper>
+					</view>
+				</view>
+			</view>
+		</view>
+	
 		<tabs
 		ref="tabs"
 		:tabs="tabs" 
@@ -11,6 +32,7 @@
 		lineColor="#f1505c"
 		swiperWidth="750">
 		</tabs>
+		
 		<navigator url="../../submitBP/submitBP" open-type="navigate"> 	
 			<botton class="sbmit">提交BP</botton>
 		</navigator>
@@ -67,7 +89,14 @@
 		            circular: true,
 		            previousMargin: '58rpx',
 		            nextMargin: '58rpx'
-		        }
+		        },
+				  background: ['color1', 'color2', 'color3'],
+				indicatorDots: true,
+				autoplay: true,
+				interval: 2000,
+				duration: 500,
+				vertical:true,
+				circular:true
 		    }
 		},
 		methods: {
@@ -81,7 +110,19 @@
 				this.$refs.tabs.setFinishCurrent(current);
 				this.swiperCurrent = current;
 				this.current = current;
-			}
+			},
+			changeIndicatorDots(e) {
+			            this.indicatorDots = !this.indicatorDots
+			        },
+			        changeAutoplay(e) {
+			            this.autoplay = !this.autoplay
+			        },
+			        intervalChange(e) {
+			            this.interval = e.target.value
+			        },
+			        durationChange(e) {
+			            this.duration = e.target.value
+			        }
 		}
 	}
 </script>
@@ -100,5 +141,8 @@
 	background:orange;
 	border-radius: 1rem;
 	color: #fff;
+}
+.newsiwper{
+	/* display: flex; */
 }
 </style>
