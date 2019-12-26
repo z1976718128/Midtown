@@ -1,0 +1,36 @@
+
+.uni-common-mt.data-v-d7fef91e{
+	margin:0 30rpx;
+}
+.uni-form-item.data-v-d7fef91e{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	padding-bottom: 34rpx;
+	border-bottom:1rpx solid #F1F1F1;
+	background: red;
+}
+label.data-v-d7fef91e{
+	font-size:30rpx;
+	font-weight:400;
+	color:rgba(70,79,87,1);
+}
+input.data-v-d7fef91e{
+	font-size:26rpx;
+	font-weight:400;
+	color:rgba(169,169,169,1);
+}
+.req.data-v-d7fef91e{
+	color: red;
+}
+.yjh.data-v-d7fef91e{
+	width:689rpx;
+	height:82rpx;
+	background:rgba(241,241,241,1);
+	border-radius:5rpx;
+	font-size:26rpx;
+	font-weight:400;
+	color:rgba(145,145,145,1);
+	text-indent: 23rpx;
+}
+

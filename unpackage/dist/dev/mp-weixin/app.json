@@ -5,7 +5,11 @@
     "pages/index/investment/investment",
     "pages/index/find/find",
     "pages/index/my/my",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/newDetails/newDetails",
+    "pages/project/project",
+    "pages/bpDetails/bpDetails",
+    "pages/investDetails/investDetails"
   ],
   "subPackages": [],
   "window": {
@@ -47,5 +51,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap74.json"
+  "sitemapLocation": "sitemap69.json"
 }

@@ -1,0 +1,20 @@
+
+.uni-list.data-v-3fba35c6{
+	width:331rpx;
+	height:63rpx;
+	line-height: 63rpx;
+	background:rgba(239,239,239,1);
+	border-radius:15rpx;
+	text-align: center;
+}
+.uni-input.data-v-3fba35c6{
+	font-size:28rpx;
+	color:rgba(68,68,68,1);
+	text-align: center;
+}
+.xl.data-v-3fba35c6{
+	width:24rpx;
+	height:14rpx;
+	margin-left: 18rpx;
+}
+

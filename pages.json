@@ -35,6 +35,34 @@
         
         ,{
             "path" : "pages/details/details",
+            "style" : {
+				"navigationBarTitleText": "项目详情",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/newDetails/newDetails",
+            "style" : {
+				"navigationBarTitleText": "投资方详情",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/project/project",
+            "style" : {
+				"navigationBarTitleText": "我的项目",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/bpDetails/bpDetails",
+            "style" : {
+				"navigationBarTitleText": "BP详情",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/investDetails/investDetails",
             "style" : {}
         }
     ],

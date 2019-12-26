@@ -1,1 +1,1 @@
-<view>投资</view>
+<view class="data-v-27970b94"><view class="selets data-v-27970b94"><industry-item vue-id="1" class="data-v-27970b94" bind:__l="__l"></industry-item><industry-field vue-id="2" class="data-v-27970b94" bind:__l="__l"></industry-field></view><new-item vue-id="3" class="data-v-27970b94" bind:__l="__l"></new-item></view>

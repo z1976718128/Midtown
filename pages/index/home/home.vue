@@ -34,7 +34,7 @@
 		</tabs>
 		
 		<navigator url="../../submitBP/submitBP" open-type="navigate"> 	
-			<botton class="sbmit">提交BP</botton>
+			<view class="sbmit">提交BP</view>
 		</navigator>
 	</view>
 </template>

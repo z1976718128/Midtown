@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我的项目",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "project-item": "/components/projectItem"
+  }
+}

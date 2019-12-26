@@ -133,56 +133,6 @@ export default {
 		font-weight:bold;
 		border-bottom: 1upx solid #DEB156;
 	}
-	.list_item{
-		border-top: 1upx solid #F1F1F1;
-		margin:30upx;
-	}
-	.list_item view{
-		width: 100%;
-	}
-	.name{
-		width:91upx;
-		background:rgba(254,243,220,1);
-		border-radius:5upx;
-		font-size:22upx;
-		color:rgba(222,163,44,1);
-	}
-	.title{
-		width:489upx;
-		font-size:28upx;
-		font-weight:bold;
-		color:rgba(82,91,99,1);
-		line-height:65upx;
-		color: #525B63;
-	}
-	.pric{
-		font-size:50upx;
-		font-weight:bold;
-		color:rgba(243,140,55,1);
-	}
-	.type{
-		width:113upx;
-		height:42upx;
-		line-height: 42upx;
-		background:rgba(255,243,235,1);
-		border-radius:5upx;
-	}
-	.type_size{
-		font-size:22upx;
-		font-weight:400;
-		color:rgba(255,156,130,1);
-	}
-	.time,.ll{
-		font-size:20upx;
-		font-weight:400;
-		color:rgba(181,181,181,1);
-	}
-	.list_item_last{
-		display: flex;
-		justify-content:space-between;
-	}
-	.ll{
-		
-	}
+	
 </style>
 

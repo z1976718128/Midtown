@@ -1,0 +1,19 @@
+
+.find_title.data-v-671bf858{
+	margin:35rpx 30rpx 49rpx;
+}
+.shux.data-v-671bf858{
+	display: inline-block;
+	width:6rpx;
+	height:35rpx;
+	background:rgba(222,177,86,1);
+	border-radius:3rpx;
+	margin-right: 17rpx;
+	vertical-align: middle;
+}
+.hd.data-v-671bf858{
+	font-size:32rpx;
+	font-weight:bold;
+	color:rgba(70,79,87,1);
+}
+

@@ -9,7 +9,6 @@
 	bottom: 4rem;
 	left: 50%;
 	-webkit-transform: translateX(-50%);
-	    -ms-transform: translateX(-50%);
 	        transform: translateX(-50%);
 	background:orange;
 	border-radius: 1rem;

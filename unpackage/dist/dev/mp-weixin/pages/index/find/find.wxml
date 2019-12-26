@@ -1,1 +1,1 @@
-<view>发现</view>
+<view class="data-v-671bf858"><view class="find_title data-v-671bf858"><text class="shux data-v-671bf858"></text><text class="hd data-v-671bf858">热门活动</text></view><banner vue-id="1" banner-list="{{bannerList}}" swiper-config="{{swiperConfig}}" class="data-v-671bf858" bind:__l="__l"></banner><view class="find_title data-v-671bf858"><text class="shux data-v-671bf858"></text><text class="hd data-v-671bf858">新闻资讯</text></view><find-item vue-id="2" class="data-v-671bf858" bind:__l="__l"></find-item></view>

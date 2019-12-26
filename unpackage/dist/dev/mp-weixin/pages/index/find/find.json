@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "中城金服",
-  "usingComponents": {}
+  "usingComponents": {
+    "banner": "/components/banner",
+    "find-item": "/components/findItem"
+  }
 }

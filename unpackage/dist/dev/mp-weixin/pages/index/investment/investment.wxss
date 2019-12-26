@@ -1,0 +1,11 @@
+
+.selets.data-v-27970b94{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	margin:34rpx 0 57rpx 0;
+}
+
+
