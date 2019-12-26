@@ -40,6 +40,7 @@
 </template>
 
 <script>
+	import {getData} from "../../../uilt/api.js"
 	import banner from "../../../components/banner.vue"
 	import tabs from "../../../components/tabs.vue"
 	export default {
@@ -123,6 +124,11 @@
 			        durationChange(e) {
 			            this.duration = e.target.value
 			        }
+		},
+		mounted() {
+			getData().then((res)=>{
+				console.log(res)
+			})
 		}
 	}
 </script>

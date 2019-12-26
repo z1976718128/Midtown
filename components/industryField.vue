@@ -5,8 +5,8 @@
                 <view class="uni-list-cell-db">
                     <picker @change="bindPickerChange"  :value="index" :range="array">
                         <view class="uni-input">{{array[index]}}
-							<image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
-							<image v-else class="xl" src="../../../static/img/jt_1.png" mode="">
+							<!-- <image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
+							<image v-else class="xl" src="../../../static/img/jt_1.png" mode=""> -->
 						</view>
                     </picker>
                 </view>

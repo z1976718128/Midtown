@@ -1,9 +1,8 @@
 const baseUrl = 'http://zc.demo.yudw.com/api/';
-const httpRequest = (opts, data) => {
-	console.log(opts,data)
+const httpRequest = (opts) => {
 	let httpDefaultOpts = {
 		url: baseUrl + opts.url,
-		data: data,
+		data: opts.data,
 		method: opts.method,
 		header: opts.method == 'get' ? {
 			'X-Requested-With': 'XMLHttpRequest',
@@ -19,7 +18,6 @@ const httpRequest = (opts, data) => {
 	let promise = new Promise(function(resolve, reject) {
 		uni.request(httpDefaultOpts).then(
 			(res) => {
-				console.log(res,11111111)
 				resolve(res[1])
 			}
 		).catch(
@@ -32,7 +30,6 @@ const httpRequest = (opts, data) => {
 };
 //带Token请求
 const httpTokenRequest = (opts, data) => {
-	console.log(opts)
 	let token = "";
 	uni.getStorage({
 		key: 'token',

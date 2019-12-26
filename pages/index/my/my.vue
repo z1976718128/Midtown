@@ -31,14 +31,18 @@
 </template>
 
 <script>
+	import {checkRegist} from "../../../uilt/api.js"
 	export default {
 		data() {
 			return {
 				
 			}
 		},
-		methods: {
-			
+		mounted() {
+			const token= localStorage.getItem("token");
+			checkRegist({token:token}).then((res)=>{
+				console.log(res)
+			})
 		}
 	}
 </script>

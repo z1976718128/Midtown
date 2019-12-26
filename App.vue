@@ -8,33 +8,34 @@
 		onHide: function() {
 		},
 		mounted() {
-			getData().then((res)=>{
-				console.log(res)
-			})
+			// getData().then((res)=>{
+			// 	console.log(res)
+			// })
 			
 		},
 		beforeMount() {
-			 switch(uni.getSystemInfoSync().platform){
-			
-			    case 'android':
-			
-			       console.log('运行Android上')
-			
-			       break;
-			
-			    case 'ios':
-			
-			       console.log('运行iOS上')
-			
-			       break;
-			
-			    default:
-			
-			       console.log('运行在开发者工具上')
-			
-			       break;
-			
-			}
+			//  switch(uni.getSystemInfoSync().platform){
+			// 
+			//     case 'android':
+			// 
+			//        console.log('运行Android上')
+			// 
+			//        break;
+			// 
+			//     case 'ios':
+			// 
+			//        console.log('运行iOS上')
+			// 
+			//        break;
+			// 
+			//     default:
+			// 
+			//        console.log('运行在开发者工具上')
+			// 
+			//        break;
+			// 
+			// }
+			// #ifdef H5
 			var ua = navigator.userAgent.toLowerCase();
 			//判断是不是微信环境
 			if (ua.match(/MicroMessenger/i) == "micromessenger") {
@@ -51,13 +52,12 @@
 			        geturl({
 			          baseUrl: url
 			        }).then((res) => {
-			          console.log(res,888)
-			          // window.location.href = res.data.data;
+			          window.location.href = res.data.data;
 			        })
 			
 			    } else {
 			        //如果有带code
-			
+					console.log(111)
 			        let code = this.getQueryString("code");
 			
 			        console.log(code)
@@ -65,6 +65,7 @@
 			        getlogin({
 			          code: code
 			        }).then((res) => {
+						console.log(res,7897894566)
 			          //获取token,储存到本地
 			          if (res.data.status == 1) {
 			            if (!res.data.data.token || res.data.data.token == null) {
@@ -83,12 +84,18 @@
 			  }
 			
 			}else{
-			  console.log('不是微信环境，默认登录ID 2的用户')
+			  // console.log('不是微信环境，默认登录ID 2的用户')
 			  //不是微信环境
 			   window.localStorage.setItem("token", 2);
 			   //模拟一个 假的token ，为  2
 			  //到时候把这个删了，指引去微信
 			}
+			
+			// #endif
+			
+			// #ifdef MP-WEIXIN
+			// #endif
+			
 		},
 		methods: {
 		  getQueryString(name) {

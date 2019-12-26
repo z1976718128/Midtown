@@ -6,8 +6,8 @@
                     <picker @change="bindPickerChange" :value="index" :range="objectArray">
                         <view class="uni-input">
 							{{objectArray[index].name}}
-							<image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
-							<image v-else class="xl" src="../../../static/img/jt_1.png" mode="">
+							<!-- <image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
+							<image v-else class="xl" src="../../../static/img/jt_1.png" mode=""> -->
 						</view>
                     </picker>
                 </view>
