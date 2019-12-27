@@ -7,14 +7,8 @@
 				<view class="page-section swiper">
 					<view class="page-section-spacing">
 						<swiper class="swiper"  :autoplay="autoplay"  :duration="duration" :vertical="vertical" :circular="circular">
-							<swiper-item>
-								<view class="swiper-item uni-bg-red">云帐房完成8500万美元A轮融资</view>
-							</swiper-item>
-							<swiper-item>
-								<view class="swiper-item uni-bg-green">云帐房完成9500万美元B轮融资</view>
-							</swiper-item>
-							<swiper-item>
-								<view class="swiper-item uni-bg-blue">云帐房完成1500万美元C轮融资</view>
+							<swiper-item v-for="(item,index) in goods_news">
+								<view class="swiper-item uni-bg-red">{{item.title}}</view>
 							</swiper-item>
 						</swiper>
 					</view>
@@ -67,19 +61,8 @@
 						name:'电子信息'
 					},
 				],
-		        bannerList: [{
-		            picture: 'http://image.mishi.cn/r/yry_h5_test/detail/3_1535359279285.png',
-		            path: ''
-		        }, {
-		            picture: 'http://image.mishi.cn/r/yry_h5_test/detail/2_1535359240426.png',
-		            path: ''
-		        }, {
-		            picture: 'http://image.mishi.cn/r/yry_h5_test/detail/1_1535359204228.png',
-		            path: ''
-		        }, {
-		            picture: 'http://image.mishi.cn/r/yry_h5_test/detail/4_1535359327213.png',
-		            path: ''
-		        }],
+		        bannerList: [],
+				goods_news:[],
 		        swiperConfig: {
 		            indicatorDots: true,
 		            indicatorColor: 'rgba(255, 255, 255, .4)',
@@ -128,6 +111,8 @@
 		mounted() {
 			getData().then((res)=>{
 				console.log(res)
+				this.bannerList = res.data.data.banner;
+				this.goods_news = res.data.data.goods_news;
 			})
 		}
 	}

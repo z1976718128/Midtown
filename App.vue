@@ -86,7 +86,7 @@
 			}else{
 			  // console.log('不是微信环境，默认登录ID 2的用户')
 			  //不是微信环境
-			   window.localStorage.setItem("token", 2);
+			   window.localStorage.setItem("token", 1);
 			   //模拟一个 假的token ，为  2
 			  //到时候把这个删了，指引去微信
 			}
