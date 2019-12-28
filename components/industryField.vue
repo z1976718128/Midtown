@@ -3,8 +3,10 @@
         <view class="uni-list">
             <view class="uni-list-cell">
                 <view class="uni-list-cell-db">
-                    <picker @change="bindPickerChange"  :value="index" :range="array">
-                        <view class="uni-input">{{array[index]}}
+                    <picker @change="bindPickerChange"  selected="index" :range="array" range-key="name">
+                        <view class="uni-input">
+							<!-- 行业阶段 -->
+							{{array[index].name}}
 							<!-- <image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
 							<image v-else class="xl" src="../../../static/img/jt_1.png" mode=""> -->
 						</view>
@@ -16,25 +18,30 @@
 </template>
 
 <script>
-	import {getRegion} from "../uilt/api.js"
+	import {getField} from "../uilt/api.js"
     export default {
         data() {
             return {
                 title: 'picker',
-                array: ["1"],
-                index: 0,
+                array: [{
+					id:1012,
+					name:"行业领域"
+				}],
+                index:0,
 				gb:""
             }
         },
-        mounted() {
-   //      	getRegion().then((res)=>{
-			// console.log(res)
-			// 	this.array = res.data.data
-			// })
-        },
+		mounted() {
+			getField().then((res)=>{
+				// this.array = res.data.data
+				res.data.data.map(item=>{
+					this.array.push(item)
+				})
+			})
+		},
         methods: {
             bindPickerChange: function(e) {
-                console.log(e.target)
+                console.log(e.target.value)
                 this.index = e.target.value
             },
         }

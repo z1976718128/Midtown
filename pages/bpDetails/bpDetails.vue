@@ -2,7 +2,7 @@
 	<view class="BP">
 		<view class="BP_hd">
 			<view class="BP_hd_frist">
-				<view class="">
+				<view class="company_logo_img">
 					<image class="company_logo" :src="bpArr.logo" mode=""></image>
 				</view>
 				<view class="BP_hd_cont">
@@ -57,6 +57,7 @@
 				<text class="business_wj">康复类医疗器械生产.pdf</text>
 			</view>
 		</view>
+		<view class="button" @tap="back">返回</view>
 	</view>
 </template>
 
@@ -78,6 +79,11 @@
 				console.log(res)
 				this.bpArr = res.data.data
 			})
+		},
+		methods:{
+			back(){
+				uni.navigateBack()
+			}
 		}
 	}
 </script>

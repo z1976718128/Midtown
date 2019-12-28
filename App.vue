@@ -52,6 +52,7 @@
 			        geturl({
 			          baseUrl: url
 			        }).then((res) => {
+						console.log(res)
 			          window.location.href = res.data.data;
 			        })
 			
@@ -86,7 +87,8 @@
 			}else{
 			  // console.log('不是微信环境，默认登录ID 2的用户')
 			  //不是微信环境
-			   window.localStorage.setItem("token", 1);
+			  window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F%23%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+			   // window.localStorage.setItem("token", 1);
 			   //模拟一个 假的token ，为  2
 			  //到时候把这个删了，指引去微信
 			}
@@ -248,9 +250,14 @@
 	.BP{
 		
 	}	
+	.company_logo_img{
+		margin:0 28upx 0 30upx ;
+		padding:38upx 0 48upx 0;
+	}
 	.company_logo{
-		width: 196upx;
-		height: 196upx;
+		width: 149upx;
+		height: 149upx;
+		border-radius: 10upx;
 	}
 	.BP_hd{
 		height: 390upx;
@@ -282,7 +289,7 @@
 	}
 	.BP_hd_last{
 		display: flex;
-		margin-top: 36upx;
+		/* margin-top: 36upx; */
 		justify-content: space-around;
 		text-align: left;
 	}

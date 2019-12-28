@@ -3,7 +3,7 @@
         <view class="uni-list">
             <view class="uni-list-cell">
                 <view class="uni-list-cell-db">
-                    <picker @change="bindPickerChange" :value="index" :range="objectArray">
+                    <picker @change="bindPickerChange" :value="index" :range="objectArray"  range-key="name">
                         <view class="uni-input">
 							{{objectArray[index].name}}
 							<!-- <image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+	import {getStage} from "../uilt/api.js"
     export default {
         data() {
             return {
@@ -24,26 +25,20 @@
                 // array: ['中国', '美国', '巴西', '日本'],
                 objectArray: [
 					{
-                        id: 11,
-                        name: '中国'
-                    },
-                    {
-                        id: 12,
-                        name: '美国'
-                    },
-                    {
-                        id: 13,
-                        name: '德国'
-                    },
-                    {
-                        id: 14,
-                        name: '法国'
-                    }
+						id:1012,
+						name:"行业阶段"
+					}
                 ],
                 index:0,
             }
         },
-        computed: {
+        mounted() {
+        	getStage().then((res)=>{
+        		console.log(res)
+				res.data.data.map(item=>{
+					this.objectArray.push(item)
+				})
+        	})
         },
         methods: {
             bindPickerChange: function(e) {

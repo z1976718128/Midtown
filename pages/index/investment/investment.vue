@@ -1,10 +1,13 @@
 <template>
 	<view>
 		<view class="selets">
-			<industryItem></industryItem>
-			<industryField></industryField>
+			<!-- <industryField></industryField>
+			<industryItem></industryItem> -->
 		</view>
 		<newItem :itenArr="itenArr"></newItem>
+		<view class="">
+			{{loadingText}}
+		</view>
 	</view>
 </template>
 
@@ -21,17 +24,43 @@
 		},
 		data() {
 			return {
-				itenArr:[]
+				itenArr:[],
+				page:1,
+				num:5,
+				loadingText:'加载中...',
+				oldArr:[],
+				tempArr:[]
 			}
 		},
-		methods: {
-			
+		
+		onReachBottom() {
+			if(this.tempArr.length < this.num){
+				this.loadingText = '没有更多数据了'
+				return
+			}
+			this.page++;
+			this.getnewList(true)
+		},
+		methods:{
+			getnewList(bool){
+				let datas= []
+				investor({page:this.page,num:this.num}).then((res)=>{
+					datas = res.data.date
+					this.tempArr = datas
+					if(bool){
+						this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
+						this.oldArr.push(...datas)
+						this.itenArr = this.oldArr
+					}else{
+						this.itenArr = datas
+					}
+				})
+				
+				
+			}
 		},
 		mounted() {
-			investor().then((res)=>{
-				console.log(res)
-				this.itenArr = res.data.date
-			})
+			this.getnewList()
 		}
 	}
 </script>

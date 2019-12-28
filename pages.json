@@ -87,7 +87,7 @@
 				"pagePath": "pages/index/investment/investment",
 				"iconPath": "static/img/tabbar/guanzhu.png",
 				"selectedIconPath": "static/img/tabbar/guanzhuactive.png",
-				"text": "投资"
+				"text": "创投"
 			},
 			{
 				"pagePath": "pages/index/find/find",

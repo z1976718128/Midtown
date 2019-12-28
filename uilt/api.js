@@ -28,6 +28,23 @@ export function checkRegist(data) {
   })
 }
 
+export function edit(data) {
+  // 注册
+  return http.httpRequest({
+    url: '/user/edit',
+    method: 'post',
+    data
+  })
+}
+export function sendSms(data) {
+  // 验证码
+  return http.httpRequest({
+    url: 'user/sendSms',
+    method: 'post',
+    data
+  })
+}
+
 export function getData(data) {
   // 首页接口
   return http.httpRequest({
@@ -57,19 +74,38 @@ export function bpInfo(data) {
 
 export function getRegion(data) {
   // 获取省市
+  console.log(data,5555)
   return http.httpRequest({
-    url: '/user/getRegion',
+    url: '/config/getRegion',
+    method: 'POST',
+     data
+  })
+}
+
+export function getField(data) {
+  // 领域列表
+  return http.httpRequest({
+    url: '/index/getField',
+    method: 'get',
+    params: data
+  })
+}
+export function getStage(data) {
+  // 行业列表
+  return http.httpRequest({
+    url: '/index/getStage',
     method: 'get',
     params: data
   })
 }
 
+
 export function investor(data) {
   // 投资方列表
   return http.httpRequest({
     url: '/investor/index',
-    method: 'get',
-    params: data
+    method: 'post',
+     data
   })
 }
 

@@ -34,7 +34,8 @@
 					url:"/pages/newDetails/newDetails?id="+id
 				})
 			}
-		}
+		},
+		
 	}
 </script>
 
