@@ -3,21 +3,18 @@
 		<view class="BP_hd">
 			<view class="BP_hd_frist">
 				<view class="">
-					<image class="company_logo" src="../../static/img/company_logo.png" mode=""></image>
+					<image class="company_logo" :src="detailsArr.logo" mode=""></image>
 				</view>
 				<view class="BP_hd_cont">
-					 <view class="company_name">伟思医疗</view>
-					 <view class="company-desc">康复类医疗器械生产销售商</view>
+					 <view class="company_name">{{detailsArr.company_name}}</view>
+					 <view class="company-desc"></view>
 				</view>
 			</view>
 		</view>
 		<view class="projectBrief">
 			<view class="find_title"><text class="shux"></text><text class="hd">机构简介：</text></view>
 			<text class="projectBrief_text">
-				深圳市东方富海投资管理股份有限公司（简称OFC或东方富海）是由数位在中国创业投资领域从业时间长、有丰富实战经验、优秀投资业绩、在业内有较大影响力的专业人士发起设立的专业性创业投资管理公司。
-				东方富海致力于投资具有成长性和上市潜力的目标公司，并积极为被投资企业提供增值服务，提高企业的盈利能力，努力帮助企业通过 IPO上市等方式实现企业价值最大化，为投资人带来满意的资本增值回报。我们衷心期待成为您的诚挚朋友、可靠伙伴。
-				东方富海成立于2006年，累计管理基金规模近80亿元人民币。目前已投资项目超过100个，10个项目成功上市。投资领域：信息技术、健康医疗、消费品、新能源新材料。
-				                            
+					{{detailsArr.company_desc}}							
 			</text>
 		</view>
 		<view class="company">
@@ -42,17 +39,25 @@
 </template>
 
 <script>
+	import {investorInfo} from "../../uilt/api.js"
 	export default {
 		data() {
 			return {
-				
+				id:"",
+				detailsArr:[]
 			}
 		},
 		methods: {
 			
 		},
 		onLoad(id){
-			console.log(id)
+			this.id = id.id
+		},
+		mounted() {
+			investorInfo({id:this.id}).then((res)=>{
+				console.log(res,111)
+				this.detailsArr = res.data.date
+			})
 		}
 	}
 </script>

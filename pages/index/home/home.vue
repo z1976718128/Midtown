@@ -17,8 +17,10 @@
 		</view>
 	
 		<tabs
+		:field="field"
 		ref="tabs"
 		:tabs="tabs" 
+		:BP="BP"
 		animationMode="line3" 
 		:current="current" 
 		@change="change"
@@ -44,21 +46,23 @@
 		},
 		data() {
 		    return {
+				field:[],
+				BP:[],
 				current: 0,
 				swiperCurrent: 0,
 				tabsHeight: 0,
 				dx: 0,
 				tabs:[
 					{
-						name:'全部',
+						name:'',
 						asd:"111111"
 						
 					},
 					{
-						name:'生物医药'
+						name:''
 					},
 					{
-						name:'电子信息'
+						name:''
 					},
 				],
 		        bannerList: [],
@@ -113,6 +117,8 @@
 				console.log(res)
 				this.bannerList = res.data.data.banner;
 				this.goods_news = res.data.data.goods_news;
+				this.field = res.data.data.field
+				this.BP = res.data.data.bp
 			})
 		}
 	}

@@ -16,16 +16,21 @@
 </template>
 
 <script>
+	import {getRegion} from "../uilt/api.js"
     export default {
         data() {
             return {
                 title: 'picker',
-                array: ['中国', '美国', '巴西', '日本'],
+                array: ["1"],
                 index: 0,
 				gb:""
             }
         },
-        computed: {
+        mounted() {
+   //      	getRegion().then((res)=>{
+			// console.log(res)
+			// 	this.array = res.data.data
+			// })
         },
         methods: {
             bindPickerChange: function(e) {

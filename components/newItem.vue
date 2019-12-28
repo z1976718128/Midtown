@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<view class="new" v-for="(item,index) in arr" :key="index" @click="gotoDetails(item.id)">
+		<view class="new" v-for="(item,index) in itenArr" :key="index" @click="gotoDetails(item.id)">
 			<view class="new_img">
-				<image class="new_imgs" :src="item.img" mode=""></image>
+				<image class="new_imgs" :src="item.logo" mode=""></image>
 			</view>
 			<view class="content">
-				<view class="new_title">{{item.title}}</view>
-				<view class="new_deso">{{item.deso}}</view>
-				<view class="new_time"><text>{{item.time}}</text><text class="fr">浏览量 : {{item.ll}}</text></view>
+				<view class="new_title">{{item.company_name}}</view>
+				<view class="new_deso">{{item.company_desc}}</view>
+				<view class="new_time"><text>{{item.add_time}}</text><text class="fr">浏览量 : {{item.volume_num}}</text></view>
 			</view>
 		</view>
 	
@@ -16,51 +16,17 @@
 
 <script>
 	export default {
+		props:{
+			itenArr:{
+				type:Array,
+				default () {
+					return []
+				}
+			}
+		},
 		data() {
 			return {
-				arr:[
-					{
-						id:1,
-						img:"../../../static/img/logo.png",
-						title:"极空间",
-						deso:"本公司成立于2013年，核心投研团队拥有超过10年的资本市场投资管理经验",
-						time:"2019-12-23 16:18",
-						ll:121
-					},
-					{
-						id:2,
-						img:"../../../static/img/logo.png",
-						title:"极空间",
-						deso:"本公司成立于2013年，核心投研团队拥有超过10年的资本市场投资管理经验",
-						time:"2019-12-23 16:18",
-						ll:121
-					},
-					{
-						id:3,
-						img:"../../../static/img/logo.png",
-						title:"极空间",
-						deso:"本公司成立于2013年，核心投研团队拥有超过10年的资本市场投资管理经验",
-						time:"2019-12-23 16:18",
-						ll:121
-					},
-					{
-						id:4,
-						img:"../../../static/img/logo.png",
-						title:"极空间",
-						deso:"本公司成立于2013年，核心投研团队拥有超过10年的资本市场投资管理经验",
-						time:"2019-12-23 16:18",
-						ll:121
-					},
-					{
-						id:5,
-						img:"../../../static/img/logo.png",
-						title:"极空间",
-						deso:"本公司成立于2013年，核心投研团队拥有超过10年的资本市场投资管理经验",
-						time:"2019-12-23 16:18",
-						ll:121
-					},
-				]
-			};
+			}
 		},
 		methods:{
 			gotoDetails(id){
@@ -98,7 +64,7 @@
 	
 }
 .new_title{
-	width:84upx;
+	/* width:84upx; */
 	font-size:28upx;
 	font-weight:bold;
 	color:rgba(82,91,99,1);

@@ -4,11 +4,12 @@
 			<industryItem></industryItem>
 			<industryField></industryField>
 		</view>
-		<newItem></newItem>
+		<newItem :itenArr="itenArr"></newItem>
 	</view>
 </template>
 
 <script>
+	import {investor} from "../../../uilt/api.js"
 	import industryItem from "../../../components/industryItem.vue"
 	import industryField from "../../../components/industryField.vue"
 	import newItem from "../../../components/newItem.vue"
@@ -20,11 +21,17 @@
 		},
 		data() {
 			return {
-				
+				itenArr:[]
 			}
 		},
 		methods: {
 			
+		},
+		mounted() {
+			investor().then((res)=>{
+				console.log(res)
+				this.itenArr = res.data.date
+			})
 		}
 	}
 </script>

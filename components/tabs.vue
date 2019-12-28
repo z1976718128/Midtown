@@ -2,8 +2,8 @@
 	<view class="content">
 		<!-- 头部 -->
 		<view class="navbar">
-			<view v-for="(item, index) in navList" :key="index" class="nav-item" >
-				<text :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">{{ item.text }}</text>
+			<view v-for="(item, index) in field" :key="index" class="nav-item" >
+				<text :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">{{ item}}</text>
 			</view>
 		</view>
 		<!-- 显示区域 -->
@@ -27,10 +27,15 @@
 </template>
 
 <script>
-
+	import {bpItem} from "../uilt/api.js"
 export default {
-	components: {
-		
+ 	props:{
+		field:{
+			type:Array,
+			default () {
+				return []
+			}
+		}
 	},
 	data() {
 		return {
@@ -92,7 +97,7 @@ export default {
 		};
 	},
 	mounted() {
-		console.log(this.navList[0].orderList)
+		bpItem
 	},
 	onLoad(options) {
 		// 页面显示是默认选中第一个

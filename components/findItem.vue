@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<view class="new" v-for="(item,index) in arr" :key="index" @click="gotoDetails(item.id)">
+		<view class="new" v-for="(item,index) in getNewsArr" :key="index" @click="gotoDetails(item.id)">
 			<view class="content">
-				<view class="new_deso">{{item.deso}}</view>
-				<view class="new_time"><text>{{item.time}}</text><text class="fr">浏览量 : {{item.ll}}</text></view>
+				<view class="new_deso">{{item.title}}</view>
+				<view class="new_time"><text>{{item.add_time}}</text><text class="fr">浏览量 : {{item.volume_num}}</text></view>
 			</view>
 			<view class="new_img">
 				<image class="new_imgs" :src="item.img" mode=""></image>
@@ -15,44 +15,16 @@
 
 <script>
 	export default {
+		props:{
+			getNewsArr:{
+				type:Array,
+				default () {
+					return []
+				}
+			}
+		},
 		data() {
 			return {
-				arr: [{
-						id: 1,
-						img: "../../../static/img/logo.png",
-						deso: "量身打造线下微路演，直面投资大咖， 获取创业真经 ",
-						time: "2019-12-23 16:18",
-						ll: 121
-					},
-					{
-						id: 2,
-						img: "../../../static/img/logo.png",
-						deso: "量身打造线下微路演， 直面投资大咖， 获取创业真经 ",
-						time: "2019-12-23 16:18",
-						ll: 121
-					},
-					{
-						id: 3,
-						img: "../../../static/img/logo.png",
-						deso: "量身打造线下微路演， 直面投资大咖， 获取创业真经 ",
-						time: "2019-12-23 16:18",
-						ll: 121
-					},
-					{
-						id: 4,
-						img: "../../../static/img/logo.png",
-						deso: "量身打造线下微路演， 直面投资大咖， 获取创业真经 ",
-						time: "2019-12-23 16:18",
-						ll: 121
-					},
-					{
-						id: 5,
-						img: "../../../static/img/logo.png",
-						deso: "量身打造线下微路演， 直面投资大咖， 获取创业真经 ",
-						time: "2019-12-23 16:18",
-						ll: 121
-					},
-				]
 			};
 		},
 		methods: {
@@ -91,6 +63,7 @@
 	.new_imgs {
 		width: 246upx;
 		height: 164upx;
+		border-radius: 10upx;
 
 	}
 

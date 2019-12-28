@@ -264,7 +264,7 @@
 		margin-left: 20upx;
 	}
 	.company_name{
-		width:131upx;
+		/* width:131upx; */
 		height:32upx;
 		font-size:32upx;
 		font-weight:bold;

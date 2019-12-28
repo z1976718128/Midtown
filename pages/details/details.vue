@@ -68,6 +68,7 @@
 </template>
 
 <script>
+	import {bpItem} from "../../uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -76,6 +77,11 @@
 		},
 		methods: {
 			
+		},
+		mounted() {
+			bpItem({id:this.id}).then((res)=>{
+				console.log(res)
+			})
 		},
 		onLoad(id) {
 			console.log(id)
