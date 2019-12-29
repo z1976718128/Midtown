@@ -122,11 +122,13 @@
 							title: res.data.msg,
 							icon: 'success',
 							success() {
-								uni.switchTab ({
-									url:"../index/my/my"
-								})
-								uni.hideToast()
+								setTimeout(function(){
+									uni.switchTab ({
+										url:"../index/my/my"
+									})
+								},2000)
 							}
+							
 						});
 					}else{
 						uni.showToast({

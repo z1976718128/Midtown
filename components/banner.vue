@@ -86,6 +86,7 @@
 				this.isDescAnimating = false
 			},
 			getBannerDetail(index) {
+				console.log(index)
 				// uni.showLoading({
 				// 	title: '将前往详情页面',
 				// 	duration: 2000,
@@ -105,7 +106,6 @@
 			width: 100%;
 			height: 100%;
 			display: flex;
-			
 			.slide-image {
 				width:686upx;
 				height:293upx;

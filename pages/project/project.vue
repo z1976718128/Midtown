@@ -18,7 +18,7 @@
 		},
 		mounted() {
 			const token = localStorage.getItem("token");
-			getUserBp({token}).then((res)=>{
+			getUserBp({token:token}).then((res)=>{
 				console.log(res)
 				this.projectArr = res.data.date
 			})

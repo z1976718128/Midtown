@@ -50,9 +50,9 @@
 			return {
 				type:"advert",
 				value:false,
+				mData:{src:'../../static/img/company_logo.png',width:'600upx',height:'350upx'},
 				id:"",
 				detailsArr:[],
-				mData:{src:'../../static/img/company_logo.png',width:'600upx',height:'350upx'},
 			}
 		},
 		methods: {

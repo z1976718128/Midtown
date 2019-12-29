@@ -113,6 +113,9 @@
 
 <style>
 	/*每个页面公共css */
+	.uni-swiper-dots-horizontal{
+		bottom: 66upx !important;
+	}
 	page{
 		background: #f8f8fa;
 	}	

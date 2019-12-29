@@ -30,7 +30,7 @@
 		methods: {
 			gotoDetails(id) {
 				uni.navigateTo({
-					url: "/pages/newDetails/newDetails?id=" + id
+					url: "/pages/findDetails/findDetails?id=" + id
 				})
 			}
 		}

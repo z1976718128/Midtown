@@ -74,10 +74,19 @@ export function getData(data) {
   })
 }
 
-export function bpItem(data) {
+export function bpIndex(data) {
   // 获取BP项目列表
   return http.httpRequest({
     url: '/bp/index',
+    method: 'post',
+    data
+  })
+}
+
+export function bpItem(data) {
+  // 获取BP详情
+  return http.httpRequest({
+    url: '/bp/info',
     method: 'post',
     data
   })
@@ -186,6 +195,15 @@ export function upload(data) {
   // 上传文件
   return http.httpRequest({
     url: '/Upload/upload_file',
+    method: 'post',
+    data
+  })
+}
+
+export function newsInfo(data) {
+  // 发现详情
+  return http.httpRequest({
+    url: '/news/info',
     method: 'post',
     data
   })

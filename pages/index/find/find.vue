@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import {findList,getNews} from "../../../uilt/api.js"
+	import {findList,getNews,investor} from "../../../uilt/api.js"
 	import banner from "../../../components/banner.vue"
 	import findItem from "../../../components/findItem.vue"
 	export default {
@@ -36,8 +36,8 @@
 				},
 				itenArr:[],
 				page:1,
-				num:5,
-				loadingText:'加载中...',
+				num:2,
+				loadingText:'上拉加载更多数据',
 				oldArr:[],
 				tempArr:[]
 			}
@@ -55,8 +55,12 @@
 				let datas= []
 				getNews({page:this.page,num:this.num}).then((res)=>{
 					console.log(res)
-					datas = res.data.date
+					datas = res.data.data
 					this.tempArr = datas
+					if(this.tempArr.length < this.num){
+						this.loadingText = '没有更多数据了'
+						return
+					}
 					if(bool){
 						this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
 						this.oldArr.push(...datas)
@@ -71,6 +75,7 @@
 		},
 		mounted() {
 			findList().then((res)=>{
+				console.log(res)
 				this.bannerList = res.data.data
 			})
 			this.getnewList()

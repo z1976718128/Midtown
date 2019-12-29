@@ -27,7 +27,7 @@
 				itenArr:[],
 				page:1,
 				num:5,
-				loadingText:'加载中...',
+				loadingText:'上拉加载更多数据',
 				oldArr:[],
 				tempArr:[]
 			}
@@ -47,6 +47,9 @@
 				investor({page:this.page,num:this.num}).then((res)=>{
 					datas = res.data.date
 					this.tempArr = datas
+					if(this.tempArr.length < this.num){
+						this.loadingText = '没有更多数据了'
+					}
 					if(bool){
 						this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
 						this.oldArr.push(...datas)

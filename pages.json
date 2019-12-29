@@ -72,6 +72,13 @@
 				"navigationBarTextStyle": "black"
 			}
         }
+        ,{
+            "path" : "pages/findDetails/findDetails",
+            "style" : {
+				"navigationBarTitleText": "发现详情",
+				"navigationBarTextStyle": "black"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -52,7 +52,7 @@
 	let timer = null
 	import {
 		getData,
-		bpItem
+		bpIndex
 	} from "../../../uilt/api.js"
 	import banner from "../../../components/banner.vue"
 	import tabs from "../../../components/tabs.vue"
@@ -66,7 +66,7 @@
 				show:false,
 				oldArr:[],
 				tempArr:[],
-				loadingText: '加载中...',
+				loadingText: '上拉加载更多数据',
 				tabCurrentIndex: 0,
 				navList: [],
 				page: 1,
@@ -116,7 +116,6 @@
 			this.tabCurrentIndex = 0;
 		},
 		onReachBottom() {
-			this.show = true
 			if(this.tempArr.length < this.num){
 				this.show = true
 				this.loadingText = '没有更多数据了'
@@ -127,7 +126,7 @@
 		},
 		methods: {
 			getdatas(bool) {
-				bpItem({
+				bpIndex({
 					field_id: this.tabCurrentIndex,
 					num: this.num,
 					page: this.page
@@ -135,6 +134,10 @@
 					let datas= []
 					datas = rsp.data.date
 					this.tempArr = datas
+					if(this.tempArr.length < this.num){
+						this.loadingText = '没有更多数据了'
+						return
+					}
 					if(bool){
 						this.oldArr = JSON.parse(JSON.stringify(this.navList))
 						this.oldArr.push(...datas)
@@ -150,7 +153,7 @@
 			//顶部tab点击
 			tabClick(index) {
 				this.tabCurrentIndex = index;
-				bpItem({
+				bpIndex({
 					field_id: index,
 					num: 5,
 					page: 1
