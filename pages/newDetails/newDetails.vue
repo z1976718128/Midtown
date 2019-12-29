@@ -17,7 +17,11 @@
 					{{detailsArr.company_desc}}							
 			</text>
 		</view>
-		<view class="company">
+		<view class="find_title"><text class="shux"></text><text class="hd">投资偏好：</text></view>
+		<text class="projectBrief_text">
+			{{detailsArr.stage_desc}}
+		</text>
+		<!-- <view class="company">
 			<view class="find_title"><text class="shux"></text><text class="hd">投资阶段：</text></view>
 			<view class="Investment">
 				<text>{{detailsArr.stage_name}}</text>
@@ -30,22 +34,38 @@
 			<text class="projectBrief_text">
 				{{detailsArr.stage_desc}}
 			</text>
-		</view>
-		<view class="button">联系我们</view>
+		</view> -->
+		 <view class="content">
+			<chunLei-modal v-model="value" :mData="mData" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
+			</chunLei-modal>
+		  </view>
+		<view class="button" @tap="showModel">联系平台</view>
 	</view>
 </template>
 
 <script>
-	import {investorInfo} from "../../uilt/api.js"
+	import {investorInfo,checkRegist} from "../../uilt/api.js"
 	export default {
 		data() {
 			return {
+				type:"advert",
+				value:false,
 				id:"",
-				detailsArr:[]
+				detailsArr:[],
+				mData:{src:'../../static/img/company_logo.png',width:'600upx',height:'350upx'},
 			}
 		},
 		methods: {
-			
+			showModel(){
+				console.log(111)
+				this.value = true
+			},
+			onConfirm(){
+				this.value = false
+			},
+			cancel(){
+				this.value = false
+			}
 		},
 		onLoad(id){
 			this.id = id.id
@@ -54,6 +74,27 @@
 			investorInfo({id:this.id}).then((res)=>{
 				console.log(res,111)
 				this.detailsArr = res.data.date
+			})
+			const token= localStorage.getItem("token");
+			checkRegist({token:token}).then(res=>{
+				console.log(res.data.data)
+				this.check = res.data.data
+				if(res.data.data != 1){
+					uni.showModal({
+						title:"请先注册",
+						success(res) {
+							if(res.confirm){
+								console.log(1)
+								uni.navigateTo({
+									url:"/pages/register/register"
+								})
+							}else if(res.cancel){
+								console.log(2)
+							}
+						}
+						
+					})
+				}
 			})
 		}
 	}
@@ -67,5 +108,4 @@
 	border: none;
 	margin-bottom:114upx ;
 }	
-
 </style>

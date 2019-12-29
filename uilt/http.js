@@ -1,4 +1,4 @@
-const baseUrl = 'http://zc.demo.yudw.com/api/';
+const baseUrl = 'http://zc.demo.yudw.com/api';
 const httpRequest = (opts) => {
 	let httpDefaultOpts = {
 		url: baseUrl + opts.url,

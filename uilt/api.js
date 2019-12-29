@@ -4,7 +4,7 @@ export function geturl(data) {
 //获取链接
 console.log(data)
   return  http.httpRequest({
-    url: 'login/get_code_url',
+    url: '/login/get_code_url',
     method: 'post',
     data
   })
@@ -13,33 +13,53 @@ console.log(data)
 export function getlogin(data) {
 //登录
   return  http.httpRequest ({
-    url: 'login/login',
-    method: 'get',
-    params: data
+    url: '/login/login',
+    method: 'post',
+    data
   })
 }
 
 export function checkRegist(data) {
   // 判断是否注册
   return http.httpRequest({
-    url: 'user/checkRegist',
+    url: '/user/checkRegist',
     method: 'post',
     data
   })
 }
 
+export function getUser(data) {
+  // 获取个人信息
+  return http.httpRequest({
+    url: '/user/getUser',
+    method: 'post',
+    data
+  })
+}
+
+
 export function edit(data) {
-  // 注册
+ //注册
   return http.httpRequest({
     url: '/user/edit',
     method: 'post',
     data
   })
 }
+
+export function postBp(data) {
+    // 提交bp
+  return http.httpRequest({
+    url: '/user/postBp',
+    method: 'post',
+    data
+  })
+}
+
 export function sendSms(data) {
   // 验证码
   return http.httpRequest({
-    url: 'user/sendSms',
+    url: '/user/sendSms',
     method: 'post',
     data
   })
@@ -48,7 +68,7 @@ export function sendSms(data) {
 export function getData(data) {
   // 首页接口
   return http.httpRequest({
-    url: 'index/index',
+    url: '/index/index',
     method: 'get',
     params: data
   })
@@ -153,4 +173,22 @@ export function bpInfos(data) {
     data
   })
 }
+
+export function getCapital(data) {
+  // 融资需求
+  return http.httpRequest({
+    url: '/index/getCapital',
+    method: 'post',
+    data
+  })
+}
+export function upload(data) {
+  // 上传文件
+  return http.httpRequest({
+    url: '/Upload/upload_file',
+    method: 'post',
+    data
+  })
+}
+
 

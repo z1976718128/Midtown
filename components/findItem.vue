@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="new" v-for="(item,index) in getNewsArr" :key="index" @click="gotoDetails(item.id)">
+		<view class="new" v-for="(item,index) in itenArr" :key="index" @click="gotoDetails(item.id)">
 			<view class="content">
 				<view class="new_deso">{{item.title}}</view>
 				<view class="new_time"><text>{{item.add_time}}</text><text class="fr">浏览量 : {{item.volume_num}}</text></view>
@@ -16,7 +16,7 @@
 <script>
 	export default {
 		props:{
-			getNewsArr:{
+			itenArr:{
 				type:Array,
 				default () {
 					return []

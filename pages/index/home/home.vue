@@ -25,12 +25,12 @@
 		</view>
 		<!-- 显示区域 -->
 		<view class="list_item" v-for="(or,index) in navList" :key="index" @click="dilt(or.id)">
-			<view>
+			<view class="list_frist">
 				<text class="name">{{or.stage_name}}</text>
 				<text class="title">{{or.title}}</text>
 			</view>
-			<view class="">
-				<text><text class="pric">{{or.capital_name}}</text>万元以下</text>
+			<view class="list_nth">
+				<text ><text class="pric">{{or.capital_name}}</text><text class="wy">以下</text></text>
 				<text class="type"><text class="type_size">{{or.field_name}}</text></text>
 			</view>
 			<view class="list_item_last">
@@ -42,7 +42,7 @@
 		<navigator url="../../submitBP/submitBP" open-type="navigate">
 			<view class="sbmit">提交BP</view>
 		</navigator>
-		<view class="">
+		<view class="tost" v-if="show">
 			{{loadingText}}
 		</view>
 	</view>
@@ -63,6 +63,7 @@
 		},
 		data() {
 			return {
+				show:false,
 				oldArr:[],
 				tempArr:[],
 				loadingText: '加载中...',
@@ -115,8 +116,9 @@
 			this.tabCurrentIndex = 0;
 		},
 		onReachBottom() {
+			this.show = true
 			if(this.tempArr.length < this.num){
-				console.log(98888)
+				this.show = true
 				this.loadingText = '没有更多数据了'
 				return
 			}
@@ -251,7 +253,11 @@
 		font-weight:400;
 		color:rgba(222,177,86,1);
 		line-height:38upx;
-		padding:29upx 29upx 32upx 38upx;
+		/* padding:29upx 29upx 32upx 38upx; */
+		margin: 13px 4px;
+	}
+	.shux{
+		margin: 13px 4px;
 	}
 	.swiper-item{
 		font-size:28upx;
@@ -276,6 +282,15 @@
 		color: #444;
 		font-weight: bold;
 		border-bottom: 1upx solid #DEB156;
+		box-shadow:0px 5upx 4upx 0upx rgba(222,177,86,0.4);
+		border-radius:2upx;
 	}
-	
+	.navbar{
+		border-top:13upx solid #F1F1F1;
+		margin-top: 42upx;
+		padding-top: 20upx;
+	}
+	.type{
+		float: right;
+	}
 </style>

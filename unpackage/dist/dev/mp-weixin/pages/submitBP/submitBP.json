@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "提交BP",
-  "navigationBarTextStyle": "black",
-  "usingComponents": {
-    "field": "/components/field",
-    "w-picker": "/components/w-picker/w-picker"
-  }
-}

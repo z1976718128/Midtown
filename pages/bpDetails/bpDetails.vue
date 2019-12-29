@@ -48,13 +48,12 @@
 			<view class="find_title"><text class="shux"></text><text class="hd">融资经历：</text></view>
 			<view class="financing_content">
 				<view class="financing_text">{{bpArr.financing}}</view>
-				<view class="financing_text">2012年获东方富海资本投资200w元</view>
 			</view>
 		</view>
 		<view class="business">
 			<view class="sy">
 				<text class="shux"></text><text class="hd">商业计划书：</text>
-				<text class="business_wj">康复类医疗器械生产.pdf</text>
+				<text class="business_wj" @tap="down">康复类医疗器械生产.pdf</text>
 			</view>
 		</view>
 		<view class="button" @tap="back">返回</view>
@@ -83,6 +82,9 @@
 		methods:{
 			back(){
 				uni.navigateBack()
+			},
+			down(){
+				window.location.href =this.bpArr.file
 			}
 		}
 	}

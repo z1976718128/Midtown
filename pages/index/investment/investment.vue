@@ -5,7 +5,7 @@
 			<industryItem></industryItem> -->
 		</view>
 		<newItem :itenArr="itenArr"></newItem>
-		<view class="">
+		<view class="tost">
 			{{loadingText}}
 		</view>
 	</view>

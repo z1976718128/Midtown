@@ -58,11 +58,8 @@
 			
 			    } else {
 			        //如果有带code
-					console.log(111)
+				
 			        let code = this.getQueryString("code");
-			
-			        console.log(code)
-			
 			        getlogin({
 			          code: code
 			        }).then((res) => {
@@ -74,7 +71,7 @@
 			            }
 			            console.log("登录成功");
 			            console.log("token:", res.data.data.token);
-			            window.localStorage.setItem("token", res.data.data.token);
+			            localStorage.setItem("token", res.data.data.token);
 			
 			          } else {
 			            alert(res.data.msg);
@@ -87,8 +84,8 @@
 			}else{
 			  // console.log('不是微信环境，默认登录ID 2的用户')
 			  //不是微信环境
-			  window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F%23%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-			   // window.localStorage.setItem("token", 1);
+			  // window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F%23%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+			   localStorage.setItem("token", 1);
 			   //模拟一个 假的token ，为  2
 			  //到时候把这个删了，指引去微信
 			}
@@ -130,7 +127,7 @@
 		background:rgba(255,255,255,1);
 		box-shadow:0upx 0upx 21upx 0upx rgba(141,139,139,0.1);
 		border-radius:30upx;
-		margin:17upx 19upx;
+		margin:34upx 19upx;
 	}
 	.list_item{
 		border-top: 1upx solid #F1F1F1;
@@ -145,6 +142,22 @@
 		border-radius:5upx;
 		font-size:22upx;
 		color:rgba(222,163,44,1);
+		margin-right: 12upx;
+		margin-bottom: 30upx;
+	}
+	.wy{
+		font-size:24upx;
+		font-weight:400;
+		color:rgba(94,94,94,1);
+		line-height:38upx;
+		margin:0 44upx 60upx 8upx;
+	}
+	.list_frist{
+		margin-top: 29upx;
+	}
+	.list_nth{
+		margin-top: 41upx;
+		margin-bottom: 60upx;
 	}
 	.title{
 		width:489upx;
@@ -158,6 +171,7 @@
 		font-size:50upx;
 		font-weight:bold;
 		color:rgba(243,140,55,1);
+		line-height:38upx;
 	}
 	.type{
 		width:113upx;
@@ -375,6 +389,7 @@
 		text-decoration:underline;
 		color:rgba(153,153,153,1);
 		margin-left:180upx;
+		overflow: hidden;
 	}
 	.projectBrief{
 		padding-bottom: 61upx;
@@ -409,5 +424,11 @@
 		font-weight:400;
 		color:rgba(255,156,130,1);
 		margin:0 22upx;
+	}
+	.tost{
+		text-align: center;
+		margin-bottom: 40upx;
+		color: #444;
+		font-size: 32upx;
 	}
 </style>

@@ -1,24 +1,26 @@
 <template>
 	<view class="uni-common-mt">
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>姓名<text class="req">*</text></label>
-			<input v-model="nickname" type="text" value="" :adjust-position="false" placeholder="请输入您的姓名" />
+			<label><text class="shux"></text>项目名称<text class="req">*</text></label>
+			<input v-model="title" type="text" value="" :adjust-position="false" placeholder="请填写项目名称" />
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>手机号码<text class="req">*</text></label>
-			<input v-model="phone" type="number" value="" :adjust-position="false" placeholder="请输入您的手机号码" />
+			<label><text class="shux"></text>公司全称<text class="req">*</text></label>
+			<input v-model="company_name" type="text" value="" :adjust-position="false" placeholder="请填写公司全称" />
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>工作邮箱<text class="req">*</text></label>
-			<input v-model="email" type="text" value="" :adjust-position="false" placeholder="请输入您的邮箱" />
+			<label><text class="shux"></text>上传LOGO<text class="req">*</text></label>
+			<view class="log" @tap="logoUp">{{logos}}</view>
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>公司名称<text class="req">*</text></label>
-			<input v-model="company_name" type="text" value="" :adjust-position="false" placeholder="请输入您的公司名称" />
+			<label><text class="shux"></text>一句话简介<text class="req">*</text></label>
+		</view>
+		<view class="">
+			<textarea v-model="one_desc" class="yjhs" placeholder="请用一句话描述~" />
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>职位<text class="req">*</text></label>
-			<input v-model="position" type="text" value="" :adjust-position="false" placeholder="请输入您的职位" />
+			<label><text class="shux"></text>行业领域<text class="req">*</text></label>
+			<industryField class="filedsa" @fieldVal="fieldVal"></industryField>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>所在城市<text class="req">*</text></label>
@@ -29,32 +31,55 @@
 			</cityPicker>
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>公司简介</label>
+			<label><text class="shux"></text>公司简介<text class="req">*</text></label>
 		</view>
 		<view class="">
-			<textarea v-model="desc" class="yjh" placeholder="介绍下您的公司吧…" />
-			</view>
-		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>短信验证码</label>
-			<input v-model="code" type="number" class="smscode" value="" :adjust-position="false" placeholder="请输入您的短信验证码"/>
-			<button  type="primary" @tap="getCode" :disabled="disabled" class="get_vcode">
-				{{countdown}} <text class="but_text" v-show="timestatus">秒重获</text>
-			</button>
+			<textarea v-model="company_desc" class="yjh" placeholder="请具体描述下您的公司哦~~" />
 		</view>
-		<view class="button" @tap="save">保存</view>
-		
+		<view class="uni-form-item uni-row">
+			<label><text class="shux"></text>融资需求<text class="req">*</text></label>
+			<financing class="filedsa" @findVal="findVal"></financing>
+		</view>
+		<view class="uni-form-item uni-row">
+			<label><text class="shux"></text>在融阶段<text class="req">*</text></label>
+			<inFusion class="filedsa" @infudVal="infudVal"></inFusion>
+		</view>
+		<view class="uni-form-item uni-row">
+			<label><text class="shux"></text>融资经历</label>
+		</view>
+		<view class="">
+			<textarea v-model="financing" class="yjh" placeholder="请具体描述下您的融资经历哦~" />
+		</view>
+		<view class="uni-form-item uni-row">
+			<label><text class="shux"></text>商业计划书</label>
+		</view>
+		<view class="sc_item">
+			<view class="sc" @tap="fileUp">{{files}}</view>
+			<view class="scpdf">仅限上传PDF类型的文件（单个文件不超过20M） </view>
+		</view>
+		<view class="button" @tap="save">提交</view>
 	</view>
 </template>
 
 <script>
-	import {edit,sendSms,getRegion} from "../../uilt/api.js"
-	import cityPicker from 'components/cityPicker';
+	import {postBp,upload,getRegion} from "../../uilt/api.js"
+	import cityPicker from '@/components/cityPicker';
+	import industryField from "@/components/industryField.vue"
+	import financing from "@/components/financing.vue"
+	import inFusion from "@/components/inFusion.vue"
 	export default {
-		components:{cityPicker},
+		components:{
+			cityPicker,
+			industryField,
+			financing,
+			inFusion,
+		},
 		data() {
 			return {
+				logos:"上传图片+",
+				files:"选择文件+",
 				array:[],
-				 index: 0,
+				index: 0,
 				indicatorStyle:"",
 				visible: true,
 				code:'',
@@ -63,18 +88,21 @@
                 disabled:false,
                 timestatus:false,
                 clear:'',
-				nickname:"",
-				phone:"",
-				email:"",
+				title:"",
 				company_name:"",
-				position:"",
-				city:"",
-				code:"",
-				desc:"",
-				avatar:"",
+				logo:"",
+				one_desc:"",
+				field_id:"",
+				city_id:"",
+				company_desc:"",
+				capital_id:"",
+				stage_id:"",
+				file:"",
+				stage_id:"",
+				financing:"",
 				picked:{
 					labels:[
-						"请选择您的所在城市>"
+						"选择>"
 					]
 				}
 			}
@@ -85,9 +113,75 @@
 			})
 		},
 		methods: {
+			fieldVal(val){
+				this.field_id=val
+				console.log(this.field_id)
+			},
+			findVal(val){
+				this.capital_id=val
+			},
+			infudVal(val){
+				this.stage_id=val
+			},
+			logoUp(){
+				let than = this;
+				uni.chooseImage({
+					success:function(chooseImageRes){
+						const tempFilePaths = chooseImageRes.tempFiles;
+						let nar =tempFilePaths[0].name.split(".")
+						if(nar[1] == "jpg" || nar[1] == "png" || nar[1] == "jpeg"){
+							uni.uploadFile({
+								url:"http://zc.demo.yudw.com/api/Upload/upload_file",
+								filePath:tempFilePaths[0].path,
+								name: 'file',
+								success: function (res) {
+									let arr = res.data
+									than.logos = tempFilePaths[0].name
+									than.logo = JSON.parse(arr).data;
+								}
+							})
+							
+						}
+						
+						
+					}
+									 
+				})
+			},
+			fileUp(){
+				let than = this;
+				 uni.chooseImage({
+					success:function(chooseImageRes){
+						const tempFilePaths = chooseImageRes.tempFiles;
+						let nar =tempFilePaths[0].name.split(".")
+						uni.uploadFile({
+							url:"http://zc.demo.yudw.com/api/Upload/upload_file",
+							filePath:tempFilePaths[0].path,
+							name: 'file',
+							success: function (res) {
+								let arr = res.data
+								than.files = tempFilePaths[0].name
+								than.file = JSON.parse(arr).data;
+							}
+						})
+						// if(nar[1] == "pdf"){
+							
+							
+						// }else{
+						// 	uni.showToast({
+						// 		title: "请上传pdf文件",
+						// 		icon: 'none'
+						// 	})
+						// }
+						
+						
+					}
+					 
+				 })
+				
+			},
 			endCity(picked){
-				this.city = picked.value
-				console.log(picked.value)
+				this.city_id = picked.value
 				this.picked = picked
 			},
 			// 处理数据
@@ -104,69 +198,44 @@
 			        },
 			save(){
 				const token = localStorage.getItem("token");
-				console.log(this.city)
-				edit({
+				postBp({
 					token,
-					nickname:this.nickname,
-					phone:this.phone,
-					email:this.email,
+					title:this.title,
 					company_name:this.company_name,
-					position:this.position,
-					city:this.city,
-					code:this.code,
-					desc:this.desc,
+					logo:this.logo,
+					one_desc:this.one_desc,
+					field_id:this.field_id,
+					city_id:this.city_id,
+					company_desc:this.company_desc,
+					capital_id:this.capital_id,
+					stage_id:this.stage_id,
+					file:this.file,
+					stage_id:this.stage_id,
+					financing:this.financing,
 				}).then((res)=>{
 					console.log(res)
+					if(res.data.status === 1){
+						uni.showToast({
+							title: res.data.msg,
+							icon: 'success',
+							success() {
+								uni.switchTab ({
+									url:"../index/home/home"
+								})
+								uni.hideToast()
+							}
+						});
+						
+					}else{
+						uni.showToast({
+							title: res.data.msg,
+							icon: 'none'
+						});
+					}
+					
+                                    
 				})
 			},
-			   // 获取验证码
-			            getCode(){
-			                var that = this;
-			                if(that.phone==''){
-			                    uni.showToast({
-			                        title: '请输入手机号码',
-			                        icon: 'none'
-			                    });
-			                }else{
-								console.log(111)
-								const token = localStorage.getItem("token");
-			                    that.disabled = true;//禁用点击
-								sendSms({
-									token,
-									mobile:this.phone,
-								
-								}).then((res)=>{
-									if(res.data.status==1){
-		                                uni.showToast({
-		                                    title: res.data.msg,
-		                                    icon: 'none'
-		                                });
-		                                that.countdown = 60;
-										console.log( that.countdown)
-		                                that.timestatus = true;
-		                                that.clear = setInterval(that.countDown,1000);
-		                            }else{
-											uni.showToast({
-			                                    title: res.data.msg,
-			                                    icon: 'none'
-			                                });
-		                                that.disabled = false; //获取失败开启点击
-		                            }
-								})
-			                }                
-			            },
-			            // 倒计时
-			            countDown(){
-			                var that = this;
-			                if(!that.countdown){                    
-			                    that.disabled = false;
-			                    that.timestatus = false;
-			                    that.countdown = '获取验证码';
-			                    clearInterval(that.clear);
-			                }else{
-			                    --that.countdown;
-			                }
-			            },
 			bindPickerChange: function(e) {
 			    console.log(e.target.value)
 			    this.index = e.target.value
@@ -189,6 +258,26 @@ label{
 	font-size:30upx;
 	font-weight:400;
 	color:rgba(70,79,87,1);
+}
+.sc{
+	width:162upx;
+	height:63upx;
+	line-height: 63upx;
+	border:1upx solid rgba(205,205,205,1);
+	border-radius:5upx;
+	margin-top: 30upx;
+	font-size:26upx;
+	font-weight:400;
+	color:rgba(202,202,202,1);
+	text-align: center;
+}
+.scpdf{
+	height:27upx;
+	font-size:26upx;
+	font-weight:400;
+	color:rgba(166,166,166,1);
+	line-height:65upx;
+	padding:30upx 0;
 }
 input,.cists{
 	font-size:26upx;
@@ -228,5 +317,48 @@ input,.cists{
 	font-size:26upx;
 	font-weight:400;
 	color:rgba(182,0,14,1) !important;
+}
+.sc_item{
+	margin-bottom: 20upx;
+}
+.log{
+	position: absolute;
+	right: 0;
+	top: 22upx;
+	width:162upx;
+	height:63upx;
+	border:1upx solid rgba(205,205,205,1);
+	border-radius:5upx;
+	font-size:26upx;
+	font-weight:400;
+	color:rgba(202,202,202,1);
+	line-height:63upx;
+	text-align: center;
+}
+.yjhs{
+	width:689upx;
+	height:82upx;
+	background:rgba(241,241,241,1);
+	border-radius:5upx;
+	font-size:26upx;
+	font-weight:400;
+	color:rgba(145,145,145,1);
+	line-height:82upx;
+	text-indent: 20upx;
+}
+.filedsa{
+	position: absolute;
+	right: 0;
+}
+.uni-list{
+	width:331upx;
+	height:63upx;
+	line-height: 63upx;
+	background:none !important;
+	border-radius:15upx;
+	text-align: center;
+}
+.cists{
+	color: #DEB156;
 }
 </style>

@@ -86,11 +86,11 @@
 				this.isDescAnimating = false
 			},
 			getBannerDetail(index) {
-				uni.showLoading({
-					title: '将前往详情页面',
-					duration: 2000,
-					mask: true
-				})
+				// uni.showLoading({
+				// 	title: '将前往详情页面',
+				// 	duration: 2000,
+				// 	mask: true
+				// })
 			}
 		}
 	}
@@ -98,18 +98,19 @@
 <style lang="scss" scoped>
 	.banner-container {
 		width: 100vw;
-		height: 524rpx;
+		height: 424rpx;
 
 		.image-container {
 			box-sizing: border-box;
 			width: 100%;
 			height: 100%;
 			display: flex;
-
+			
 			.slide-image {
-				width: 550rpx;
-				height: 328rpx;
+				width:686upx;
+				height:293upx;
 				z-index: 200;
+				border-radius:24upx;
 			}
 		}
 

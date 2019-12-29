@@ -3,9 +3,10 @@
         <view class="uni-list">
             <view class="uni-list-cell">
                 <view class="uni-list-cell-db">
-                    <picker @change="bindPickerChange" :value="index" :range="objectArray"  range-key="name">
+                    <picker @change="bindPickerChange"  selected="index" :range="array" range-key="name">
                         <view class="uni-input">
-							{{objectArray[index].name}}
+							<!-- 行业阶段 -->
+							{{array[index].name}}
 							<!-- <image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
 							<image v-else class="xl" src="../../../static/img/jt_1.png" mode=""> -->
 						</view>
@@ -17,32 +18,29 @@
 </template>
 
 <script>
-	import {getStage} from "../uilt/api.js"
+	import {getCapital} from "../uilt/api.js"
     export default {
         data() {
             return {
                 title: 'picker',
-                // array: ['中国', '美国', '巴西', '日本'],
-                objectArray: [
-					{
-						id:1012,
-						name:"行业阶段"
-					}
-                ],
+                array: [{
+					id:1012,
+					name:"选择>"
+				}],
                 index:0,
+				gb:""
             }
         },
-        mounted() {
-        	getStage().then((res)=>{
-        		console.log(res)
+		mounted() {
+			getCapital().then((res)=>{
 				res.data.data.map(item=>{
-					this.objectArray.push(item)
+					this.array.push(item)
 				})
-        	})
-        },
+			})
+		},
         methods: {
             bindPickerChange: function(e) {
-                console.log(e.target.value)
+                this.$emit("findVal",e.target.value)
                 this.index = e.target.value
             },
         }
@@ -50,19 +48,19 @@
 </script>
 
 <style scoped>
-/* .uni-list{
-	width:331upx;
+.uni-list{
+	/* width:331upx;
 	height:63upx;
 	line-height: 63upx;
 	background:rgba(239,239,239,1);
 	border-radius:15upx;
-	text-align: center;
+	text-align: center; */
 	
-} */	
+}	
 .uni-input{
 	font-size:28upx;
-	color: #DEB156;
 	text-align: center;
+	color: #DEB156;
 }
 .xl{
 	width:24upx;

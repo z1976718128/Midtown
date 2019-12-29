@@ -65,6 +65,13 @@
             "path" : "pages/investDetails/investDetails",
             "style" : {}
         }
+        ,{
+            "path" : "pages/register/register",
+            "style" : {
+				"navigationBarTitleText": "修改个人信息",
+				"navigationBarTextStyle": "black"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

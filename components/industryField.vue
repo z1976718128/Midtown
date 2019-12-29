@@ -25,7 +25,7 @@
                 title: 'picker',
                 array: [{
 					id:1012,
-					name:"行业领域"
+					name:"选择>"
 				}],
                 index:0,
 				gb:""
@@ -33,7 +33,6 @@
         },
 		mounted() {
 			getField().then((res)=>{
-				// this.array = res.data.data
 				res.data.data.map(item=>{
 					this.array.push(item)
 				})
@@ -41,7 +40,7 @@
 		},
         methods: {
             bindPickerChange: function(e) {
-                console.log(e.target.value)
+				this.$emit("fieldVal",e.target.value)
                 this.index = e.target.value
             },
         }
@@ -50,17 +49,18 @@
 
 <style scoped>
 .uni-list{
-	width:331upx;
+	/* width:331upx;
 	height:63upx;
 	line-height: 63upx;
 	background:rgba(239,239,239,1);
 	border-radius:15upx;
-	text-align: center;
+	text-align: center; */
+	color: #DEB156;
 	
 }	
 .uni-input{
 	font-size:28upx;
-	color:rgba(68,68,68,1);
+	color: #DEB156;
 	text-align: center;
 }
 .xl{

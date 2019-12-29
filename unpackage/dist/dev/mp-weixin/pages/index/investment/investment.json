@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "中城金服",
-  "usingComponents": {
-    "industry-item": "/components/industryItem",
-    "industry-field": "/components/industryField",
-    "new-item": "/components/newItem"
-  }
-}

@@ -1,12 +1,12 @@
 <template>
 	<view>
 		<view class="list_item" v-for="(or,index) in projectArr" :key="index" @click="dilt(or.id)">
-			<view>
+			<view class="list_frist">
 				<text class="name">{{or.stage_name}}</text>
 				<text class="title">{{or.title}}</text>
 			</view>
-			<view class="">
-				<text ><text class="pric">{{or.capital_name}}</text>万元以下</text>
+			<view class="list_nth">
+				<text ><text class="pric">{{or.capital_name}}</text><text class="wy">以下</text></text>
 				<text class="type">
 					<text class="type_size">{{or.field_name}}</text>
 				</text>
