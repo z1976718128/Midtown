@@ -26,11 +26,11 @@
 		<!-- 显示区域 -->
 		<view class="list_item" v-for="(or,index) in navList" :key="index" @click="dilt(or.id)">
 			<view class="list_frist">
-				<text class="name">{{or.stage_name}}</text>
+				<text class="name"><text>{{or.stage_name}}</text></text>
 				<text class="title">{{or.title}}</text>
 			</view>
 			<view class="list_nth">
-				<text ><text class="pric">{{or.capital_name}}</text><text class="wy">以下</text></text>
+				<text ><text class="pric">{{or.capital_name}}</text><text class="wy"></text></text>
 				<text class="type"><text class="type_size">{{or.field_name}}</text></text>
 			</view>
 			<view class="list_item_last">

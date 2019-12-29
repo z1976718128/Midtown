@@ -56,7 +56,7 @@
 		<view class="business">
 			<view class="sy">
 				<text class="shux"></text><text class="hd">商业计划书：</text>
-				<text class="business_wj" @tap="down">康复类医疗器械生产.pdf</text>
+				<text class="business_wj" @tap="down">{{arr.file_name}}</text>
 			</view>
 		</view>
 		<view class="content">
@@ -99,12 +99,13 @@
 				console.log(res.data.date)
 				this.arr = res.data.date
 			})
-			const token= localStorage.getItem("token");
+			const token=uni.getStorageSync("token");
 			checkRegist({token:token}).then(res=>{
 				console.log(res.data.data)
 				this.check = res.data.data
 				if(res.data.data != 1){
 					uni.showModal({
+						showCancel:false,
 						title:"请先注册",
 						success(res) {
 							if(res.confirm){
@@ -112,8 +113,6 @@
 								uni.navigateTo({
 									url:"/pages/register/register"
 								})
-							}else if(res.cancel){
-								console.log(2)
 							}
 						}
 						

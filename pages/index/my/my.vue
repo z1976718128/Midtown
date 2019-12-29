@@ -4,7 +4,8 @@
 			<view class="user_img"><image :src="user.avatar" mode=""></image></view>
 			<view class="">
 				<view ><text class="user_name">{{user.nickname}}</text> <text  class="user_type">{{check==1?"已注册":"未注册"}}</text></view>
-				<view class="user_id">ID:1254321</view>
+				<view class="user_id" v-if="check==1">手机号码:{{user.phone}}</view>
+				<view class="user_id" v-else>ID:1254321</view>
 				<navigator url="../../register/register">
 					<view class="xg" v-if="check==1">修改<text>></text></view>
 				</navigator>
@@ -43,15 +44,17 @@
 			}
 		},
 		mounted() {
-			const token= localStorage.getItem("token");
+			const token=uni.getStorageSync("token");
 			getUser({token:token}).then((res)=>{
+				console.log(res)
 				this.user = res.data.date
 			})
 			checkRegist({token:token}).then(res=>{
-				console.log(res.data.data)
+				console.log(res)
 				this.check = res.data.data
 				if(res.data.data != 1){
 					uni.showModal({
+						showCancel:false,
 						title:"请先注册",
 						success(res) {
 							if(res.confirm){
@@ -59,8 +62,6 @@
 								uni.navigateTo({
 									url:"/pages/register/register"
 								})
-							}else if(res.cancel){
-								console.log(2)
 							}
 						}
 						
@@ -140,7 +141,7 @@
 .icfon{
 	width:100upx;
 	height:50upx;
-	margin:27upx 0 180upx 28upx;
+	margin:27upx 0 160upx 0upx;
 }
 .icont_text{
 	margin-left: 29upx;

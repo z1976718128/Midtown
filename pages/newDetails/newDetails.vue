@@ -75,12 +75,13 @@
 				console.log(res,111)
 				this.detailsArr = res.data.date
 			})
-			const token= localStorage.getItem("token");
+			const token=uni.getStorageSync("token");
 			checkRegist({token:token}).then(res=>{
 				console.log(res.data.data)
 				this.check = res.data.data
 				if(res.data.data != 1){
 					uni.showModal({
+						showCancel:false,
 						title:"请先注册",
 						success(res) {
 							if(res.confirm){
@@ -88,8 +89,6 @@
 								uni.navigateTo({
 									url:"/pages/register/register"
 								})
-							}else if(res.cancel){
-								console.log(2)
 							}
 						}
 						

@@ -90,7 +90,7 @@
 
 <style scoped>
 .find_title{
-	margin:35upx 30upx 49upx;
+	margin:35upx 30upx 0upx;
 }	
 .shux{
 	display: inline-block;

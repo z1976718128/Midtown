@@ -103,8 +103,7 @@
 			            this.index = e.target.value
 			        },
 			save(){
-				const token = localStorage.getItem("token");
-				console.log(this.city)
+				const token=uni.getStorageSync("token");
 				edit({
 					token,
 					nickname:this.nickname,

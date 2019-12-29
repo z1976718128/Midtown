@@ -53,7 +53,7 @@
 		<view class="business">
 			<view class="sy">
 				<text class="shux"></text><text class="hd">商业计划书：</text>
-				<text class="business_wj" @tap="down">康复类医疗器械生产.pdf</text>
+				<text class="business_wj" @tap="down">{{bpArr.file_name}}</text>
 			</view>
 		</view>
 		<view class="button" @tap="back">返回</view>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-	import {bpInfos} from "../../uilt/api.js"
+	import {bpInfos,checkRegist} from "../../uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -73,10 +73,30 @@
 			this.uid = id.id;
 		},
 		mounted() {
-			const token = localStorage.getItem("token");
-			bpInfos({id:this.uid,token}).then((res)=>{
+			const token=uni.getStorageSync("token");
+			bpInfos({id:this.uid,token:token}).then((res)=>{
 				console.log(res)
 				this.bpArr = res.data.data
+			})
+			
+			checkRegist({token:token}).then(res=>{
+				console.log(res.data.data)
+				this.check = res.data.data
+				if(res.data.data != 1){
+					uni.showModal({
+						showCancel:false,
+						title:"请先注册",
+						success(res) {
+							if(res.confirm){
+								console.log(1)
+								uni.navigateTo({
+									url:"/pages/register/register"
+								})
+							}
+						}
+						
+					})
+				}
 			})
 		},
 		methods:{

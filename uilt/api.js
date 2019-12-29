@@ -103,7 +103,6 @@ export function bpInfo(data) {
 
 export function getRegion(data) {
   // 获取省市
-  console.log(data,5555)
   return http.httpRequest({
     url: '/config/getRegion',
     method: 'POST',

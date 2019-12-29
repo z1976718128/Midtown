@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import {newsInfo} from "@/uilt/api.js"
+	import {newsInfo,checkRegist} from "@/uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -34,6 +34,26 @@
 				console.log(res)
 				this.arr = res.data.data
 			})
+			const token=uni.getStorageSync("token");
+			checkRegist({token:token}).then(res=>{
+				console.log(res.data.data)
+				this.check = res.data.data
+				if(res.data.data != 1){
+					uni.showModal({
+						showCancel:false,
+						title:"请先注册",
+						success(res) {
+							if(res.confirm){
+								console.log(1)
+								uni.navigateTo({
+									url:"/pages/register/register"
+								})
+							}
+						}
+						
+					})
+				}
+			})
 		},
 		methods:{
 			back(){
@@ -48,22 +68,20 @@
 	margin:30upx;
 }
 .findeta_num{
-	height:20upx;
-	font-size:20upx;
+	font-size:30upx;
 	font-weight:400;
 	color:rgba(181,181,181,1);
-	line-height:26upx;
 }
 .find_titles{
 	height:69upx;
-	font-size:28upx;
+	font-size:30upx;
 	font-weight:bold;
 	color:rgba(82,91,99,1);
 	line-height:40upx;
 	margin:57upx 0 61upx 0;
 }
 .findeta_cont{
-	font-size:26upx;
+	font-size:30upx;
 	font-weight:400;
 	color:rgba(71,71,71,1);
 	line-height:50upx;

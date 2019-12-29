@@ -66,23 +66,24 @@
 }
 .new_title{
 	/* width:84upx; */
-	font-size:28upx;
+	font-size:30upx;
 	font-weight:bold;
 	color:rgba(82,91,99,1);
 }
 .new_deso{
 	width:496upx;
-	height:56upx;
-	font-size:22upx;
+	/* height:56upx; */
+	font-size:30upx;
 	font-weight:400;
 	color:rgba(94,94,94,1);
 	line-height:34upx;
 	margin:26upx 0;
+	line-height:40upx;
 }
 .new_time{
 	width:495upx;
-	height:20upx;
-	font-size:20upx;
+	height:30upx;
+	font-size:30upx;
 	font-weight:400;
 	color:rgba(181,181,181,1);
 	line-height:26upx;

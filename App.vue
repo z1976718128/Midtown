@@ -8,54 +8,33 @@
 		onHide: function() {
 		},
 		mounted() {
-			// getData().then((res)=>{
-			// 	console.log(res)
-			// })
 			
 		},
 		beforeMount() {
-			//  switch(uni.getSystemInfoSync().platform){
-			// 
-			//     case 'android':
-			// 
-			//        console.log('运行Android上')
-			// 
-			//        break;
-			// 
-			//     case 'ios':
-			// 
-			//        console.log('运行iOS上')
-			// 
-			//        break;
-			// 
-			//     default:
-			// 
-			//        console.log('运行在开发者工具上')
-			// 
-			//        break;
-			// 
-			// }
 			// #ifdef H5
+			let _than =this;
 			var ua = navigator.userAgent.toLowerCase();
 			//判断是不是微信环境
 			if (ua.match(/MicroMessenger/i) == "micromessenger") {
 			  let url = window.location.href;
-			  let huoqutoken = localStorage.getItem("token");
+			  // let huoqutoken = localStorage.getItem("token");
+			  let huoqutoken = _than.$store.state.token;
 			
-			  console.log('当前token',huoqutoken)
+			  // console.log('当前token',huoqutoken)
 			
 			  if ( huoqutoken === null || huoqutoken == "" ||	huoqutoken == null ||	huoqutoken == "null" ||	huoqutoken == undefined) {
-			
+				// const token = uni.getStorageSync("token")
+				// if(token){
+				// 	_than.$store.commit('set_token', token);  
+				// }
 			    //如果URL中没有带code
 			    if(window.location.href.indexOf("code") == 0 ||	window.location.href.indexOf("code") <= 0){
-					console.log(111)
 			        geturl({
 			          baseUrl: url
 			        }).then((res) => {
 						console.log(res)
-			          window.location.href = res.data.data;
+						window.location.href = res.data.data;
 			        })
-			
 			    } else {
 			        //如果有带code
 				
@@ -67,14 +46,15 @@
 			          //获取token,储存到本地
 			          if (res.data.status == 1) {
 			            if (!res.data.data.token || res.data.data.token == null) {
-			              alert("token出错：" + res.data.data.token);
+			              console.log("token出错：" + res.data.data.token);
 			            }
 			            console.log("登录成功");
 			            console.log("token:", res.data.data.token);
-			            localStorage.setItem("token", res.data.data.token);
-			
+			            // localStorage.setItem("token", res.data.data.token);
+						uni.setStorageSync("token", res.data.data.token)
+						_than.$store.commit('set_token', res.data.data.token);  
 			          } else {
-			            alert(res.data.msg);
+			            // alert(res.data.msg);
 			          }
 			        })
 			    }
@@ -84,8 +64,10 @@
 			}else{
 			  // console.log('不是微信环境，默认登录ID 2的用户')
 			  //不是微信环境
-			  // window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F%23%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-			   localStorage.setItem("token", 1);
+			  window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F%23%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
+			   // localStorage.setItem("token", 1);
+			   	// uni.setStorageSync("token", 1)
+			   // _than.$store.commit('set_token', 1);  
 			   //模拟一个 假的token ，为  2
 			  //到时候把这个删了，指引去微信
 			}
@@ -140,13 +122,17 @@
 		width: 100%;
 	}
 	.name{
+		display: inline-block;
 		width:91upx;
+		height: 42upx;
+		line-height: 42upx;
 		background:rgba(254,243,220,1);
 		border-radius:5upx;
 		font-size:22upx;
 		color:rgba(222,163,44,1);
 		margin-right: 12upx;
 		margin-bottom: 30upx;
+		text-align: center;
 	}
 	.wy{
 		font-size:24upx;
@@ -171,17 +157,19 @@
 		color: #525B63;
 	}
 	.pric{
-		font-size:50upx;
+		font-size:40upx;
 		font-weight:bold;
 		color:rgba(243,140,55,1);
 		line-height:38upx;
 	}
 	.type{
-		width:113upx;
+		display: inline-block;
+		width:120upx;
 		height:42upx;
-		line-height: 42upx;
+		line-height: 30upx;
 		background:rgba(255,243,235,1);
 		border-radius:5upx;
+		text-align: center;
 	}
 	.type_size{
 		font-size:22upx;
@@ -189,7 +177,7 @@
 		color:rgba(255,156,130,1);
 	}
 	.time,.ll{
-		font-size:20upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(181,181,181,1);
 	}
@@ -297,9 +285,9 @@
 		margin:40upx 0 22upx 0;
 	}
 	.company-desc{
-		width:320upx;
+		/* width:320upx; */
 		height:27upx;
-		font-size:26upx;
+		font-size:30upx;
 		font-weight:bold;
 		color:rgba(119,119,119,1);
 		line-height:65upx;
@@ -314,12 +302,12 @@
 		margin:80upx 0 0 59upx;
 	}
 	.BP_hd_last_item_name{
-		font-size:20upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(102,102,102,1);
 	}
 	.BP_hd_last_item_js{
-		font-size:22upx;
+		font-size:30upx;
 		font-weight:bold;
 		color:rgba(68,68,68,1);
 		margin-top: 41upx;
@@ -342,13 +330,13 @@
 		margin:0 30upx;
 	}
 	.company_title{
-		font-size:26upx;
+		font-size:30upx;
 		font-weight:bold;
 		color:rgba(71,71,71,1);
 	}
 	.company_jan{
 		display: inline-block;
-		font-size:26upx;
+		font-size:30upx;
 		font-weight:bold;
 		color:rgba(71,71,71,1);
 		vertical-align: top;
@@ -359,11 +347,13 @@
 	}
 	.company_nr{
 		width:528upx;
-		font-size:26upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(71,71,71,1);
 		line-height:40upx;
 		display: inline-block;
+		position: relative;
+		top: -8upx;
 	}
 	.financing{
 		border-bottom:11upx solid rgba(241,241,241,1);
@@ -373,7 +363,7 @@
 		margin:0 30upx;
 	}
 	.financing_text{
-		font-size:26upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(71,71,71,1);
 	}
@@ -391,7 +381,7 @@
 		font-weight:400;
 		text-decoration:underline;
 		color:rgba(153,153,153,1);
-		margin-left:180upx;
+		margin-left:320upx;
 		overflow: hidden;
 	}
 	.projectBrief{
@@ -402,7 +392,7 @@
 		display: inline-block;
 		width:683upx;
 		height:176upx;
-		font-size:26upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(71,71,71,1);
 		line-height:50upx;
@@ -415,7 +405,7 @@
 	.Investment text{
 		background:rgba(254,243,220,1);
 		border-radius:5upx;
-		font-size:22upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(222,163,44,1);
 		margin:0 10upx;
@@ -423,7 +413,7 @@
 	.field text{
 		background:rgba(255,243,235,1);
 		border-radius:5upx;
-		font-size:22upx;
+		font-size:30upx;
 		font-weight:400;
 		color:rgba(255,156,130,1);
 		margin:0 22upx;
@@ -433,5 +423,8 @@
 		margin-bottom: 40upx;
 		color: #444;
 		font-size: 32upx;
+	}
+	.uni-tabbar .uni-tabbar__icon{
+		height: 44upx;
 	}
 </style>

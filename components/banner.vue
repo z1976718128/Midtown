@@ -15,7 +15,7 @@
               transitionDuration: '.3s',
               transitionTimingFunction: 'ease'
             }"
-					 @click="getBannerDetail(i)" />
+					 @click="getBannerDetail(item.id)" />
 				</div>
 			</swiper-item>
 		</swiper>
@@ -85,8 +85,11 @@
 			animationfinish(e) {
 				this.isDescAnimating = false
 			},
-			getBannerDetail(index) {
-				console.log(index)
+			getBannerDetail(id) {
+				console.log(id)
+				uni.navigateTo({
+					url:"/pages/findDetails/findDetails?id="+id
+				})
 				// uni.showLoading({
 				// 	title: '将前往详情页面',
 				// 	duration: 2000,

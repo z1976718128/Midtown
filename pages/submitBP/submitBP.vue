@@ -45,13 +45,13 @@
 			<inFusion class="filedsa" @infudVal="infudVal"></inFusion>
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>融资经历</label>
+			<label><text class="shux"></text>融资经历<text class="req">*</text></label>
 		</view>
 		<view class="">
 			<textarea v-model="financing" class="yjh" placeholder="请具体描述下您的融资经历哦~" />
 		</view>
 		<view class="uni-form-item uni-row">
-			<label><text class="shux"></text>商业计划书</label>
+			<label><text class="shux"></text>商业计划书<text class="req">*</text></label>
 		</view>
 		<view class="sc_item">
 			<view class="sc" @tap="fileUp">{{files}}</view>
@@ -129,19 +129,20 @@
 					success:function(chooseImageRes){
 						const tempFilePaths = chooseImageRes.tempFiles;
 						let nar =tempFilePaths[0].name.split(".")
-						if(nar[1] == "jpg" || nar[1] == "png" || nar[1] == "jpeg"){
-							uni.uploadFile({
-								url:"http://zc.demo.yudw.com/api/Upload/upload_file",
-								filePath:tempFilePaths[0].path,
-								name: 'file',
-								success: function (res) {
-									let arr = res.data
-									than.logos = tempFilePaths[0].name
-									than.logo = JSON.parse(arr).data;
-								}
-							})
+						uni.uploadFile({
+							url:"http://zc.demo.yudw.com/api/Upload/upload_file",
+							filePath:tempFilePaths[0].path,
+							name: 'file',
+							success: function (res) {
+								let arr = res.data
+								than.logos = tempFilePaths[0].name
+								than.logo = JSON.parse(arr).data;
+							}
+						})
+						// if(nar[1] == "jpg" || nar[1] == "png" || nar[1] == "jpeg"){
 							
-						}
+							
+						// }
 						
 						
 					}
@@ -154,10 +155,14 @@
 					success:function(chooseImageRes){
 						const tempFilePaths = chooseImageRes.tempFiles;
 						let nar =tempFilePaths[0].name.split(".")
+						console.log(tempFilePaths)
 						uni.uploadFile({
 							url:"http://zc.demo.yudw.com/api/Upload/upload_file",
 							filePath:tempFilePaths[0].path,
 							name: 'file',
+							formData:{
+								field_name:tempFilePaths[0].name
+							},
 							success: function (res) {
 								let arr = res.data
 								than.files = tempFilePaths[0].name
@@ -197,7 +202,7 @@
 			            this.index = e.target.value
 			        },
 			save(){
-				const token = localStorage.getItem("token");
+				const token=uni.getStorageSync("token");
 				postBp({
 					token,
 					title:this.title,
@@ -219,10 +224,11 @@
 							title: res.data.msg,
 							icon: 'success',
 							success() {
-								uni.switchTab ({
-									url:"../index/home/home"
-								})
-								uni.hideToast()
+								setTimeout(function(){
+									uni.switchTab ({
+										url:"../index/home/home"
+									})
+								},2000)
 							}
 						});
 						
@@ -270,6 +276,10 @@ label{
 	font-weight:400;
 	color:rgba(202,202,202,1);
 	text-align: center;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .scpdf{
 	height:27upx;
@@ -334,6 +344,9 @@ input,.cists{
 	color:rgba(202,202,202,1);
 	line-height:63upx;
 	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .yjhs{
 	width:689upx;
