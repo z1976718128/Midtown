@@ -9,6 +9,16 @@ console.log(data)
     data
   })
 }
+export function subscribe(data) {
+//是否关注
+console.log(data)
+  return  http.httpRequest({
+    url: '/config/subscribe',
+    method: 'post',
+    data
+  })
+}
+
 export function bpDownload(data) {
 //bp下载
   return  http.httpRequest ({

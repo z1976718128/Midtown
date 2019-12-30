@@ -2,23 +2,23 @@
 	<view class="uni-common-mt">
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>姓名<text class="req">*</text></label>
-			<input v-model="nickname" type="text" value="" :adjust-position="false" placeholder="请输入您的姓名" />
+			<input v-model="nickname" type="text" value="" :adjust-position="false" :placeholder="userArr.nickname" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>手机号码<text class="req">*</text></label>
-			<input v-model="phone" type="number" value="" :adjust-position="false" placeholder="请输入您的手机号码" />
+			<input v-model="phone" type="number" value="" :adjust-position="false" :placeholder="userArr.phone" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>工作邮箱<text class="req">*</text></label>
-			<input v-model="email" type="text" value="" :adjust-position="false" placeholder="请输入您的邮箱" />
+			<input v-model="email" type="text" value="" :adjust-position="false" :placeholder="userArr.email" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>公司名称<text class="req">*</text></label>
-			<input v-model="company_name" type="text" value="" :adjust-position="false" placeholder="请输入您的公司名称" />
+			<input v-model="company_name" type="text" value="" :adjust-position="false" :placeholder="userArr.company_name" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>职位<text class="req">*</text></label>
-			<input v-model="position" type="text" value="" :adjust-position="false" placeholder="请输入您的职位" />
+			<input v-model="position" type="text" value="" :adjust-position="false" :placeholder="userArr.position" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>所在城市<text class="req">*</text></label>
@@ -32,7 +32,7 @@
 			<label><text class="shux"></text>公司简介</label>
 		</view>
 		<view class="">
-			<textarea v-model="desc" class="yjh" placeholder="介绍下您的公司吧…" />
+			<textarea v-model="desc" class="yjh" :placeholder="userArr.company_desc" />
 			</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>短信验证码</label>
@@ -49,14 +49,15 @@
 </template>
 
 <script>
-	import {edit,sendSms,getRegion} from "@/uilt/api.js"
+	import {edit,sendSms,getRegion,getUser} from "@/uilt/api.js"
 	import cityPicker from 'components/cityPicker';
 	export default {
 		components:{cityPicker},
 		data() {
 			return {
+				userArr:[],
 				array:[],
-				 index: 0,
+				index: 0,
 				indicatorStyle:"",
 				visible: true,
 				code:'',
@@ -82,9 +83,14 @@
 			}
 		},
 		mounted() {
+			const token=uni.getStorageSync("token");
 			getRegion().then((res)=>{
 				this.array = res.data.data
 			})
+			getUser({token:token}).then((res)=>{
+				this.userArr = res.data.data
+			})
+			
 		},
 		methods: {
 			// cacle(){

@@ -140,7 +140,7 @@
 .company_logo_img {
 	width: 149upx;
 	height: 149upx;
-    padding: 46upx 0 48upx 0;
+    padding: 46upx 0 0upx 0;
 	  
 }
 .company_logo{

@@ -2,17 +2,22 @@
 	import {
 		getlogin,
 		geturl,
-		getData
+		getData,
+		subscribe
 	} from "./uilt/api.js"
 	export default {
 		onLaunch: function() {},
 		onShow: function() {},
 		onHide: function() {},
 		mounted() {
-
+			const token=uni.getStorageSync("token");
+			subscribe({token:token}).then(res =>{
+				if(res.data.data.subscribe != 1){
+					window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
+				}
+			})
 		},
 		beforeMount() {
-			alert("未进入if")
 			let _than = this;
 			let url = window.location.href;
 			let huoqutoken = uni.getStorageSync("token");
@@ -21,13 +26,11 @@
 					geturl({
 						baseUrl: url
 					}).then((res) => {
-						alert("进入geturl")
 						console.log(res)
 						window.location.href = res.data.data;
 					})
 				} else {
 					//如果有带code
-					alert("进入else")
 					let code = this.getQueryString("code");
 					getlogin({
 						code: code
@@ -35,25 +38,25 @@
 						alert("进入code返回token")
 						console.log(res, 7897894566)
 						//获取token,储存到本地
-						if (res.data.status == 1) {
+						if (res.data.data.subscribe != 1) {
+							// alert(res.data.data.subscribe)
+							window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
+						}else if(res.data.status == 1){
 							if (!res.data.data.token || res.data.data.token == null) {
 								console.log("token出错：" + res.data.data.token);
 							}
 							console.log("登录成功");
 							console.log("token:", res.data.data.token);
-							localStorage.setItem("token", res.data.data.token);
+							// localStorage.setItem("token", res.data.data.token);
 							uni.setStorageSync("token", res.data.data.token)
 							// _than.$store.commit('set_token', res.data.data.token);  
-						} else {
+						} 
+						else {
 							// alert(res.data.msg);
 						}
 					})
 				}
 			}
-
-
-
-
 
 		},
 		methods: {
@@ -100,17 +103,18 @@
 	.ewm {
 		width: 210upx;
 		height: 210upx;
-		margin: 40upx auto;
+		margin:12upx auto;
 	}
 
 	.email {
-		width: 320upx;
+		/* width: 320upx; */
 		height: 67upx;
-		font-size: 24upx;
+		font-size: 30upx;
 		font-weight: 400;
 		color: rgba(68, 68, 68, 1);
 		line-height: 40upx;
 		margin: 60upx auto;
+		text-align: center;
 	}
 
 	.yy {
@@ -190,7 +194,7 @@
 		background: rgba(254, 243, 220, 1);
 		border-radius: 5upx;
 		font-size: 22upx;
-		color: rgba(222, 163, 44, 1);
+		color: rgba(243, 140, 55, 1);
 		margin-right: 12upx;
 		margin-bottom: 30upx;
 		text-align: center;
@@ -410,20 +414,21 @@
 		font-size: 30upx;
 		font-weight: bold;
 		color: rgba(68, 68, 68, 1);
-		margin-top: 41upx;
+		margin-top:20upx;
 	}
 
 	.gan {
 		width: 2upx;
 		height: 97upx;
-		background: rgba(249, 249, 248, 1);
-		border: 1upx solid rgba(241, 241, 241, 1);
+		background: rgba(102, 102, 102, 1);
+		border: 2upx solid rgba(241, 241, 241, 1);
+		opacity: .2;
 	}
 
 	.find_title {
 		margin: 30upx;
 		padding-bottom: 28upx;
-		border-bottom: 1upx solid rgba(241, 241, 241, 1);
+		border-bottom: 2upx solid rgba(241, 241, 241, 1);
 	}
 
 	.company {
@@ -505,7 +510,7 @@
 	}
 
 	.projectBrief {
-		padding-bottom: 61upx;
+		padding-bottom: 30upx;
 		border-bottom: 11upx solid rgba(241, 241, 241, 1);
 	}
 

@@ -259,7 +259,6 @@
 			// alert()
 			let token2= localStorage.getItem("token");
 			const token=uni.getStorageSync("token");
-			alert(token2,token,132456)
 			this.getdatas()
 			getData().then((res) => {
 				this.bannerList = res.data.data.banner;
@@ -275,6 +274,8 @@
 <style scoped>
 	.button {
 		position: fixed;
+		height: 72upx;
+		line-height: 72upx;
 		bottom:112upx;
 		left: 50%;
 		transform: translateX(-50%);
@@ -349,7 +350,7 @@
 		color: #444 !important;
 		font-size: 30upx;
 		font-weight: bold;
-		border-bottom: 4upx solid #DEB156;
+		border-bottom: 8upx solid #DEB156;
 		border-radius:2upx;
 		padding-bottom: 10upx;
 	}

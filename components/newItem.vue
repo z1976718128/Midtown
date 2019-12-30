@@ -46,9 +46,9 @@
 }	
 .new{
 	display: flex;
-	border-bottom: 1upx solid #F1F1F1;
-	padding-bottom: 41upx;
-	margin:30upx;
+	border-bottom: 2upx solid #F1F1F1;
+	padding-bottom:20upx;
+	margin:20upx 30upx;
 }	
 .new_img{
 	width:162upx;

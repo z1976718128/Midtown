@@ -9,7 +9,7 @@
 					<text v-else class="user_type">未注册</text> -->
 				</view>
 				<view class="user_id" v-if="check==1">{{user.phone}}</view>
-				<view class="user_id" v-else>ID:1254321</view>
+				<view class="user_id" v-else>ID:{{user.id}}</view>
 				<navigator url="../../register/register">
 					<view class="xg" v-if="check==1">修改<text>></text></view>
 				</navigator>

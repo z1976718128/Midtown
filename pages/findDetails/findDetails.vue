@@ -51,7 +51,7 @@
 
 <style scoped>
 .pdr{
-	padding-bottom: 250upx;
+	padding-bottom: 100upx;
 }
 .findeta{
 	margin:40upx 30upx;
@@ -67,12 +67,15 @@
 .find_titles{
 	height:69upx;
 	line-height:40upx;
-	margin:57upx 0 61upx 0;
+	margin:20upx 0 40upx 0;
 }
 .find_titles text{
-	font-size:35upx;
+	font-size:36upx;
 	font-weight:bold;
 	color:rgba(82,91,99,1);
+}
+.findeta_img{
+	margin-bottom: 20upx;
 }
 .findeta_cont{
 	width: 688upx;

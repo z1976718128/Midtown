@@ -10,7 +10,7 @@
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>上传LOGO<text class="req">*</text></label>
-			<view class="log" @tap="logoUp">{{logos}}</view>
+			<view class="log" @tap="logoUp">{{logo==""?files:'已上传点击修改'}}</view>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>一句话简介<text class="req">*</text></label>
@@ -54,7 +54,7 @@
 			<label><text class="shux"></text>商业计划书<text class="req">*</text></label>
 		</view>
 		<view class="sc_item">
-			<view class="sc" @tap="fileUp">{{files}}</view>
+			<view class="sc" @tap="fileUp">{{field_name==""?files:'已上传点击修改'}}</view>
 			<view class="scpdf">仅限上传PDF类型的文件（单个文件不超过20M） </view>
 		</view>
 		<view class="button" @tap="save">提交</view>
