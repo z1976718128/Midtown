@@ -1,13 +1,14 @@
 <template>
 	<view>
 		<view class="new" v-for="(item,index) in itenArr" :key="index" @click="gotoDetails(item.id)">
-			<view class="new_img">
-				<image class="new_imgs" :src="item.logo" mode=""></image>
+			<view class="new_img" >
+				<!-- <image class="new_imgs"  :src="item.logo"></image> -->
+				<image class="new_imgs"  :style="{backgroundImage:'url('+item.logo+')'}"></image>
 			</view>
 			<view class="content">
 				<view class="new_title">{{item.company_name}}</view>
 				<view class="new_deso">{{item.company_desc}}</view>
-				<view class="new_time"><text>{{item.add_time}}</text><text class="fr">浏览量 : {{item.volume_num}}</text></view>
+				<!-- <view class="new_time"><text>{{item.add_time}}</text><text class="fr">浏览量 : {{item.volume_num}}</text></view> -->
 			</view>
 		</view>
 	
@@ -52,41 +53,53 @@
 .new_img{
 	width:162upx;
 	height:162upx;
-	background:rgba(239,239,239,1);
 	border-radius:10upx;
 	margin-right: 27upx;
-	display: flex;
+/* 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: center; */
+	object-fit: cover;
+	
 }
 .new_imgs{
-	width:95upx;
-	height:95upx;
-	
+	width: 100%;  
+	height: 100%;  
+	object-fit:cover; 
+	background-repeat: no-repeat;
+	background-size: contain;
+	/* transform: scale(.8); */
+	/* background-position-x: 10upx; */
+
 }
 .new_title{
 	/* width:84upx; */
+	height: 29upx;
 	font-size:30upx;
 	font-weight:bold;
 	color:rgba(82,91,99,1);
 }
 .new_deso{
 	width:496upx;
-	/* height:56upx; */
-	font-size:30upx;
+	height:80upx;
+	font-size:26upx;
 	font-weight:400;
 	color:rgba(94,94,94,1);
-	line-height:34upx;
-	margin:26upx 0;
+	margin:40upx 0 0 0;
 	line-height:40upx;
+	text-overflow: -o-ellipsis-lastline;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  display: -webkit-box;
+	  -webkit-line-clamp: 2;
+	  line-clamp: 2;
+	  -webkit-box-orient: vertical;
 }
 .new_time{
 	width:495upx;
-	height:30upx;
-	font-size:30upx;
+	height:20upx;
+	font-size:25upx;
 	font-weight:400;
 	color:rgba(181,181,181,1);
-	line-height:26upx;
+	line-height:40upx;
 }
-
 </style>

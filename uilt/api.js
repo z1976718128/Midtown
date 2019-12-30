@@ -9,6 +9,14 @@ console.log(data)
     data
   })
 }
+export function bpDownload(data) {
+//bp下载
+  return  http.httpRequest ({
+    url: '/bp/bpDownload',
+    method: 'post',
+    data
+  })
+}
 
 export function getlogin(data) {
 //登录

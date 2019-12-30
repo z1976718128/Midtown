@@ -41,13 +41,15 @@
 				{{countdown}} <text class="but_text" v-show="timestatus">秒重获</text>
 			</button>
 		</view>
-		<view class="button" @tap="save">保存</view>
-		
+			<view class="button" @tap="save">保存</view>
+		<!-- <view class="buus">
+			<view class="cacle" @tap="cacle">取消</view>
+		</view> -->
 	</view>
 </template>
 
 <script>
-	import {edit,sendSms,getRegion} from "../../uilt/api.js"
+	import {edit,sendSms,getRegion} from "@/uilt/api.js"
 	import cityPicker from 'components/cityPicker';
 	export default {
 		components:{cityPicker},
@@ -85,6 +87,11 @@
 			})
 		},
 		methods: {
+			// cacle(){
+			// 	uni.navigateBack({
+			// 		delta:1
+			// 	})
+			// },
 			endCity(picked){
 				this.city = picked.value
 				console.log(picked.value)
@@ -123,7 +130,7 @@
 							success() {
 								setTimeout(function(){
 									uni.switchTab ({
-										url:"../index/my/my"
+										url:"../index/my/my",
 									})
 								},2000)
 							}
@@ -149,7 +156,8 @@
 			                    });
 			                }else{
 								console.log(111)
-								const token = localStorage.getItem("token");
+								// const token = localStorage.getItem("token");
+								const token=uni.getStorageSync("token");
 			                    that.disabled = true;//禁用点击
 								sendSms({
 									token,
@@ -198,11 +206,12 @@
 <style scoped>
 .uni-common-mt{
 	margin:0 30upx;
+	padding-bottom:250upx;
 }
 .uni-form-item{
 	display: flex;
 	padding:34upx 0;
-	border-bottom:1upx solid #F1F1F1;
+	border-bottom:2upx solid #F1F1F1;
 	position: relative;
 }
 label{
@@ -251,5 +260,32 @@ input,.cists{
 }
 .button {
 	margin:50upx 0;
+}
+.buus{
+	display: flex;
+	justify-content: center;
+	padding:50upx 0 100upx 0;
+}
+.cacle{
+	width:260upx;
+	height:66upx;
+	background:rgba(153,153,153,1);
+	border-radius:33upx;
+	color: #fff;
+	font-size: 28upx;
+	line-height: 66upx;
+}
+.baocun{
+	width:260upx;
+	height:66upx;
+	background:#DEB156;
+	border-radius:33upx;
+	color: #fff;
+	font-size: 28upx;
+	line-height: 66upx;
+}
+.buus view{
+	text-align: center;
+	margin:0 25upx;
 }
 </style>

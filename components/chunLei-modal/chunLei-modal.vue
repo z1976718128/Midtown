@@ -372,14 +372,14 @@
 	}
 	.advert-view{
 		overflow: hidden;
-		
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		.confirm{
-			width: 500rpx;
-			height: 700rpx;
-			border-radius: 6rpx;
+			width: 243upx;
+			height: 291.5upx;
+			border-radius: 5rpx;
+			background: #fff;
 		}
 		.cancel{
 			margin-top: 150rpx;

@@ -1,9 +1,11 @@
 <template>
 	<view class="BP">
-		<view class="BP_hd">
+		<view class="head_fx"></view>
+		<view class="">
 			<view class="BP_hd_frist">
 				<view class="company_logo_img">
-					<image class="company_logo" :src="detailsArr.logo" mode=""></image>
+					<image class="company_logo"  :style="{backgroundImage:'url('+detailsArr.logo+')'}"></image>
+					<!-- <image class="company_logo" :src="detailsArr.logo" mode=""></image> -->
 				</view>
 				<view class="BP_hd_cont">
 					 <view class="company_name">{{detailsArr.company_name}}</view>
@@ -39,6 +41,18 @@
 			<chunLei-modal v-model="value" :mData="mData" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
 			</chunLei-modal>
 		  </view>
+		  <view class="models" v-if="showMod">
+		  	<view class="info">请添加平台负责人 获取更多信息~</view>
+		  	<view class="ewm">
+		  		<image class="ewm" src="../../static/img/m1.png" mode=""></image>
+		  	</view>
+		  	<view class="email" @tap="gp">
+		  		<view class="">电话/微信：13543250693</view>
+		  		<view class="">邮箱：zhangc@unspace.cn</view>
+		  	</view>
+		  	<view @tap="hideMol" class="clones"><image src="../../static/img/clone.png" mode=""></image></view>
+		  </view>
+		  	<view @tap="hideMol" v-if="showMod" class="yy"></view>
 		<view class="button" @tap="showModel">联系平台</view>
 	</view>
 </template>
@@ -48,6 +62,7 @@
 	export default {
 		data() {
 			return {
+					showMod:false,
 				type:"advert",
 				value:false,
 				mData:{src:'../../static/img/company_logo.png',width:'600upx',height:'350upx'},
@@ -56,9 +71,34 @@
 			}
 		},
 		methods: {
+			hideMol(){
+				this.showMod = false
+			},
 			showModel(){
-				console.log(111)
-				this.value = true
+				const token=uni.getStorageSync("token");
+				checkRegist({token:token}).then(res=>{
+					if(res.data.data != 1){
+						uni.showModal({
+							showCancel:false,
+							title:"请先注册",
+							success(res) {
+								if(res.confirm){
+									console.log(1)
+									uni.navigateTo({
+										url:"/pages/register/register"
+									})
+								}
+							}
+							
+						})
+					}else{
+						this.showMod = true
+						const token=uni.getStorageSync("token");
+						bpDownload({token:token,bp_id:this.id}).then(res =>{
+							console.log(res)
+						})
+					}
+				})
 			},
 			onConfirm(){
 				this.value = false
@@ -75,31 +115,14 @@
 				console.log(res,111)
 				this.detailsArr = res.data.date
 			})
-			const token=uni.getStorageSync("token");
-			checkRegist({token:token}).then(res=>{
-				console.log(res.data.data)
-				this.check = res.data.data
-				if(res.data.data != 1){
-					uni.showModal({
-						showCancel:false,
-						title:"请先注册",
-						success(res) {
-							if(res.confirm){
-								console.log(1)
-								uni.navigateTo({
-									url:"/pages/register/register"
-								})
-							}
-						}
-						
-					})
-				}
-			})
 		}
 	}
 </script>
 
 <style scoped>
+.BP{
+	padding-bottom: 250upx;
+}	
 .BP_hd{
 	height: auto;
 }	
@@ -107,4 +130,29 @@
 	border: none;
 	margin-bottom:114upx ;
 }	
+.button{
+	margin:68upx 0 160upx 0;
+}
+.BP_hd_frist{
+	justify-content: flex-start;
+	margin-left:30upx ;
+}	
+.company_logo_img {
+	width: 149upx;
+	height: 149upx;
+    padding: 46upx 0 48upx 0;
+	  
+}
+.company_logo{
+	width: 149upx;
+	height: 149upx;
+	background-repeat: no-repeat;
+	background-size: contain;
+	/* transform: scale(.8); */
+	/* background-position-x: 10upx; */
+}
+.company_name {
+    margin: 56upx 0 6upx 0;
+}
+
 </style>

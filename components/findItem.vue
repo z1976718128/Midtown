@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="new" v-for="(item,index) in itenArr" :key="index" @click="gotoDetails(item.id)">
+		<view class="new" v-for="(item,index) in itenArr" :key="index" @click="gotoDetails(item)">
 			<view class="content">
 				<view class="new_deso">{{item.title}}</view>
 				<view class="new_time"><text>{{item.add_time}}</text><text class="fr">浏览量 : {{item.volume_num}}</text></view>
@@ -28,10 +28,15 @@
 			};
 		},
 		methods: {
-			gotoDetails(id) {
-				uni.navigateTo({
-					url: "/pages/findDetails/findDetails?id=" + id
-				})
+			gotoDetails(item) {
+				console.log(item)
+				if(item.href == ""){
+					uni.navigateTo({
+						url: "/pages/findDetails/findDetails?id=" +item.id
+					})
+				}else{
+					window.location.href = item.href;
+				}
 			}
 		}
 	}
@@ -74,6 +79,13 @@
 		font-weight:bold;
 		color:rgba(82,91,99,1);
 		line-height:40upx;
+		text-overflow: -o-ellipsis-lastline;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  display: -webkit-box;
+		  -webkit-line-clamp: 2;
+		  line-clamp: 2;
+		  -webkit-box-orient: vertical;
 	}
 
 	.new_time {

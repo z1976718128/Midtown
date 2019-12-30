@@ -15,7 +15,7 @@
               transitionDuration: '.3s',
               transitionTimingFunction: 'ease'
             }"
-					 @click="getBannerDetail(item.id)" />
+					 @click="getBannerDetail(item)" />
 				</div>
 			</swiper-item>
 		</swiper>
@@ -85,16 +85,15 @@
 			animationfinish(e) {
 				this.isDescAnimating = false
 			},
-			getBannerDetail(id) {
-				console.log(id)
-				uni.navigateTo({
-					url:"/pages/findDetails/findDetails?id="+id
-				})
-				// uni.showLoading({
-				// 	title: '将前往详情页面',
-				// 	duration: 2000,
-				// 	mask: true
-				// })
+			getBannerDetail(item) {
+				console.log(item)
+				if(item.href == ""){
+					uni.navigateTo({
+						url: "/pages/findDetails/findDetails?id=" +item.id
+					})
+				}else{
+					window.location.href = item.href;
+				}
 			}
 		}
 	}

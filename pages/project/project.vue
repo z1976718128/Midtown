@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<view class="head_fx"></view>
 		<projectItem :projectArr="projectArr"></projectItem>
 	</view>
 </template>
@@ -26,6 +27,3 @@
 	}
 </script>
 
-<style>
-
-</style>

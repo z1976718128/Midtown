@@ -1,16 +1,31 @@
 <template>
 	<view class="BP">
-		<view class="BP_hd">
+		<view class="head_fx"></view>
+		<view class="">
 			<view class="BP_hd_frist">
 				<view class="company_logo_img">
 					<image class="company_logo" :src="bpArr.logo" mode=""></image>
 				</view>
 				<view class="BP_hd_cont">
 					 <view class="company_name">{{bpArr.title}}</view>
-					 <view class="company-desc">{{bpArr.company_desc}}</view>
+					 <view class="company-desc">{{bpArr.one_desc}}</view>
 				</view>
 				<view class="">
-					<text class="bule">{{bpArr.status_name}}</text>
+					<text v-if="bpArr.status === 0" class="bule">
+						{{bpArr.status_name}}
+					</text>
+					<text v-if="bpArr.status === 1" class="green">
+						{{bpArr.status_name}}
+					</text>
+					<text v-if="bpArr.status === 2" class="black">
+						{{bpArr.status_name}}
+					</text>
+					<text v-if="bpArr.status === 3" class="black">
+						{{bpArr.status_name}}
+					</text>
+					<text v-if="bpArr.status === 4" class="black">
+						{{bpArr.status_name}}
+					</text>
 				</view>
 			</view>
 			<view class="BP_hd_last">
@@ -34,7 +49,7 @@
 			<view class="find_title"><text class="shux"></text><text class="hd">公司信息：</text></view>
 			<view class="company_content">
 				<view class="">
-					<text class="company_title">公司全称：{{bpArr.company_name}}</text>
+					<text class="company_title">公司全称：<text class="company_qc">{{bpArr.company_name}}</text></text>
 				</view>
 				<view class="company_item">
 					<text class="company_jan">公司简介：</text>
@@ -56,7 +71,7 @@
 				<text class="business_wj" @tap="down">{{bpArr.file_name}}</text>
 			</view>
 		</view>
-		<view class="button" @tap="back">返回</view>
+		<!-- <view class="button" @tap="back">返回</view> -->
 	</view>
 </template>
 
@@ -79,30 +94,11 @@
 				this.bpArr = res.data.data
 			})
 			
-			checkRegist({token:token}).then(res=>{
-				console.log(res.data.data)
-				this.check = res.data.data
-				if(res.data.data != 1){
-					uni.showModal({
-						showCancel:false,
-						title:"请先注册",
-						success(res) {
-							if(res.confirm){
-								console.log(1)
-								uni.navigateTo({
-									url:"/pages/register/register"
-								})
-							}
-						}
-						
-					})
-				}
-			})
 		},
 		methods:{
-			back(){
-				uni.navigateBack()
-			},
+			// back(){
+			// 	uni.navigateBack()
+			// },
 			down(){
 				window.location.href =this.bpArr.file
 			}
@@ -111,5 +107,10 @@
 </script>
 
 <style scoped>
-
+.bule,.green,.black{
+	margin-top: 92upx;
+}
+.BP_hd_last{
+	margin:0 30upx;
+}
 </style>

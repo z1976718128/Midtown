@@ -2,10 +2,12 @@
 	<view>
 		<view class="find_title"><text class="shux"></text><text class="hd">热门活动</text></view>
 		<banner :banner-list="bannerList" :swiper-config="swiperConfig"></banner>
-		<view class="find_title"><text class="shux"></text><text class="hd">新闻资讯</text></view>
-		<findItem :itenArr="itenArr"></findItem>
-		<view class="tost">
-			{{loadingText}}
+		<view class="br">
+			<view class="find_title "><text class="shux"></text><text class="hd">新闻资讯</text></view>
+			<findItem :itenArr="itenArr"></findItem>
+			<view class="tost">
+				{{loadingText}}
+			</view>
 		</view>
 	</view>
 </template>
@@ -54,7 +56,7 @@
 			getnewList(bool){
 				let datas= []
 				getNews({page:this.page,num:this.num}).then((res)=>{
-					console.log(res)
+					console.log(res,"新闻")
 					datas = res.data.data
 					this.tempArr = datas
 					if(this.tempArr.length < this.num){
@@ -75,7 +77,7 @@
 		},
 		mounted() {
 			findList().then((res)=>{
-				console.log(res)
+				console.log(res,"活动")
 				this.bannerList = res.data.data
 			})
 			this.getnewList()
@@ -89,6 +91,9 @@
 </script>
 
 <style scoped>
+	.br{
+		border-top: 13upx solid #F1F1F1;
+	}
 .find_title{
 	margin:35upx 30upx 0upx;
 }	

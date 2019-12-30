@@ -6,7 +6,7 @@
 				<text class="title">{{or.title}}</text>
 			</view>
 			<view class="list_nth">
-				<text ><text class="pric">{{or.capital_name}}</text><text class="wy">以下</text></text>
+				<text ><text class="pric">{{or.capital_name}}</text><text class="wy"></text></text>
 				<text class="type">
 					<text class="type_size">{{or.field_name}}</text>
 				</text>
@@ -56,4 +56,6 @@
 		}
 	}
 </script>
+
+
 

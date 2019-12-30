@@ -3,7 +3,13 @@
 	{
 		"path": "pages/index/home/home",
 		"style": {
-			"navigationBarTitleText": "中城金服"
+			      "navigationStyle":"custom",
+			
+			       "app-plus":{
+			
+			       "titleNView":false
+			
+			       }
 		}
 	}
 	,
@@ -17,19 +23,38 @@
 		{
             "path" : "pages/index/investment/investment",
             "style" : {
-				"navigationBarTitleText": "中城金服"
+				      "navigationStyle":"custom",
+				
+				       "app-plus":{
+				
+				       "titleNView":false
+				
+				       }
 			}
         }
         ,{
             "path" : "pages/index/find/find",
             "style" : {
-				"navigationBarTitleText": "中城金服"
+				      "navigationStyle":"custom",
+				
+				       "app-plus":{
+				
+				       "titleNView":false
+				
+				       }
 			}
         }
         ,{
+			"name":132,
             "path" : "pages/index/my/my",
             "style" : {
-				"navigationBarTitleText": "中城金服"
+				      "navigationStyle":"custom",
+				
+				       "app-plus":{
+				
+				       "titleNView":false
+				
+				       }
 			}
         }
         
@@ -62,13 +87,9 @@
 			}
         }
         ,{
-            "path" : "pages/investDetails/investDetails",
-            "style" : {}
-        }
-        ,{
             "path" : "pages/register/register",
             "style" : {
-				"navigationBarTitleText": "修改个人信息",
+				"navigationBarTitleText": "注册/修改",
 				"navigationBarTextStyle": "black"
 			}
         }
@@ -82,7 +103,7 @@
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "中城金服",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
@@ -95,13 +116,13 @@
 				"pagePath": "pages/index/home/home",
 				"iconPath": "static/img/tabbar/home.png",
 				"selectedIconPath": "static/img/tabbar/homeactive.png",
-				"text": "首页"
+				"text": "项目"
 			},
 			{
 				"pagePath": "pages/index/investment/investment",
 				"iconPath": "static/img/tabbar/guanzhu.png",
 				"selectedIconPath": "static/img/tabbar/guanzhuactive.png",
-				"text": "创投"
+				"text": "资方"
 			},
 			{
 				"pagePath": "pages/index/find/find",

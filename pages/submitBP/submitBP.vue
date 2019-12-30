@@ -63,7 +63,7 @@
 
 <script>
 	import {postBp,upload,getRegion} from "../../uilt/api.js"
-	import cityPicker from '@/components/cityPicker';
+	import cityPicker from 'components/cityPicker';
 	import industryField from "@/components/industryField.vue"
 	import financing from "@/components/financing.vue"
 	import inFusion from "@/components/inFusion.vue"
@@ -100,6 +100,7 @@
 				file:"",
 				stage_id:"",
 				financing:"",
+				field_name:"",
 				picked:{
 					labels:[
 						"选择>"
@@ -155,14 +156,12 @@
 					success:function(chooseImageRes){
 						const tempFilePaths = chooseImageRes.tempFiles;
 						let nar =tempFilePaths[0].name.split(".")
-						console.log(tempFilePaths)
+						console.log(tempFilePaths[0].name)
+						than.field_name = tempFilePaths[0].name
 						uni.uploadFile({
 							url:"http://zc.demo.yudw.com/api/Upload/upload_file",
 							filePath:tempFilePaths[0].path,
 							name: 'file',
-							formData:{
-								field_name:tempFilePaths[0].name
-							},
 							success: function (res) {
 								let arr = res.data
 								than.files = tempFilePaths[0].name
@@ -205,6 +204,7 @@
 				const token=uni.getStorageSync("token");
 				postBp({
 					token,
+					field_name:this.field_name,
 					title:this.title,
 					company_name:this.company_name,
 					logo:this.logo,
@@ -312,6 +312,7 @@ input,.cists{
 	font-weight:400;
 	color:rgba(145,145,145,1);
 	text-indent: 23upx;
+	padding-top: 10upx;
 }
 .get_vcode{
 	width:177upx;
@@ -373,5 +374,8 @@ input,.cists{
 }
 .cists{
 	color: #DEB156;
+}
+.button{
+	margin:68upx 0 200upx 0;
 }
 </style>

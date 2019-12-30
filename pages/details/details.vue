@@ -1,6 +1,7 @@
 <template>
 	<view class="BP">
-		<view class="BP_hd">
+		<view class="head_fx"></view>
+		<view class="">
 			<view class="BP_hd_frist">
 				<view class="">
 					<image class="company_logo" :src="arr.logo" mode=""></image>
@@ -59,19 +60,34 @@
 				<text class="business_wj" @tap="down">{{arr.file_name}}</text>
 			</view>
 		</view>
-		<view class="content">
-					<chunLei-modal v-model="value" :mData="mData" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
-					</chunLei-modal>
-		 </view>
+		<!-- <view class="content">
+			<chunLei-modal v-model="value" :mData="mData" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
+			</chunLei-modal>
+		 </view> -->
+		<view class="models" v-if="showMod">
+			<view class="info">请添加平台负责人 获取更多信息~</view>
+			<view class="ewm">
+				<image class="ewm" src="../../static/img/m1.png" mode=""></image>
+			</view>
+			<view class="email" @tap="gp">
+				<view class="">电话/微信：13543250693</view>
+				<view class="">邮箱：zhangc@unspace.cn</view>
+			</view>
+			<view @tap="hideMol" class="clones"><image src="../../static/img/clone.png" mode=""></image></view>
+		</view>
+		<view @tap="hideMol" v-if="showMod" class="yy"></view>
 		<view class="button" @tap="showModel">下载BP</view>
 	</view>
 </template>
 
 <script>
-	import {bpItem,checkRegist} from "../../uilt/api.js"
+	import {bpItem,checkRegist,bpDownload} from "@/uilt/api.js"
 	export default {
+		components:{
+		},
 		data() {
 			return {
+				showMod:false,
 				id:"",
 				arr:[],
 				type:"advert",
@@ -81,17 +97,53 @@
 		},
 		methods: {
 			down(){
-				window.location.href =this.arr.file
+				// window.location.href =this.arr.file
+			},
+			hideMol(){
+				this.showMod = false
 			},
 			showModel(){
-				console.log(111)
-				this.value = true
+				const token=uni.getStorageSync("token");
+				checkRegist({token:token}).then(res=>{
+					if(res.data.data != 1){
+						uni.showModal({
+							showCancel:false,
+							title:"请先注册",
+							success(res) {
+								if(res.confirm){
+									console.log(1)
+									uni.navigateTo({
+										url:"/pages/register/register"
+									})
+								}
+							}
+							
+						})
+					}else{
+						this.showMod = true
+						const token=uni.getStorageSync("token");
+						bpDownload({token:token,bp_id:this.id}).then(res =>{
+							console.log(res)
+						})
+					}
+				})
 			},
 			onConfirm(){
 				this.value = false
 			},
 			cancel(){
 				this.value = false
+			},
+			gp(){
+				uni.makePhoneCall({
+					phoneNumber: '13543250693',
+					success(res) {
+						console.log(res)
+					},
+					fail(res) {
+						console.log(res)
+					}
+				})
 			}
 		},
 		mounted() {
@@ -99,26 +151,7 @@
 				console.log(res.data.date)
 				this.arr = res.data.date
 			})
-			const token=uni.getStorageSync("token");
-			checkRegist({token:token}).then(res=>{
-				console.log(res.data.data)
-				this.check = res.data.data
-				if(res.data.data != 1){
-					uni.showModal({
-						showCancel:false,
-						title:"请先注册",
-						success(res) {
-							if(res.confirm){
-								console.log(1)
-								uni.navigateTo({
-									url:"/pages/register/register"
-								})
-							}
-						}
-						
-					})
-				}
-			})
+			
 		},
 		onLoad(id) {
 			console.log(id)
@@ -128,7 +161,26 @@
 </script>
 
 <style scoped>
+.BP{
+	padding-bottom:250upx ;
+}	
 .BP_hd_frist{
 	margin-bottom: 54upx;
 }	
+.company_name{
+	width: auto;
+}
+.button{
+	margin:68upx 0 300upx 0;
+}
+.company_logo{
+	margin-top: 46upx;
+}
+.BP_hd_frist {
+	justify-content: flex-start;
+	margin-left: 30upx;
+}
+.company_nr{
+	top: 0;
+}
 </style>

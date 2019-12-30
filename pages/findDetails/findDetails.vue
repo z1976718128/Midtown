@@ -1,21 +1,26 @@
 <template>
-	<view class="findeta">
-		<view class="findeta_num">
-			<text></text>
-			<text>浏览量:{{arr.volume_num}}</text>
+	<view class="pdr">
+		<view class="head_fx"></view>
+		<view class="findeta">
+			<view class="findeta_num">
+				<text>{{arr.add_time}}</text>
+				<text>浏览量:{{arr.volume_num}}</text>
+			</view>
+			<view class="find_titles">
+				<text>{{arr.title}}</text>
+			</view>
+			<view class="findeta_img">
+				<image :src="arr.img" mode=""></image>
+			</view>
+			<view class="findeta_cont">
+				<text v-html="arr.content">{{arr.content}}</text>
+			</view>
+			<!-- <view class="button" @tap="back">返回</view> -->
 		</view>
-		<view class="find_titles">
-			<text>{{arr.title}}</text>
-		</view>
-		<view class="findeta_img">
-			<image :src="arr.img" mode=""></image>
-		</view>
-		<view class="findeta_cont">
-			<text>{{arr.content}}</text>
-		</view>
-		<view class="button" @tap="back">返回</view>
 	</view>
+	
 </template>
+
 
 <script>
 	import {newsInfo,checkRegist} from "@/uilt/api.js"
@@ -34,53 +39,45 @@
 				console.log(res)
 				this.arr = res.data.data
 			})
-			const token=uni.getStorageSync("token");
-			checkRegist({token:token}).then(res=>{
-				console.log(res.data.data)
-				this.check = res.data.data
-				if(res.data.data != 1){
-					uni.showModal({
-						showCancel:false,
-						title:"请先注册",
-						success(res) {
-							if(res.confirm){
-								console.log(1)
-								uni.navigateTo({
-									url:"/pages/register/register"
-								})
-							}
-						}
-						
-					})
-				}
-			})
+		
 		},
 		methods:{
-			back(){
-				uni.navigateBack()
-			},
+			// back(){
+			// 	uni.navigateBack()
+			// },
 		}
 	}
 </script>
 
 <style scoped>
+.pdr{
+	padding-bottom: 250upx;
+}
 .findeta{
-	margin:30upx;
+	margin:40upx 30upx;
 }
 .findeta_num{
 	font-size:30upx;
 	font-weight:400;
 	color:rgba(181,181,181,1);
+	display: flex;
+	height: 40upx;
+	justify-content: space-between;
 }
 .find_titles{
 	height:69upx;
-	font-size:30upx;
-	font-weight:bold;
-	color:rgba(82,91,99,1);
 	line-height:40upx;
 	margin:57upx 0 61upx 0;
 }
+.find_titles text{
+	font-size:35upx;
+	font-weight:bold;
+	color:rgba(82,91,99,1);
+}
 .findeta_cont{
+	width: 688upx;
+	overflow: hidden;
+	white-space:pre-wrap;
 	font-size:30upx;
 	font-weight:400;
 	color:rgba(71,71,71,1);
@@ -93,5 +90,9 @@
 	width:688upx;
 	height:410upx;
 	border-radius:10upx;
+}
+.head_fx{
+	top: 88upx;
+	margin-bottom: 30upx;
 }
 </style>
