@@ -95,7 +95,28 @@
 				mData:{src:'../../static/img/company_logo.png',width:'600upx',height:'350upx'},
 			}
 		},
+		onLoad(id) {
+			this.id = id.did;
+		},
+		mounted() {
+			bpItem({id:this.id}).then((res)=>{
+				console.log(res)
+				this.arr = res.data.date
+			})
+		},
+		onBackPress(event){
+			if(event.from == "backbutton" ||event.from == "navigateBack"){
+				return false;
+			}
+			 this.back();  
+			return true;  
+		},
 		methods: {
+			 back() {  
+				uni.reLaunch({
+					url:"/pages/index/home/home"
+				})
+			},  
 			down(){
 				// window.location.href =this.arr.file
 			},
@@ -145,18 +166,8 @@
 					}
 				})
 			}
-		},
-		mounted() {
-			bpItem({id:this.id}).then((res)=>{
-				console.log(res.data.date)
-				this.arr = res.data.date
-			})
-			
-		},
-		onLoad(id) {
-			console.log(id)
-			this.id = id.did;
 		}
+		
 	}
 </script>
 

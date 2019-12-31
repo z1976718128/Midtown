@@ -70,7 +70,39 @@
 				detailsArr:[],
 			}
 		},
+		onLoad(id){
+			this.id = id.id
+		},
+		mounted() {
+			investorInfo({id:this.id}).then((res)=>{
+				console.log(res,111)
+				this.detailsArr = res.data.date
+			})
+		},
+		onBackPress(event){
+			if(event.from == "backbutton" ||event.from == "navigateBack"){
+				return false;
+			}
+			 this.back();  
+			return true;  
+		},
 		methods: {
+			back() {
+				uni.reLaunch({
+					url:"/pages/index/investment/investment"
+				})
+			}, 
+			gp(){
+				uni.makePhoneCall({
+					phoneNumber: '13543250693',
+					success(res) {
+						console.log(res)
+					},
+					fail(res) {
+						console.log(res)
+					}
+				})
+			},
 			hideMol(){
 				this.showMod = false
 			},
@@ -107,15 +139,7 @@
 				this.value = false
 			}
 		},
-		onLoad(id){
-			this.id = id.id
-		},
-		mounted() {
-			investorInfo({id:this.id}).then((res)=>{
-				console.log(res,111)
-				this.detailsArr = res.data.date
-			})
-		}
+	
 	}
 </script>
 
