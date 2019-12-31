@@ -2,23 +2,23 @@
 	<view class="uni-common-mt">
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>姓名<text class="req">*</text></label>
-			<input v-model="nickname" type="text" value="" :adjust-position="false"  />
+			<input v-model="nickname" type="text" value="" :adjust-position="false"  :placeholder="userArr.nickname"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>手机号码<text class="req">*</text></label>
-			<input v-model="phone" type="number" value="" :adjust-position="false"  />
+			<input v-model="phone" type="number" value="" :adjust-position="false"  :placeholder="userArr.phone"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>工作邮箱<text class="req">*</text></label>
-			<input v-model="email" type="text" value="" :adjust-position="false" />
+			<input v-model="email" type="text" value="" :adjust-position="false" :placeholder="userArr.email"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>公司名称<text class="req">*</text></label>
-			<input v-model="company_name" type="text" value="" :adjust-position="false"  />
+			<input v-model="company_name" type="text" value="" :adjust-position="false"  :placeholder="userArr.company_name"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>职位<text class="req">*</text></label>
-			<input v-model="position" type="text" value="" :adjust-position="false"  />
+			<input v-model="position" type="text" value="" :adjust-position="false"  :placeholder="userArr.position"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>所在城市<text class="req">*</text></label>
@@ -32,7 +32,7 @@
 			<label><text class="shux"></text>公司简介</label>
 		</view>
 		<view class="">
-			<textarea v-model="desc" class="yjh"  />
+			<textarea v-model="desc" class="yjh" :placeholder="userArr.company_desc" />
 			</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>短信验证码</label>
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-	import {edit,sendSms,getRegion,getUser} from "@/uilt/api.js"
 	import cityPicker from 'components/cityPicker';
 	export default {
 		components:{cityPicker},
@@ -82,14 +81,55 @@
 				}
 			}
 		},
+		onBackPress(event){
+			console.log(event)
+			uni.switchTab({
+				url: '/pages/index/home/home'
+			});
+		},
 		mounted() {
 			const token=uni.getStorageSync("token");
-			getRegion().then((res)=>{
-				this.array = res.data.data
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/config/getRegion', //请求接口
+				method:'GET',
+				dataType:'json',
+				success: (res) => {
+					this.array = res.data.data
+				}
 			})
-			getUser({token:token}).then((res)=>{
-				this.userArr = res.data.data
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
+				method:'GET',
+				data:{
+					token:token
+				},
+				dataType:'json',
+				success: (res) => {
+					console.log(res)
+					this.check = res.data.data
+					if(res.data.data == 1){
+						uni.request({
+							url: 'http://zc.demo.yudw.com/api/user/getUser', //请求接口
+							method:'GET',
+							data:{
+								token:token
+							},
+							dataType:'json',
+							success: (res) => {
+								console.log(res)
+								this.userArr = res.data.date
+							},
+							fail:(res) =>{//请求失败后返回
+								console.log(res);
+							}
+						})
+					}
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
 			})
+			
 			
 		},
 		methods: {
@@ -117,39 +157,43 @@
 			        },
 			save(){
 				const token=uni.getStorageSync("token");
-				edit({
-					token,
-					nickname:this.nickname,
-					phone:this.phone,
-					email:this.email,
-					company_name:this.company_name,
-					position:this.position,
-					city:this.city,
-					code:this.code,
-					desc:this.desc,
-				}).then((res)=>{
-					if(res.data.status === 1){
-						console.log(res.data.msg)
-						uni.showToast({
-							title: res.data.msg,
-							icon: 'success',
-							success() {
-								setTimeout(function(){
-									uni.switchTab ({
-										url:"../index/my/my",
-									})
-								},2000)
-							}
-							
-						});
-					}else{
-						uni.showToast({
-							title: res.data.msg,
-							icon: 'none'
-						});
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/user/edit', //请求接口
+					method:'get',
+					data:{
+						token,
+						nickname:this.nickname,
+						phone:this.phone,
+						email:this.email,
+						company_name:this.company_name,
+						position:this.position,
+						city:this.city,
+						code:this.code,
+						desc:this.desc,
+					},
+					dataType:'json',
+					success: (res) => {
+						if(res.data.status === 1){
+							console.log(res.data.msg)
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'success',
+								success() {
+									setTimeout(function(){
+										uni.switchTab ({
+											url:"../index/my/my",
+										})
+									},2000)
+								}
+								
+							});
+						}else{
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							});
+						}
 					}
-					
-                                    
 				})
 			},
 			   // 获取验证码
@@ -165,27 +209,35 @@
 								// const token = localStorage.getItem("token");
 								const token=uni.getStorageSync("token");
 			                    that.disabled = true;//禁用点击
-								sendSms({
-									token,
-									mobile:this.phone,
-								
-								}).then((res)=>{
-									if(res.data.status==1){
-		                                uni.showToast({
-		                                    title: res.data.msg,
-		                                    icon: 'none'
-		                                });
-		                                that.countdown = 60;
-										console.log( that.countdown)
-		                                that.timestatus = true;
-		                                that.clear = setInterval(that.countDown,1000);
-		                            }else{
-											uni.showToast({
+								uni.request({
+									url: 'http://zc.demo.yudw.com/api/user/sendSms', //请求接口
+									method:'GET',
+									data:{
+										token,
+										mobile:this.phone,
+									},
+									dataType:'json',
+									success: (res) => {
+										if(res.data.status==1){
+			                                uni.showToast({
 			                                    title: res.data.msg,
 			                                    icon: 'none'
 			                                });
-		                                that.disabled = false; //获取失败开启点击
-		                            }
+			                                that.countdown = 60;
+											console.log( that.countdown)
+			                                that.timestatus = true;
+			                                that.clear = setInterval(that.countDown,1000);
+			                            }else{
+												uni.showToast({
+				                                    title: res.data.msg,
+				                                    icon: 'none'
+				                                });
+			                                that.disabled = false; //获取失败开启点击
+			                            }
+									},
+									fail:(res) =>{//请求失败后返回
+										console.log(res);
+									}
 								})
 			                }                
 			            },

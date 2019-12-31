@@ -23,7 +23,6 @@
 
 
 <script>
-	import {newsInfo,checkRegist} from "@/uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -35,11 +34,17 @@
 			this.id = id.id
 		},
 		mounted() {
-			newsInfo({id:this.id}).then(res=>{
-				console.log(res)
-				this.arr = res.data.data
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/news/info', //请求接口
+				method:'get',
+				dataType:'json',
+				data:{
+					id:this.id
+				},
+				success: (res) => {
+					this.arr = res.data.data
+				}
 			})
-		
 		},
 		methods:{
 			// back(){

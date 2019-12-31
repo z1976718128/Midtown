@@ -59,7 +59,6 @@
 </template>
 
 <script>
-	import {getUser,checkRegist} from "../../../uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -71,44 +70,56 @@
 		},
 		mounted() {
 			const token=uni.getStorageSync("token");
-			getUser({token:token}).then((res)=>{
-				console.log(res)
-				this.user = res.data.date
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/user/getUser', //请求接口
+				method:'GET',
+				data:{
+					token:token
+				},
+				dataType:'json',
+				success: (res) => {
+					console.log(res)
+					this.user = res.data.date
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
 			})
-			// checkRegist({token:token}).then(res=>{
-			// 	console.log(res)
-			// 	this.check = res.data.data
-			// 	if(res.data.data != 1){
-			// 		uni.showModal({
-			// 			showCancel:false,
-			// 			title:"请先注册",
-			// 			success(res) {
-			// 				if(res.confirm){
-			// 					console.log(1)
-			// 					uni.navigateTo({
-			// 						url:"/pages/register/register"
-			// 					})
-			// 				}
-			// 			}
-						
-			// 		})
-			// 	}
-			// })
 			
 		},
 		onBackPress(event){
 			console.log(111)
 		},
 		onTabItemTap(){
-			console.log("注册")
 			const token=uni.getStorageSync("token");
-			checkRegist({token:token}).then(res=>{
-				console.log(res)
-				this.check = res.data.data
-				if(res.data.data != 1){
-					uni.navigateTo({
-						url:"/pages/register/register"
-					})
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
+				method:'GET',
+				data:{
+					token:token
+				},
+				dataType:'json',
+				success: (res) => {
+					console.log(res)
+					this.check = res.data.data
+					if(res.data.data == 1){
+						uni.navigateTo({
+							url:"/pages/register/register"
+						})
+						// uni.showModal({
+						// 	showCancel:false,
+						// 	title:"请先注册",
+						// 	success(res) {
+						// 		if(res.confirm){
+									
+						// 		}
+						// 	}
+							
+						// })
+					}
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
 				}
 			})
 		},

@@ -1,61 +1,87 @@
 <script>
-	import {
-		getlogin,
-		geturl,
-		getData,
-		subscribe
-	} from "./uilt/api.js"
 	export default {
-		mounted() {
-			const token=uni.getStorageSync("token");
-			subscribe({token:token}).then(res =>{
-				if(res.data.data.subscribe != 1){
-					window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
-				}
-			})
-		},
+		data(){
+			return{
+				hr:""
+			}
+		},	
 		beforeMount() {
 			let _than = this;
-			let url = window.location.href;
 			let huoqutoken = uni.getStorageSync("token");
-			if (huoqutoken === null || huoqutoken == "" || huoqutoken == null || huoqutoken == "null" || huoqutoken == undefined) {
+			console.log('当前token', huoqutoken)
+			if (!huoqutoken) {
+				//如果URL中没有带code
+				let url = window.location.href;
 				if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
-					geturl({
-						baseUrl: url
-					}).then((res) => {
-						console.log(res)
-						window.location.href = res.data.data;
+					uni.request({
+						url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
+						method: 'get',
+						data: {
+							baseUrl: url
+						},
+						dataType: 'json',
+						success: (res) => {
+							console.log(res)
+							_than.hr =res.data.data
+							window.location.href = res.data.data;
+						}
 					})
 				} else {
 					//如果有带code
 					let code = this.getQueryString("code");
-					getlogin({
-						code: code
-					}).then((res) => {
-						// alert("进入code返回token")
-						console.log(res, 7897894566)
-						//获取token,储存到本地
-						if (res.data.data.subscribe != 1) {
-							// alert(res.data.data.subscribe)
-							window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
-						}else if(res.data.status == 1){
-							if (!res.data.data.token || res.data.data.token == null) {
-								console.log("token出错：" + res.data.data.token);
+					uni.request({
+						url: 'http://zc.demo.yudw.com/api/login/login', //登录
+						method: 'get',
+						data: {
+							code: code
+						},
+						dataType: 'json',
+						success: (res) => {
+							console.log(res, 7897894566)
+							//获取token,储存到本地
+							if (res.data.status == 1) {
+								console.log("登录成功");
+								console.log("token:", res.data.data.token);
+								uni.setStorageSync("token", res.data.data.token)
 							}
-							console.log("登录成功");
-							console.log("token:", res.data.data.token);
-							// localStorage.setItem("token", res.data.data.token);
-							uni.setStorageSync("token", res.data.data.token)
-							// _than.$store.commit('set_token', res.data.data.token);  
-						} 
-						else {
-							// alert(res.data.msg);
+						},
+						fail: (res) => { //请求失败后返回
+							console.log(res);
 						}
 					})
 				}
-			}else{
+			
 			}
+			// //判断是不是微信环境
+			// if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === "micromessenger") {
+			
 
+			// } else {
+			// 	window.location.href == _than.hr 
+			// 	// uni.setStorageSync("token", 1)
+			// 	//模拟一个 假的token ，为  2
+			// }
+		},
+		mounted() {
+			const token = uni.getStorageSync("token");
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/config/subscribe', //是否关注
+				method: 'get',
+				data: {
+					token: token
+				},
+				dataType: 'json',
+				success: (res) => {
+					// alert(res.data.data.subscribe)
+					if (res.data.data.subscribe == 0) {
+						// window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
+						// alert(res.data.data.subscribe,213)
+					}
+				},
+				fail: (res) => { //请求失败后返回
+					console.log(res);
+				}
+			})
 		},
 		methods: {
 			getQueryString(name) {
@@ -68,7 +94,6 @@
 				}
 			}
 		}
-
 	}
 </script>
 
@@ -101,7 +126,7 @@
 	.ewm {
 		width: 210upx;
 		height: 210upx;
-		margin:12upx auto;
+		margin: 12upx auto;
 	}
 
 	.email {
@@ -412,7 +437,7 @@
 		font-size: 30upx;
 		font-weight: bold;
 		color: rgba(68, 68, 68, 1);
-		margin-top:20upx;
+		margin-top: 20upx;
 	}
 
 	.gan {

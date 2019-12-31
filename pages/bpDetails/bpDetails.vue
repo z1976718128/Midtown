@@ -76,7 +76,6 @@
 </template>
 
 <script>
-	import {bpInfos,checkRegist} from "../../uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -89,11 +88,19 @@
 		},
 		mounted() {
 			const token=uni.getStorageSync("token");
-			bpInfos({id:this.uid,token:token}).then((res)=>{
-				console.log(res)
-				this.bpArr = res.data.data
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/user/bpInfo', //请求接口
+				method:'get',
+				data:{
+					id:this.uid,
+					token:token
+				},
+				dataType:'json',
+				success: (res) => {
+					this.bpArr = res.data.data
+				}
+				
 			})
-			
 		},
 		methods:{
 			// back(){

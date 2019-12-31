@@ -62,7 +62,6 @@
 </template>
 
 <script>
-	import {postBp,upload,getRegion} from "../../uilt/api.js"
 	import cityPicker from 'components/cityPicker';
 	import industryField from "@/components/industryField.vue"
 	import financing from "@/components/financing.vue"
@@ -109,8 +108,16 @@
 			}
 		},
 		mounted() {
-			getRegion().then((res)=>{
-				this.array = res.data.data
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/config/getRegion', //请求接口
+				method:'GET',
+				dataType:'json',
+				success: (res) => {
+					this.array = res.data.data
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
 			})
 		},
 		methods: {
@@ -202,44 +209,51 @@
 			        },
 			save(){
 				const token=uni.getStorageSync("token");
-				postBp({
-					token,
-					field_name:this.field_name,
-					title:this.title,
-					company_name:this.company_name,
-					logo:this.logo,
-					one_desc:this.one_desc,
-					field_id:this.field_id,
-					city_id:this.city_id,
-					company_desc:this.company_desc,
-					capital_id:this.capital_id,
-					stage_id:this.stage_id,
-					file:this.file,
-					stage_id:this.stage_id,
-					financing:this.financing,
-				}).then((res)=>{
-					console.log(res)
-					if(res.data.status === 1){
-						uni.showToast({
-							title: res.data.msg,
-							icon: 'success',
-							success() {
-								setTimeout(function(){
-									uni.switchTab ({
-										url:"../index/home/home"
-									})
-								},2000)
-							}
-						});
-						
-					}else{
-						uni.showToast({
-							title: res.data.msg,
-							icon: 'none'
-						});
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/user/GETBp', //请求接口
+					method:'GET',
+					data:{
+						token:token,
+						field_name:this.field_name,
+						title:this.title,
+						company_name:this.company_name,
+						logo:this.logo,
+						one_desc:this.one_desc,
+						field_id:this.field_id,
+						city_id:this.city_id,
+						company_desc:this.company_desc,
+						capital_id:this.capital_id,
+						stage_id:this.stage_id,
+						file:this.file,
+						stage_id:this.stage_id,
+						financing:this.financing,
+					},
+					dataType:'json',
+					success: (res) => {
+						console.log(res)
+						if(res.data.status === 1){
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'success',
+								success() {
+									setTimeout(function(){
+										uni.switchTab ({
+											url:"../index/home/home"
+										})
+									},2000)
+								}
+							});
+							
+						}else{
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							});
+						}
+					},
+					fail:(res) =>{//请求失败后返回
+						console.log(res);
 					}
-					
-                                    
 				})
 			},
 			bindPickerChange: function(e) {

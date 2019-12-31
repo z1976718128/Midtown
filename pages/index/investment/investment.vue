@@ -12,10 +12,9 @@
 </template>
 
 <script>
-	import {investor} from "../../../uilt/api.js"
-	import industryItem from "../../../components/industryItem.vue"
-	import industryField from "../../../components/industryField.vue"
-	import newItem from "../../../components/newItem.vue"
+	import industryItem from "@/components/industryItem.vue"
+	import industryField from "@/components/industryField.vue"
+	import newItem from "@/components/newItem.vue"
 	export default {
 		components:{
 			industryItem,
@@ -36,7 +35,7 @@
 			this.getnewList()
 		},
 		onTabItemTap(){
-			// uni.navigateBack();  
+			uni.navigateBack();  
 		},
 		onReachBottom() {
 			if(this.tempArr.length < this.num){
@@ -49,21 +48,32 @@
 		methods:{
 			getnewList(bool){
 				let datas= []
-				investor({page:this.page,num:this.num}).then((res)=>{
-					datas = res.data.date
-					this.tempArr = datas
-					if(this.tempArr.length < this.num){
-						this.loadingText = '没有更多数据了'
-					}
-					if(bool){
-						this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
-						this.oldArr.push(...datas)
-						this.itenArr = this.oldArr
-					}else{
-						this.itenArr = datas
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/investor/index', //请求接口
+					method:'GET',
+					data:{
+						page:this.page,
+						num:this.num
+					},
+					dataType:'json',
+					success: (res) => {
+						datas = res.data.date
+						this.tempArr = datas
+						if(this.tempArr.length < this.num){
+							this.loadingText = '没有更多数据了'
+						}
+						if(bool){
+							this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
+							this.oldArr.push(...datas)
+							this.itenArr = this.oldArr
+						}else{
+							this.itenArr = datas
+						}
+					},
+					fail:(res) =>{//请求失败后返回
+						console.log(res);
 					}
 				})
-				
 				
 			}
 		},

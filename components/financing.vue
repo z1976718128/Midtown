@@ -32,10 +32,18 @@
             }
         },
 		mounted() {
-			getCapital().then((res)=>{
-				res.data.data.map(item=>{
-					this.array.push(item)
-				})
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/index/getCapital', //请求接口
+				method:'GET',
+				dataType:'json',
+				success: (res) => {
+					res.data.data.map(item=>{
+						this.array.push(item)
+					})
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
 			})
 		},
         methods: {

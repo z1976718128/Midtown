@@ -32,10 +32,18 @@
             }
         },
 		mounted() {
-			getStage().then((res)=>{
-				res.data.data.map(item=>{
-					this.array.push(item)
-				})
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/index/getStage', //请求接口
+				method:'GET',
+				dataType:'json',
+				data:{
+					id:this.id
+				},
+				success: (res) => {
+					res.data.data.map(item=>{
+						this.array.push(item)
+					})
+				}
 			})
 		},
         methods: {

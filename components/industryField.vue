@@ -18,7 +18,6 @@
 </template>
 
 <script>
-	import {getField} from "../uilt/api.js"
     export default {
         data() {
             return {
@@ -32,10 +31,18 @@
             }
         },
 		mounted() {
-			getField().then((res)=>{
-				res.data.data.map(item=>{
-					this.array.push(item)
-				})
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/index/getField', //请求接口
+				method:'GET',
+				dataType:'json',
+				data:{
+					id:this.id
+				},
+				success: (res) => {
+					res.data.data.map(item=>{
+						this.array.push(item)
+					})
+				}
 			})
 		},
         methods: {

@@ -13,9 +13,8 @@
 </template>
 
 <script>
-	import {findList,getNews,investor} from "../../../uilt/api.js"
-	import banner from "../../../components/banner.vue"
-	import findItem from "../../../components/findItem.vue"
+	import banner from "@/components/banner.vue"
+	import findItem from "@/components/findItem.vue"
 	export default {
 		components:{
 			banner,
@@ -45,7 +44,7 @@
 			}
 		},
 		onTabItemTap(){
-			// uni.navigateBack();  
+			uni.navigateBack();  
 		},
 		onReachBottom() {
 			if(this.tempArr.length < this.num){
@@ -58,36 +57,52 @@
 		methods:{
 			getnewList(bool){
 				let datas= []
-				getNews({page:this.page,num:this.num}).then((res)=>{
-					console.log(res,"新闻")
-					datas = res.data.data
-					this.tempArr = datas
-					if(this.tempArr.length < this.num){
-						this.loadingText = '没有更多数据了'
-						return
-					}
-					if(bool){
-						this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
-						this.oldArr.push(...datas)
-						this.itenArr = this.oldArr
-					}else{
-						this.itenArr = datas
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/news/getNews', //请求接口
+					method:'get',
+					data:{
+						page:this.page,
+						num:this.num
+					},
+					dataType:'json',
+					success: (res) => {
+						console.log(res,"新闻")
+						datas = res.data.data
+						this.tempArr = datas
+						if(this.tempArr.length < this.num){
+							this.loadingText = '没有更多数据了'
+							return
+						}
+						if(bool){
+							this.oldArr = JSON.parse(JSON.stringify(this.itenArr))
+							this.oldArr.push(...datas)
+							this.itenArr = this.oldArr
+						}else{
+							this.itenArr = datas
+						}
+					},
+					fail:(res) =>{//请求失败后返回
+						console.log(res);
 					}
 				})
-				
 				
 			}
 		},
 		mounted() {
-			findList().then((res)=>{
-				console.log(res,"活动")
-				this.bannerList = res.data.data
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/news/index', //请求接口
+				method:'GET',
+				dataType:'json',
+				success: (res) => {
+					console.log(res,"活动")
+					this.bannerList = res.data.data
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
 			})
+			
 			this.getnewList()
-			// getNews().then((res)=>{
-			// 	console.log(res)
-			// 	this.getNewsArr = res.data.data
-			// })
 		},
 		  
 	}

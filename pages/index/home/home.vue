@@ -1,27 +1,9 @@
 <template>
 	<view>
-		<view class="bans">
+		<view class="bans" v-if="hides">
 			<banner :banner-list="bannerList" :tabs="tabs" :swiper-config="swiperConfig"></banner>
-			 <!-- <view class="uni-padding-wrap">
-				<view class="page-section swiper">
-					<view class="page-section-spacing">
-						<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
-							<swiper-item>
-								<view class="swiper-item uni-bg-red">A</view>
-							</swiper-item>
-							<swiper-item>
-								<view class="swiper-item uni-bg-green">B</view>
-							</swiper-item>
-							<swiper-item>
-								<view class="swiper-item uni-bg-blue">C</view>
-							</swiper-item>
-						</swiper>
-					</view>
-				</view>
-			</view> -->
 		</view>
-		
-		<view class="newsiwper">
+		<view class="newsiwper"  v-if="hides">
 			<view class="xixun">喜讯</view>
 			<text class="shux"></text>
 			<view class="posi uni-padding-wrap">
@@ -38,7 +20,7 @@
 		</view>
 
 		<!-- 头部 -->
-		<view class="navbar">
+		<view class="navbar" :class="phoneHeight>200?'fx':''">
 			<view v-for="(item, index) in field" :key="index" class="nav-item">
 				<text :class="{ current: tabCurrentIndex === index }" @click="tabClick(index)">{{ item}}</text>
 			</view>
@@ -50,9 +32,9 @@
 				<text class="title">{{or.title}}</text>
 			</view>
 			<view class="list_nth">
-				<text ><text class="pric">{{or.capital_name}}</text><text class="wy"></text></text>
+				<text><text class="pric">{{or.capital_name}}</text><text class="wy"></text></text>
 				<text class="type mr" v-for="(item,index) in or.field_name" :key="index">
-					<text class="type_size " >{{item}}</text>
+					<text class="type_size ">{{item}}</text>
 				</text>
 			</view>
 			<view class="list_item_last">
@@ -69,33 +51,27 @@
 
 <script>
 	let timer = null
-	import {
-		getData,
-		bpIndex,
-		checkRegist
-	} from "../../../uilt/api.js"
-	import banner from "../../../components/banner.vue"
-	import tabs from "../../../components/tabs.vue"
+	import banner from "@/components/banner.vue"
 	export default {
 		components: {
 			banner,
-			tabs,
 		},
 		data() {
 			return {
+				hides:true,
 				background: ['color1', 'color2', 'color3'],
-				            indicatorDots: true,
-				            autoplay: true,
-				            interval: 2000,
-				            duration: 500,
-				show:false,
-				oldArr:[],
-				tempArr:[],
+				indicatorDots: true,
+				autoplay: true,
+				interval: 2000,
+				duration: 500,
+				show: false,
+				oldArr: [],
+				tempArr: [],
 				loadingText: '上拉加载更多数据',
 				tabCurrentIndex: 0,
 				navList: [],
 				page: 1,
-				num:3,
+				num: 3,
 				field: [],
 				BP: [],
 				current: 0,
@@ -133,33 +109,47 @@
 				interval: 2000,
 				duration: 500,
 				vertical: true,
-				circular: true
+				circular: true,
+				phoneHeight:"" //高度
 			}
 		},
 		mounted() {
-			getData().then((res) => {
-				this.bannerList = res.data.data.banner;
-				this.goods_news = res.data.data.goods_news;
-				this.field = res.data.data.field
-				this.BP = res.data.data.bp
-				console.log(this.BP)
+			// alert(uni.getStorageSync("token"))
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/index/index', //请求接口
+				method: 'GET',
+				dataType: 'json',
+				success: (res) => {
+					console.log(res.data);
+					this.bannerList = res.data.data.banner;
+					this.goods_news = res.data.data.goods_news;
+					this.field = res.data.data.field
+					this.BP = res.data.data.bp
+				},
+				fail: (res) => { //请求失败后返回
+					console.log(res);
+				}
 			})
-			// alert()
-			let token2= localStorage.getItem("token");
-			const token=uni.getStorageSync("token");
-			// alert(token)
 			this.getdatas()
 		},
 		onLoad(options) {
 			// 页面显示是默认选中第一个
 			this.tabCurrentIndex = 0;
 		},
-		onTabItemTap(){
-			uni.navigateBack();  
-		},	
-		
+		onTabItemTap() {
+			uni.navigateBack();
+		},
+		onPageScroll(e) { //nvue暂不支持滚动监听，可用bindingx代替
+			let _than = this;
+		    this.phoneHeight =e.scrollTop
+			if(e.scrollTop>=200){
+				_than.hides = false
+			}else if(e.scrollTop<200){
+				_than.hides = true
+			}
+		},
 		onReachBottom() {
-			if(this.tempArr.length < this.num){
+			if (this.tempArr.length < this.num) {
 				this.show = true
 				this.loadingText = '没有更多数据了'
 				return
@@ -168,51 +158,71 @@
 			this.getdatas(true)
 		},
 		methods: {
-			subP(){
-				const token=uni.getStorageSync("token");
-				checkRegist({token:token}).then(res=>{
-					console.log(res,13465)
-					this.check = res.data.data
-					if(res.data.data != 1){
-						uni.showModal({
-							showCancel:false,
-							title:"请先注册",
-							success(res) {
-								if(res.confirm){
-									console.log(1)
-									uni.navigateTo({
-										url:"/pages/register/register"
-									})
+			subP() {
+				const token = uni.getStorageSync("token");
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
+					method: 'GET',
+					data: {
+						token: token
+					},
+					dataType: 'json',
+					success: (res) => {
+						// alert(res.data.data)
+						console.log(res.data.data)
+						if (res.data.data == 0) {
+							uni.showModal({
+								showCancel: false,
+								title: "请先注册",
+								success(res) {
+									if (res.confirm) {
+										console.log(1)
+										uni.navigateTo({
+											url: "/pages/register/register"
+										})
+									}
 								}
-							}
-							
-						})
-					}else{
-						uni.navigateTo({
-							url:"/pages/submitBP/submitBP"
-						})
+
+							})
+						} else {
+							uni.navigateTo({
+								url: "/pages/submitBP/submitBP"
+							})
+						}
+					},
+					fail: (res) => { //请求失败后返回
+						console.log(res);
 					}
 				})
 			},
 			getdatas(bool) {
-				bpIndex({
-					field_id: this.tabCurrentIndex,
-					num: this.num,
-					page: this.page
-				}).then(rsp => {
-					let datas= []
-					datas = rsp.data.date
-					this.tempArr = datas
-					if(this.tempArr.length < this.num){
-						this.loadingText = '没有更多数据了'
-						return
-					}
-					if(bool){
-						this.oldArr = JSON.parse(JSON.stringify(this.navList))
-						this.oldArr.push(...datas)
-						this.navList = this.oldArr
-					}else{
-						this.navList = datas
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/bp/index', //请求接口
+					method: 'GET',
+					data: {
+						field_id: this.tabCurrentIndex,
+						num: this.num,
+						page: this.page
+					},
+					dataType: 'json', //返回数据格式
+					success: (rsp) => { //请求成功后返回
+						let datas = []
+						datas = rsp.data.date
+						this.tempArr = datas
+						if (this.tempArr.length < this.num) {
+							this.loadingText = '没有更多数据了'
+							return
+						}
+						if (bool) {
+							this.oldArr = JSON.parse(JSON.stringify(this.navList))
+							this.oldArr.push(...datas)
+							this.navList = this.oldArr
+						} else {
+							this.navList = datas
+						}
+					},
+					fail: (res) => { //请求失败后返回
+						console.log(res);
 					}
 				})
 			},
@@ -222,13 +232,22 @@
 			//顶部tab点击
 			tabClick(index) {
 				this.tabCurrentIndex = index;
-				bpIndex({
-					field_id: index,
-					num: 5,
-					page: 1
-				}).then(rsp => {
-					this.navList = rsp.data.date;
-					console.log(this.navList)
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/bp/index', //请求接口
+					method: 'GET',
+					data: {
+						field_id: index,
+						num: 5,
+						page: 1
+					},
+					dataType: 'json', //返回数据格式
+					success: (rsp) => { //请求成功后返回
+						this.navList = rsp.data.date;
+						console.log(this.navList)
+					},
+					fail: (res) => { //请求失败后返回
+						console.log(res);
+					}
 				})
 			},
 			dilt(id) {
@@ -271,9 +290,9 @@
 			durationChange(e) {
 				this.duration = e.target.value
 			}
-			
+
 		}
-	
+
 	}
 </script>
 
@@ -282,68 +301,77 @@
 		position: fixed;
 		height: 72upx;
 		line-height: 72upx;
-		bottom:112upx;
+		bottom: 112upx;
 		left: 50%;
 		transform: translateX(-50%);
 		text-align: center;
 		z-index: 56;
-		box-shadow:0upx 4upx 36upx 0px rgba(143,141,141,0.5);
+		box-shadow: 0upx 4upx 36upx 0px rgba(143, 141, 141, 0.5);
 		background: #E7B85A;
 	}
 
 	.newsiwper {
 		display: flex;
 		position: relative;
-		width:700upx;
-		height:90upx;
-		background:rgba(255,255,255,1);
-		box-shadow:0upx 0upx 21upx 0upx rgba(141,139,139,0.1);
-		border-radius:15upx;
+		width: 700upx;
+		height: 90upx;
+		background: rgba(255, 255, 255, 1);
+		box-shadow: 0upx 0upx 21upx 0upx rgba(141, 139, 139, 0.1);
+		border-radius: 15upx;
 		margin: 0 auto;
 		overflow: hidden;
 		line-height: 90upx;
 	}
-	.posi,.page-section{
+
+	.posi,
+	.page-section {
 		/* position: absolute; */
-		width:550upx;
-		height:80upx;
-		margin-left:10upx;
+		width: 550upx;
+		height: 80upx;
+		margin-left: 10upx;
 	}
-	.xixun{
+
+	.xixun {
 		display: inline-block;
 		/* width:59upx; */
 		/* height:29upx; */
-		font-size:35upx;
-		font-weight:400;
-		color:rgba(222,177,86,1);
-		line-height:38upx;
+		font-size: 35upx;
+		font-weight: 400;
+		color: rgba(222, 177, 86, 1);
+		line-height: 38upx;
 		/* padding:29upx 29upx 32upx 38upx; */
-		margin:13px 0 0  13px;
+		margin: 13px 0 0 13px;
 	}
-	.shux{
-		margin:13px 0 0  10px;
+
+	.shux {
+		margin: 13px 0 0 10px;
 	}
-	.swiper-item{
-		font-size:28upx;
-		font-weight:400;
-		color:rgba(68,68,68,1);
-		width:550upx ;
+
+	.swiper-item {
+		font-size: 28upx;
+		font-weight: 400;
+		color: rgba(68, 68, 68, 1);
+		width: 550upx;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
 	}
+
 	.navbar {
 		display: flex;
 	}
-.list_frist{
-	margin-top:6upx;
-}
-.list_nth{
-		margin-top:0upx;
+
+	.list_frist {
+		margin-top: 6upx;
+	}
+
+	.list_nth {
+		margin-top: 0upx;
 		margin-bottom: 20upx;
 	}
+
 	.navbar view {
-		margin:0 50upx;
+		margin: 0 50upx;
 		text-align: center;
 	}
 
@@ -357,18 +385,33 @@
 		font-size: 30upx;
 		font-weight: bold;
 		border-bottom: 8upx solid #DEB156;
-		border-radius:2upx;
+		border-radius: 2upx;
 		padding-bottom: 10upx;
 	}
-	.navbar{
-		border-top:13upx solid #F1F1F1;
+
+	.navbar {
+		border-top: 13upx solid #F1F1F1;
 		margin-top: 42upx;
 		padding-top: 20upx;
 	}
-	.type{
+
+	.type {
 		float: right;
 	}
-	.mr{
-		margin-right:10upx;
+
+	.mr {
+		margin-right: 10upx;
+	}
+	.fx{
+		position: fixed;
+		top: 0;
+		background: #fff;
+		width: 100%;
+		height: 40px;
+		line-height: 40upx;
+		z-index: 999;
+		border-top: none; 
+		margin-top: 0px;
+		padding-top: 0px;
 	}
 </style>

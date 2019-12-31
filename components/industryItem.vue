@@ -17,7 +17,6 @@
 </template>
 
 <script>
-	import {getStage} from "../uilt/api.js"
     export default {
         data() {
             return {
@@ -33,12 +32,19 @@
             }
         },
         mounted() {
-        	getStage().then((res)=>{
-        		console.log(res)
-				res.data.data.map(item=>{
-					this.objectArray.push(item)
-				})
-        	})
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/index/getStage', //请求接口
+				method:'GET',
+				dataType:'json',
+				data:{
+					id:this.id
+				},
+				success: (res) => {
+					res.data.data.map(item=>{
+						this.objectArray.push(item)
+					})
+				}
+			})
         },
         methods: {
             bindPickerChange: function(e) {

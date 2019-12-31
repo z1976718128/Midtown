@@ -6,8 +6,7 @@
 </template>
 
 <script>
-	import {getUserBp} from "../../uilt/api.js"
-	import projectItem from "../../components/projectItem.vue"
+	import projectItem from "@/components/projectItem.vue"
 	export default {
 		components:{
 			projectItem
@@ -19,9 +18,16 @@
 		},
 		mounted() {
 			const token=uni.getStorageSync("token");
-			getUserBp({token:token}).then((res)=>{
-				console.log(res)
-				this.projectArr = res.data.date
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/user/getUserBp', //请求接口
+				method:'GET',
+				data:{
+					token:token
+				},
+				dataType:'json',
+				success: (res) => {
+					this.projectArr = res.data.date
+				}
 			})
 		}
 	}

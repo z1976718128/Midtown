@@ -38,8 +38,6 @@
 			</text>
 		</view> -->
 		 <view class="content">
-			<chunLei-modal v-model="value" :mData="mData" :type="type" @onConfirm="onConfirm" @cancel="cancel" navMask>
-			</chunLei-modal>
 		  </view>
 		  <view class="models" v-if="showMod">
 		  	<view class="info">请添加平台负责人 获取更多信息~</view>
@@ -58,7 +56,6 @@
 </template>
 
 <script>
-	import {investorInfo,checkRegist} from "../../uilt/api.js"
 	export default {
 		data() {
 			return {
@@ -74,9 +71,16 @@
 			this.id = id.id
 		},
 		mounted() {
-			investorInfo({id:this.id}).then((res)=>{
-				console.log(res,111)
-				this.detailsArr = res.data.date
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/investor/info', //请求接口
+				method:'GET',
+				data:{
+					id:this.id
+				},
+				dataType:'json',
+				success: (res) => {
+					this.detailsArr = res.data.date
+				}
 			})
 		},
 		onBackPress(event){
@@ -108,27 +112,48 @@
 			},
 			showModel(){
 				const token=uni.getStorageSync("token");
-				checkRegist({token:token}).then(res=>{
-					if(res.data.data != 1){
-						uni.showModal({
-							showCancel:false,
-							title:"请先注册",
-							success(res) {
-								if(res.confirm){
-									console.log(1)
-									uni.navigateTo({
-										url:"/pages/register/register"
-									})
+				uni.request({
+					url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
+					method:'GET',
+					data:{
+						token:token
+					},
+					dataType:'json',
+					success: (res) => {
+						console.log(res)
+						if(res.data.data == 0){
+							uni.showModal({
+								showCancel:false,
+								title:"请先注册",
+								success(res) {
+									if(res.confirm){
+										console.log(1)
+										uni.navigateTo({
+											url:"/pages/register/register"
+										})
+									}
 								}
-							}
-							
-						})
-					}else{
-						this.showMod = true
-						const token=uni.getStorageSync("token");
-						bpDownload({token:token,bp_id:this.id}).then(res =>{
-							console.log(res)
-						})
+								
+							})
+						}else{
+							this.showMod = true
+							const token=uni.getStorageSync("token");
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/bp/bpDownload', //请求接口
+								method:'GET',
+								data:{
+									token:token,
+									bp_id:this.id
+								},
+								dataType:'json',
+								success: (res) => {
+									console.log(res)
+								}
+							})
+						}
+					},
+					fail:(res) =>{//请求失败后返回
+						console.log(res);
 					}
 				})
 			},
