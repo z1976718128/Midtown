@@ -32,7 +32,12 @@
 				tempArr:[]
 			}
 		},
-		
+		mounted() {
+			this.getnewList()
+		},
+		onTabItemTap(){
+			// uni.navigateBack();  
+		},
 		onReachBottom() {
 			if(this.tempArr.length < this.num){
 				this.loadingText = '没有更多数据了'
@@ -62,9 +67,7 @@
 				
 			}
 		},
-		mounted() {
-			this.getnewList()
-		}
+		
 	}
 </script>
 

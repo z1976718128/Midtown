@@ -136,10 +136,28 @@
 				circular: true
 			}
 		},
+		mounted() {
+			getData().then((res) => {
+				this.bannerList = res.data.data.banner;
+				this.goods_news = res.data.data.goods_news;
+				this.field = res.data.data.field
+				this.BP = res.data.data.bp
+				console.log(this.BP)
+			})
+			// alert()
+			let token2= localStorage.getItem("token");
+			const token=uni.getStorageSync("token");
+			// alert(token)
+			this.getdatas()
+		},
 		onLoad(options) {
 			// 页面显示是默认选中第一个
 			this.tabCurrentIndex = 0;
 		},
+		onTabItemTap(){
+			uni.navigateBack();  
+		},	
+		
 		onReachBottom() {
 			if(this.tempArr.length < this.num){
 				this.show = true
@@ -153,7 +171,7 @@
 			subP(){
 				const token=uni.getStorageSync("token");
 				checkRegist({token:token}).then(res=>{
-					console.log(res.data.data)
+					console.log(res,13465)
 					this.check = res.data.data
 					if(res.data.data != 1){
 						uni.showModal({
@@ -254,20 +272,8 @@
 				this.duration = e.target.value
 			}
 			
-		},
-		mounted() {
-			// alert()
-			let token2= localStorage.getItem("token");
-			const token=uni.getStorageSync("token");
-			this.getdatas()
-			getData().then((res) => {
-				this.bannerList = res.data.data.banner;
-				this.goods_news = res.data.data.goods_news;
-				this.field = res.data.data.field
-				this.BP = res.data.data.bp
-				console.log(this.BP)
-			})
 		}
+	
 	}
 </script>
 

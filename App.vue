@@ -6,9 +6,6 @@
 		subscribe
 	} from "./uilt/api.js"
 	export default {
-		onLaunch: function() {},
-		onShow: function() {},
-		onHide: function() {},
 		mounted() {
 			const token=uni.getStorageSync("token");
 			subscribe({token:token}).then(res =>{
@@ -35,7 +32,7 @@
 					getlogin({
 						code: code
 					}).then((res) => {
-						alert("进入code返回token")
+						// alert("进入code返回token")
 						console.log(res, 7897894566)
 						//获取token,储存到本地
 						if (res.data.data.subscribe != 1) {
@@ -56,6 +53,7 @@
 						}
 					})
 				}
+			}else{
 			}
 
 		},

@@ -2,23 +2,23 @@
 	<view class="uni-common-mt">
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>姓名<text class="req">*</text></label>
-			<input v-model="nickname" type="text" value="" :adjust-position="false" :placeholder="userArr.nickname" />
+			<input v-model="nickname" type="text" value="" :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>手机号码<text class="req">*</text></label>
-			<input v-model="phone" type="number" value="" :adjust-position="false" :placeholder="userArr.phone" />
+			<input v-model="phone" type="number" value="" :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>工作邮箱<text class="req">*</text></label>
-			<input v-model="email" type="text" value="" :adjust-position="false" :placeholder="userArr.email" />
+			<input v-model="email" type="text" value="" :adjust-position="false" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>公司名称<text class="req">*</text></label>
-			<input v-model="company_name" type="text" value="" :adjust-position="false" :placeholder="userArr.company_name" />
+			<input v-model="company_name" type="text" value="" :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>职位<text class="req">*</text></label>
-			<input v-model="position" type="text" value="" :adjust-position="false" :placeholder="userArr.position" />
+			<input v-model="position" type="text" value="" :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>所在城市<text class="req">*</text></label>
@@ -32,7 +32,7 @@
 			<label><text class="shux"></text>公司简介</label>
 		</view>
 		<view class="">
-			<textarea v-model="desc" class="yjh" :placeholder="userArr.company_desc" />
+			<textarea v-model="desc" class="yjh"  />
 			</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>短信验证码</label>

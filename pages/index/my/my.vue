@@ -69,38 +69,6 @@
 				showMod2:false
 			}
 		},
-		onBackPress(event){
-			console.log(event)
-		},
-		onLoad() {
-			const token=uni.getStorageSync("token");
-			checkRegist({token:token}).then(res=>{
-				console.log(res)
-				this.check = res.data.data
-				if(res.data.data != 1){
-					uni.navigateTo({
-						url:"/pages/register/register"
-					})
-				}
-			})
-		},
-		methods:{
-			hideMol(){
-				this.showMod = false
-			},
-			hideMol2(){
-				this.showMod2 = false
-			},
-			yaoqing(){
-				this.showMod = true
-			},
-			guanyu(){
-				window.location.href= "https://mp.weixin.qq.com/s/-wqjwsU_q-ktkfOI_pQAhw"
-			},
-			lxzc(){
-				this.showMod2 = true
-			},
-		},
 		mounted() {
 			const token=uni.getStorageSync("token");
 			getUser({token:token}).then((res)=>{
@@ -127,7 +95,52 @@
 			// 	}
 			// })
 			
-		}
+		},
+		onBackPress(event){
+			console.log(111)
+		},
+		onTabItemTap(){
+			console.log("注册")
+			const token=uni.getStorageSync("token");
+			checkRegist({token:token}).then(res=>{
+				console.log(res)
+				this.check = res.data.data
+				if(res.data.data != 1){
+					uni.navigateTo({
+						url:"/pages/register/register"
+					})
+				}
+			})
+		},
+		methods:{
+			gp(){
+				uni.makePhoneCall({
+					phoneNumber: '13543250693',
+					success(res) {
+						console.log(res)
+					},
+					fail(res) {
+						console.log(res)
+					}
+				})
+			},
+			hideMol(){
+				this.showMod = false
+			},
+			hideMol2(){
+				this.showMod2 = false
+			},
+			yaoqing(){
+				this.showMod = true
+			},
+			guanyu(){
+				window.location.href= "https://mp.weixin.qq.com/s/-wqjwsU_q-ktkfOI_pQAhw"
+			},
+			lxzc(){
+				this.showMod2 = true
+			},
+		},
+		
 	}
 </script>
 
