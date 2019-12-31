@@ -36,6 +36,20 @@
 					})
 				}else{
 					window.location.href = item.href;
+					uni.request({
+						url:'http://zc.demo.yudw.com/api/news/newInc', //请求接口
+						method:'GET',
+						data:{
+							id:item.id
+						},
+						dataType:'json',
+						success: (res) => {
+							console.log(res)
+						},
+						fail:(res) =>{//请求失败后返回
+							console.log(res);
+						}
+					})
 				}
 			}
 		}

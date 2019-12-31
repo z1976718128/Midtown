@@ -90,7 +90,7 @@
 		onBackPress(event){
 			console.log(111)
 		},
-		onTabItemTap(){
+		onLoad() {
 			const token=uni.getStorageSync("token");
 			uni.request({
 				url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
@@ -102,7 +102,7 @@
 				success: (res) => {
 					console.log(res)
 					this.check = res.data.data
-					if(res.data.data == 1){
+					if(res.data.data == 0){
 						uni.navigateTo({
 							url:"/pages/register/register"
 						})
@@ -122,6 +122,9 @@
 					console.log(res);
 				}
 			})
+		},
+		onTabItemTap(){
+			
 		},
 		methods:{
 			gp(){

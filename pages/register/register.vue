@@ -2,42 +2,47 @@
 	<view class="uni-common-mt">
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>姓名<text class="req">*</text></label>
-			<input v-model="nickname" type="text" value="" :adjust-position="false"  :placeholder="userArr.nickname"/>
+			<input v-model="form.nickname" type="text"  :adjust-position="false"   />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>手机号码<text class="req">*</text></label>
-			<input v-model="phone" type="number" value="" :adjust-position="false"  :placeholder="userArr.phone"/>
+			<input v-model="form.phone" type="number"   :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>工作邮箱<text class="req">*</text></label>
-			<input v-model="email" type="text" value="" :adjust-position="false" :placeholder="userArr.email"/>
+			<input v-model="form.email" type="text"  :adjust-position="false" />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>公司名称<text class="req">*</text></label>
-			<input v-model="company_name" type="text" value="" :adjust-position="false"  :placeholder="userArr.company_name"/>
+			<input v-model="form.company_name" type="text"  :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>职位<text class="req">*</text></label>
-			<input v-model="position" type="text" value="" :adjust-position="false"  :placeholder="userArr.position"/>
+			<input v-model="form.position" type="text"  :adjust-position="false"  />
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>所在城市<text class="req">*</text></label>
-			<cityPicker :pickerList="array" @confirm='endCity' :defaultValue="array" columnNum='2'>
+			<!-- <cityPicker :pickerList="array" @confirm='endCity' :defaultValue="array" columnNum='2'>
 				<view class="cists">
 					{{picked.labels.join('-')}}
 				</view>
-			</cityPicker>
+			</cityPicker> -->
+			<picker mode="multiSelector" :range="array" range-key='label' @columnchange="columnchanges" :value="index" @change="bindTimeChange">
+				<view class="cists">
+					{{city_name}}
+				</view>
+			</picker>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>公司简介</label>
 		</view>
 		<view class="">
-			<textarea v-model="desc" class="yjh" :placeholder="userArr.company_desc" />
+			<textarea v-model="form.desc" class="yjh" />
 			</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>短信验证码</label>
-			<input v-model="code" type="number" class="smscode" value="" :adjust-position="false" placeholder="请输入您的短信验证码"/>
-			<button  type="primary" @tap="getCode" :disabled="disabled" class="get_vcode">
+			<input v-model="form.code" type="number" class="smscode"  :adjust-position="false" value="请输入您的短信验证码"/>
+			<button   @tap="getCode" :disabled="disabled" class="get_vcode">
 				{{countdown}} <text class="but_text" v-show="timestatus">秒重获</text>
 			</button>
 		</view>
@@ -54,26 +59,28 @@
 		components:{cityPicker},
 		data() {
 			return {
+				city_name:'请选择>',
+				tempArray:[],
+				array:[[{label:"请选择"}],[{label:'请选择'}]],
+				index: [0,0],
 				userArr:[],
-				array:[],
-				index: 0,
 				indicatorStyle:"",
 				visible: true,
-				code:'',
-                mobile:'',
                 countdown:'获取验证码',
                 disabled:false,
                 timestatus:false,
                 clear:'',
-				nickname:"",
-				phone:"",
-				email:"",
-				company_name:"",
-				position:"",
-				city:"",
-				code:"",
-				desc:"",
-				avatar:"",
+				form:{
+					nickname:"",
+					phone:"",
+					email:"",
+					company_name:"",
+					position:"",
+					city:"",
+					desc:"",
+					avatar:"",
+					code:'',
+				},
 				picked:{
 					labels:[
 						"请选择您的所在城市>"
@@ -94,7 +101,12 @@
 				method:'GET',
 				dataType:'json',
 				success: (res) => {
-					this.array = res.data.data
+					this.tempArray = res.data.data
+					this.array = [
+						this.tempArray.map(item=>{return {label:item.label,value:item.value}}),
+						this.tempArray[0].children.map(item=>{return {label:item.label,value:item.value}})
+						]
+					console.log(this.array)	
 				}
 			})
 			uni.request({
@@ -117,7 +129,7 @@
 							dataType:'json',
 							success: (res) => {
 								console.log(res)
-								this.userArr = res.data.date
+								this.form = res.data.date
 							},
 							fail:(res) =>{//请求失败后返回
 								console.log(res);
@@ -138,6 +150,16 @@
 			// 		delta:1
 			// 	})
 			// },
+			bindTimeChange(e){
+				console.log('picker发送选择改变，携带值为', e.target.value)
+				this.index = e.target.value
+				this.form.city = this.array[1][this.index[1]].value
+				this.city_name = this.array[0][this.index[0]].label + this.array[1][this.index[1]].label
+			},
+			columnchanges(event){
+				console.log('picker发送选择改变，携带值为', event.detail)
+				this.array[1] = this.tempArray[event.detail.value].children.map(item=>{return {label:item.label,value:item.value}})
+			},
 			endCity(picked){
 				this.city = picked.value
 				console.log(picked.value)
@@ -161,15 +183,15 @@
 					url: 'http://zc.demo.yudw.com/api/user/edit', //请求接口
 					method:'get',
 					data:{
-						token,
-						nickname:this.nickname,
-						phone:this.phone,
-						email:this.email,
-						company_name:this.company_name,
-						position:this.position,
-						city:this.city,
-						code:this.code,
-						desc:this.desc,
+						token:token,
+						nickname:this.form.nickname,
+						phone:this.form.phone,
+						email:this.form.email,
+						company_name:this.form.company_name,
+						position:this.form.position,
+						city:this.form.city,
+						code:this.form.code,
+						desc:this.form.desc,
 					},
 					dataType:'json',
 					success: (res) => {
@@ -199,7 +221,7 @@
 			   // 获取验证码
 			            getCode(){
 			                var that = this;
-			                if(that.phone==''){
+			                if(that.form.phone==''){
 			                    uni.showToast({
 			                        title: '请输入手机号码',
 			                        icon: 'none'
@@ -214,7 +236,7 @@
 									method:'GET',
 									data:{
 										token,
-										mobile:this.phone,
+										mobile:this.form.phone,
 									},
 									dataType:'json',
 									success: (res) => {
@@ -253,10 +275,6 @@
 			                    --that.countdown;
 			                }
 			            },
-			bindPickerChange: function(e) {
-			    console.log(e.target.value)
-			    this.index = e.target.value
-			},
 		}
 	}
 </script>
@@ -309,7 +327,7 @@ input,.cists{
 	border-radius:26upx;
 	font-size:26upx;
 	color:rgba(182,0,14,1) !important;
-	background: none;
+	background: #fff;
 }
 .but_text{
 	font-size:26upx;

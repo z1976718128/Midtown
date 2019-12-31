@@ -24,11 +24,16 @@
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>所在城市<text class="req">*</text></label>
-			<cityPicker :pickerList="array" @confirm='endCity' :defaultValue="array" columnNum='2'>
+		<!-- 	<cityPicker :pickerList="array" @confirm='endCity' :defaultValue="array" columnNum='2'>
 				<view class="cists">
 					{{picked.labels.join('-')}}
 				</view>
-			</cityPicker>
+			</cityPicker> -->
+			<picker mode="multiSelector" :range="array" range-key='label' @columnchange="columnchanges" :value="index" @change="bindTimeChange">
+				<view class="cists">
+					{{city_name}}
+				</view>
+			</picker>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label><text class="shux"></text>公司简介<text class="req">*</text></label>
@@ -75,10 +80,12 @@
 		},
 		data() {
 			return {
+				city_name:'请选择>',
+				tempArray:[],
+				array:[[{label:"请选择"}],[{label:'请选择'}]],
+				index: [0,0],
 				logos:"上传图片+",
 				files:"选择文件+",
-				array:[],
-				index: 0,
 				indicatorStyle:"",
 				visible: true,
 				code:'',
@@ -97,7 +104,6 @@
 				capital_id:"",
 				stage_id:"",
 				file:"",
-				stage_id:"",
 				financing:"",
 				field_name:"",
 				picked:{
@@ -113,7 +119,12 @@
 				method:'GET',
 				dataType:'json',
 				success: (res) => {
-					this.array = res.data.data
+					this.tempArray = res.data.data
+					this.array = [
+						this.tempArray.map(item=>{return {label:item.label,value:item.value}}),
+						this.tempArray[0].children.map(item=>{return {label:item.label,value:item.value}})
+						]
+					console.log(this.array)	
 				},
 				fail:(res) =>{//请求失败后返回
 					console.log(res);
@@ -191,6 +202,16 @@
 				 })
 				
 			},
+			bindTimeChange(e){
+				console.log('picker发送选择改变，携带值为', e.target.value)
+				this.index = e.target.value
+				this.city_id = this.array[1][this.index[1]].value
+				this.city_name = this.array[0][this.index[0]].label + this.array[1][this.index[1]].label
+			},
+			columnchanges(event){
+				console.log('picker发送选择改变，携带值为', event.detail)
+				this.array[1] = this.tempArray[event.detail.value].children.map(item=>{return {label:item.label,value:item.value}})
+			},
 			endCity(picked){
 				this.city_id = picked.value
 				this.picked = picked
@@ -203,14 +224,10 @@
 				}
 				return arr
 			},
-			bindPickerChange: function(e) {
-			            console.log('picker发送选择改变，携带值为', e.target.value)
-			            this.index = e.target.value
-			        },
 			save(){
 				const token=uni.getStorageSync("token");
 				uni.request({
-					url: 'http://zc.demo.yudw.com/api/user/GETBp', //请求接口
+					url: 'http://zc.demo.yudw.com/api/user/postBp', //请求接口
 					method:'GET',
 					data:{
 						token:token,
@@ -247,7 +264,7 @@
 						}else{
 							uni.showToast({
 								title: res.data.msg,
-								icon: 'none'
+								icon: 'none',
 							});
 						}
 					},
@@ -255,10 +272,6 @@
 						console.log(res);
 					}
 				})
-			},
-			bindPickerChange: function(e) {
-			    console.log(e.target.value)
-			    this.index = e.target.value
 			},
 		}
 	}

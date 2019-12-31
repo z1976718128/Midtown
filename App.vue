@@ -6,6 +6,8 @@
 			}
 		},	
 		beforeMount() {
+			// #ifndef H5
+			// #endif
 			let _than = this;
 			let huoqutoken = uni.getStorageSync("token");
 			console.log('当前token', huoqutoken)
@@ -52,15 +54,8 @@
 				}
 			
 			}
-			// //判断是不是微信环境
-			// if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === "micromessenger") {
-			
-
-			// } else {
-			// 	window.location.href == _than.hr 
-			// 	// uni.setStorageSync("token", 1)
-			// 	//模拟一个 假的token ，为  2
-			// }
+		
+				// uni.setStorageSync("token", 1)
 		},
 		mounted() {
 			const token = uni.getStorageSync("token");
@@ -74,7 +69,7 @@
 				success: (res) => {
 					// alert(res.data.data.subscribe)
 					if (res.data.data.subscribe == 0) {
-						// window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
+						window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
 						// alert(res.data.data.subscribe,213)
 					}
 				},
