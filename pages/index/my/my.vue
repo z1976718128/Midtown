@@ -65,11 +65,13 @@
 				user:[],
 				check:[],
 				showMod:false,
-				showMod2:false
+				showMod2:false,
+				hr:""
 			}
 		},
 		mounted() {
 			const token=uni.getStorageSync("token");
+			let _than = this;
 			uni.request({
 				url: 'http://zc.demo.yudw.com/api/user/getUser', //请求接口
 				method:'GET',
@@ -78,6 +80,52 @@
 				},
 				dataType:'json',
 				success: (res) => {
+					if (res.data.status == 403){
+						let url = window.location.href;
+						if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
+								method: 'get',
+								data: {
+									baseUrl: url
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res)
+									_than.hr =res.data.data
+									window.location.href = res.data.data;
+								}
+							})
+						} else {
+							//如果有带code
+							let code = this.getQueryString("code");
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/login', //登录
+								method: 'get',
+								data: {
+									code: code
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res, 7897894566)
+									if (res.data.status == 1) {
+										console.log("登录成功");
+										console.log("token:", res.data.data.token);
+										uni.setStorageSync("token", res.data.data.token)
+									}
+								},
+								fail: (res) => { //请求失败后返回
+									console.log(res);
+								}
+							})
+						}
+					}
+					console.log(res,123)
+					if (res.data.status == 403){
+						const url= uni.getStorageSync("url");
+						console.log(url,132465)
+						// window.location.href= url
+					}
 					console.log(res)
 					this.user = res.data.date
 				},
@@ -88,10 +136,11 @@
 			
 		},
 		onBackPress(event){
-			console.log(111)
+			// console.log(111)
 		},
 		onLoad() {
 			const token=uni.getStorageSync("token");
+			let _than = this;
 			uni.request({
 				url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
 				method:'GET',
@@ -100,22 +149,51 @@
 				},
 				dataType:'json',
 				success: (res) => {
-					console.log(res)
+					if (res.data.status == 403){
+						let url = window.location.href;
+						if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
+								method: 'get',
+								data: {
+									baseUrl: url
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res)
+									_than.hr =res.data.data
+									window.location.href = res.data.data;
+								}
+							})
+						} else {
+							//如果有带code
+							let code = this.getQueryString("code");
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/login', //登录
+								method: 'get',
+								data: {
+									code: code
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res, 7897894566)
+									if (res.data.status == 1) {
+										console.log("登录成功");
+										console.log("token:", res.data.data.token);
+										uni.setStorageSync("token", res.data.data.token)
+									}
+								},
+								fail: (res) => { //请求失败后返回
+									console.log(res);
+								}
+							})
+						}
+					}
 					this.check = res.data.data
 					if(res.data.data == 0){
 						uni.navigateTo({
 							url:"/pages/register/register"
 						})
-						// uni.showModal({
-						// 	showCancel:false,
-						// 	title:"请先注册",
-						// 	success(res) {
-						// 		if(res.confirm){
-									
-						// 		}
-						// 	}
-							
-						// })
 					}
 				},
 				fail:(res) =>{//请求失败后返回
@@ -127,6 +205,15 @@
 			
 		},
 		methods:{
+			getQueryString(name) {
+				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				let r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					return unescape(r[2]);
+				} else {
+					return null;
+				}
+			},
 			gp(){
 				uni.makePhoneCall({
 					phoneNumber: '13543250693',

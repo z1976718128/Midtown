@@ -57,6 +57,7 @@
 					},
 					dataType:'json',
 					success: (res) => {
+						
 						datas = res.data.date
 						this.tempArr = datas
 						if(this.tempArr.length < this.num){

@@ -6,7 +6,7 @@
                     <picker @change="bindPickerChange"  selected="index" :range="array" range-key="name">
                         <view class="uni-input">
 							<!-- 行业阶段 -->
-							{{array[index].name}}
+							{{finan_name}}
 							<!-- <image v-if="index==0" class="xl" src="../../../static/img/jt_2.png" mode=""></image>
 							<image v-else class="xl" src="../../../static/img/jt_1.png" mode=""> -->
 						</view>
@@ -22,11 +22,9 @@
     export default {
         data() {
             return {
+				finan_name:"选择>",
                 title: 'picker',
-                array: [{
-					id:1012,
-					name:"选择>"
-				}],
+                array: [],
                 index:0,
 				gb:""
             }
@@ -37,6 +35,7 @@
 				method:'GET',
 				dataType:'json',
 				success: (res) => {
+					console.log(res)
 					res.data.data.map(item=>{
 						this.array.push(item)
 					})
@@ -48,8 +47,9 @@
 		},
         methods: {
             bindPickerChange: function(e) {
-                this.$emit("findVal",e.target.value)
+                this.$emit("findVal",e.target.value+1)
                 this.index = e.target.value
+				this.finan_name = this.array[this.index].name
             },
         }
     }

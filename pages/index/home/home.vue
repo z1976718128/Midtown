@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<view class="bans" v-if="hides">
+		<view class="bans" >
 			<banner :banner-list="bannerList" :tabs="tabs" :swiper-config="swiperConfig"></banner>
 		</view>
-		<view class="newsiwper"  v-if="hides">
+		<view class="newsiwper" >
 			<view class="xixun">喜讯</view>
 			<text class="shux"></text>
 			<view class="posi uni-padding-wrap">
@@ -96,14 +96,13 @@
 					indicatorDots: true,
 					indicatorColor: 'rgba(255, 255, 255, .4)',
 					indicatorActiveColor: 'rgba(255, 255, 255, 1)',
-					autoplay: false,
+					autoplay: true,
 					interval: 3000,
 					duration: 300,
 					circular: true,
 					previousMargin: '58rpx',
 					nextMargin: '58rpx'
 				},
-				background: ['color1', 'color2', 'color3'],
 				indicatorDots: true,
 				autoplay: true,
 				interval: 2000,
@@ -140,13 +139,13 @@
 			uni.navigateBack();
 		},
 		onPageScroll(e) { //nvue暂不支持滚动监听，可用bindingx代替
-			let _than = this;
-		    this.phoneHeight =e.scrollTop
-			if(e.scrollTop>=200){
-				_than.hides = false
-			}else if(e.scrollTop<200){
-				_than.hides = true
-			}
+			// let _than = this;
+		 //    this.phoneHeight =e.scrollTop
+			// if(e.scrollTop>=200){
+			// 	_than.hides = false
+			// }else if(e.scrollTop<200){
+			// 	_than.hides = true
+			// }
 		},
 		onReachBottom() {
 			if (this.tempArr.length < this.num) {
@@ -158,8 +157,18 @@
 			this.getdatas(true)
 		},
 		methods: {
+			getQueryString(name) {
+				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				let r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					return unescape(r[2]);
+				} else {
+					return null;
+				}
+			},
 			subP() {
 				const token = uni.getStorageSync("token");
+				let _than =this;
 				uni.request({
 					url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
 					method: 'GET',
@@ -169,6 +178,46 @@
 					dataType: 'json',
 					success: (res) => {
 						// alert(res.data.data)
+						if (res.data.status == 403){
+							let url = window.location.href;
+							if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
+								uni.request({
+									url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
+									method: 'get',
+									data: {
+										baseUrl: url
+									},
+									dataType: 'json',
+									success: (res) => {
+										console.log(res)
+										_than.hr =res.data.data
+										window.location.href = res.data.data;
+									}
+								})
+							} else {
+								//如果有带code
+								let code = this.getQueryString("code");
+								uni.request({
+									url: 'http://zc.demo.yudw.com/api/login/login', //登录
+									method: 'get',
+									data: {
+										code: code
+									},
+									dataType: 'json',
+									success: (res) => {
+										console.log(res, 7897894566)
+										if (res.data.status == 1) {
+											console.log("登录成功");
+											console.log("token:", res.data.data.token);
+											uni.setStorageSync("token", res.data.data.token)
+										}
+									},
+									fail: (res) => { //请求失败后返回
+										console.log(res);
+									}
+								})
+							}
+						}
 						console.log(res.data.data)
 						if (res.data.data == 0) {
 							uni.showModal({
