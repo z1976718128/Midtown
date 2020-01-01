@@ -112,6 +112,70 @@
 				phoneHeight:"" //高度
 			}
 		},
+		onShow() {
+			// alert(1232131232)
+			const token = uni.getStorageSync("token");
+			let _than = this
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/config/subscribe', //是否关注
+				method: 'get',
+				data: {
+					token: token
+				},
+				dataType: 'json',
+				success: (res) => {
+					if (res.data.status == 403){
+						let url = window.location.href;
+						if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
+								method: 'get',
+								data: {
+									baseUrl: url
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res)
+									_than.hr =res.data.data
+									window.location.href = res.data.data;
+								}
+							})
+						} else {
+							//如果有带code
+							let code = this.getQueryString("code");
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/login', //登录
+								method: 'get',
+								data: {
+									code: code
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res, 7897894566)
+									if (res.data.status == 1) {
+										console.log("登录成功");
+										console.log("token:", res.data.data.token);
+										uni.setStorageSync("token", res.data.data.token)
+									}
+								},
+								fail: (res) => { //请求失败后返回
+									console.log(res);
+								}
+							})
+						}
+					}
+					// alert(res.data.data.subscribe)
+					console.log(res.data.data.subscribe)
+					if (res.data.data.subscribe == 0) {
+						window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
+						// alert(res.data.data.subscribe,213)
+					}
+				},
+				fail: (res) => { //请求失败后返回
+					console.log(res);
+				}
+			})
+		},
 		mounted() {
 			// alert(uni.getStorageSync("token"))
 			uni.request({
@@ -157,6 +221,13 @@
 			this.getdatas(true)
 		},
 		methods: {
+			  openAddres() {
+			                this.$refs.simpleAddress.open();
+			            },
+			            onConfirm(e) {
+			                this.pickerText = JSON.stringify(e)
+			            },
+
 			getQueryString(name) {
 				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 				let r = window.location.search.substr(1).match(reg);

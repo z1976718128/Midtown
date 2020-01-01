@@ -239,10 +239,12 @@ export default {
 			this.city_name = this.array[0][this.index[0]].label + this.array[1][this.index[1]].label;
 		},
 		columnchanges(event) {
+			let tempArray = []
 			console.log('picker发送选择改变，携带值为', event.detail);
-			this.array[1] = this.tempArray[event.detail.value].children.map(item => {
+			tempArray = this.tempArray[event.detail.value].children.map(item => {
 				return { label: item.label, value: item.value };
 			});
+			this.$set(this.array,1,tempArray)
 		},
 		endCity(picked) {
 			this.city_id = picked.value;

@@ -148,6 +148,14 @@
 			// 	uni.navigateBack()
 			// },
 			down(){
+				uni.downloadFile({
+				    url: this.bpArr.file, //仅为示例，并非真实的资源
+				    success: function (res) {
+				        if (res.statusCode === 200) {
+				            console.log('下载成功');
+				        }
+				    }
+				});
 				window.location.href =this.bpArr.file
 			},
 			getQueryString(name) {

@@ -107,6 +107,7 @@ export default {
 			},
 			dataType: 'json',
 			success: res => {
+				console.log(res)
 				this.arr = res.data.date;
 			}
 		});
