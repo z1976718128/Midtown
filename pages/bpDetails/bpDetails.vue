@@ -36,7 +36,9 @@
 				<view class="gan"></view>
 				<view class="BP_hd_last_item br">
 					<view class="BP_hd_last_item_name">所属领域</view>
-					<view class="BP_hd_last_item_js">{{bpArr.field_name}}</view>
+					<view class="BP_hd_last_item_js" >
+							<text  v-for="(item,index) in bpArr.field_name"  :key="index">{{item}}</text>
+					</view>
 				</view>
 				<view class="gan"></view>
 				<view class="BP_hd_last_item">
@@ -177,5 +179,8 @@
 }
 .BP_hd_last{
 	margin:0 30upx;
+}
+.business_wj{
+	margin-left:0 ;
 }
 </style>

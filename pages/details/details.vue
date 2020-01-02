@@ -17,7 +17,9 @@
 				<view class="gan"></view>
 				<view class="BP_hd_last_item br">
 					<view class="BP_hd_last_item_name">所属领域</view>
-					<view class="BP_hd_last_item_js">{{ arr.field_name }}</view>
+					<view class="BP_hd_last_item_js"  v-for="(item,index) in arr.field_name"  :key="index">
+							{{item}}
+					</view>
 				</view>
 				<view class="gan"></view>
 				<view class="BP_hd_last_item">

@@ -46,7 +46,7 @@
 		},
         methods: {
             bindPickerChange: function(e) {
-				this.$emit("fieldVal",e.target.value)
+				this.$emit("fieldVal",e.target.value+1)
                 this.index = e.target.value
 				this.field_name = this.array[this.index].name
             },

@@ -6,68 +6,10 @@
 			}
 		},	
 		onShow() {
-			// alert(1232131232)
-			const token = uni.getStorageSync("token");
-			let _than = this
-			uni.request({
-				url: 'http://zc.demo.yudw.com/api/config/subscribe', //是否关注
-				method: 'get',
-				data: {
-					token: token
-				},
-				dataType: 'json',
-				success: (res) => {
-					if (res.data.status == 403){
-						let url = window.location.href;
-						if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
-							uni.request({
-								url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
-								method: 'get',
-								data: {
-									baseUrl: url
-								},
-								dataType: 'json',
-								success: (res) => {
-									console.log(res)
-									_than.hr =res.data.data
-									window.location.href = res.data.data;
-								}
-							})
-						} else {
-							//如果有带code
-							let code = this.getQueryString("code");
-							uni.request({
-								url: 'http://zc.demo.yudw.com/api/login/login', //登录
-								method: 'get',
-								data: {
-									code: code
-								},
-								dataType: 'json',
-								success: (res) => {
-									console.log(res, 7897894566)
-									if (res.data.status == 1) {
-										console.log("登录成功");
-										console.log("token:", res.data.data.token);
-										uni.setStorageSync("token", res.data.data.token)
-									}
-								},
-								fail: (res) => { //请求失败后返回
-									console.log(res);
-								}
-							})
-						}
-					}
-					// alert(res.data.data.subscribe)
-					console.log(res.data.data.subscribe)
-					if (res.data.data.subscribe == 0) {
-						window.location.href = "https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA"
-						// alert(res.data.data.subscribe,213)
-					}
-				},
-				fail: (res) => { //请求失败后返回
-					console.log(res);
-				}
-			})
+			
+		},
+		mounted() {
+			this.back();
 		},
 		beforeMount() {
 			// #ifndef H5
@@ -120,10 +62,21 @@
 		
 				// uni.setStorageSync("token", 1)
 		},
-		mounted() {
-			
-		},
 		methods: {
+			pushHistory() {
+			//写入空白历史路径
+			  let state = {
+			    title: 'title',
+			    url: "#"
+			  }
+			  window.history.pushState(state, state.title, state.url)
+			},
+			back() {
+			  this.pushHistory();
+			  window.addEventListener("popstate", function (e) {
+			    location.href = ''
+			  }, false);
+			},
 			getQueryString(name) {
 				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 				let r = window.location.search.substr(1).match(reg);
@@ -132,12 +85,28 @@
 				} else {
 					return null;
 				}
-			}
+			},
+			pushHistory() {
+			      var state1 = {
+			        title: "title",
+			        url: "#"
+			      };
+			      window.history.pushState(state1, "title", "#");
+			    }
 		}
 	}
 </script>
 
 <style>
+	page{
+		min-height: 100vw;
+		padding-bottom:env(safe-area-inset-bottom) ;
+	}
+	@supports(bottom:env(safe-area-inset-bottom) ) {
+		.uni-tabbar{
+			margin-bottom: env(safe-area-inset-bottom);
+		}
+	}
 	/*每个页面公共css */
 	.models {
 		width: 486upx;

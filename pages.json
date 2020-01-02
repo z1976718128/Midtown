@@ -10,6 +10,13 @@
 			       "titleNView":false
 			
 			       }
+				   // "plus": {
+				   // "safearea": {
+				   // "background": "#FFFFFF", // 安全区域外的背景颜色，默认值为"#FFFFFF"
+				   // "bottom": {// 底部安全区域配置
+				   // "offset": "auto"
+				   // }
+				   // },
 		}
 	}
 	,

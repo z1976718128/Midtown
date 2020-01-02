@@ -69,6 +69,15 @@
 				hr:""
 			}
 		},
+		onLaunch: function() {
+			console.log('App Launch')
+		},
+		onShow: function() {
+			console.log('App Show')
+		},
+		onHide: function() {
+			console.log('App Hide')
+		},
 		mounted() {
 			const token=uni.getStorageSync("token");
 			let _than = this;
@@ -119,12 +128,6 @@
 								}
 							})
 						}
-					}
-					console.log(res,123)
-					if (res.data.status == 403){
-						const url= uni.getStorageSync("url");
-						console.log(url,132465)
-						// window.location.href= url
 					}
 					console.log(res)
 					this.user = res.data.date
@@ -190,11 +193,11 @@
 						}
 					}
 					this.check = res.data.data
-					if(res.data.data == 0){
-						uni.navigateTo({
-							url:"/pages/register/register"
-						})
-					}
+					// if(res.data.data == 0){
+					// 	uni.navigateTo({
+					// 		url:"/pages/register/register"
+					// 	})
+					// }
 				},
 				fail:(res) =>{//请求失败后返回
 					console.log(res);

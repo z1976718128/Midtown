@@ -51,9 +51,13 @@
 					{{picked.labels.join('-')}}
 				</view>
 			</cityPicker> -->
-			<picker mode="multiSelector" :range="array" range-key="label" @columnchange="columnchanges" :value="index" @change="bindTimeChange">
+			<!-- <picker mode="multiSelector" :range="array" range-key="label" @columnchange="columnchanges" :value="index" @change="bindTimeChange">
 				<view class="cists">{{ city_name }}</view>
-			</picker>
+			</picker> -->
+			<view class="cists" @tap="openAddres">{{city_name}}</view>
+			<view class="content">
+				<simple-address ref="simpleAddress" :pickerValueDefault="cityPickerValueDefault" @onConfirm="onConfirm" themeColor='#007AFF'></simple-address>
+			</view>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -103,6 +107,7 @@
 </template>
 
 <script>
+import simpleAddress from "@/components/simple-address/simple-address.nvue"
 import cityPicker from 'components/cityPicker';
 import industryField from '@/components/industryField.vue';
 import financing from '@/components/financing.vue';
@@ -112,10 +117,13 @@ export default {
 		cityPicker,
 		industryField,
 		financing,
-		inFusion
+		inFusion,
+		 simpleAddress
 	},
 	data() {
 		return {
+			   cityPickerValueDefault: [0, 0, 1],
+			                pickerText: '',
 			city_name: '请选择>',
 			tempArray: [],
 			array: [[{ label: '请选择' }], [{ label: '请选择' }]],
@@ -171,6 +179,15 @@ export default {
 		});
 	},
 	methods: {
+		   openAddres() {
+				this.$refs.simpleAddress.open();
+			},
+			onConfirm(e) {
+				console.log(e)
+				this.city_name = e.label
+				this.city_id = e.cityCode
+				
+			},
 		fieldVal(val) {
 			this.field_id = val;
 			console.log(this.field_id);
@@ -378,7 +395,7 @@ label {
 	color: rgba(70, 79, 87, 1);
 }
 .sc {
-	width: 162upx;
+	width: 200upx;
 	height: 63upx;
 	line-height: 63upx;
 	border: 1upx solid rgba(205, 205, 205, 1);
@@ -388,10 +405,7 @@ label {
 	font-weight: 400;
 	color: rgba(202, 202, 202, 1);
 	text-align: center;
-	text-align: center;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	padding:0 30upx;
 }
 .scpdf {
 	height: 27upx;
@@ -401,7 +415,13 @@ label {
 	line-height: 65upx;
 	padding: 30upx 0;
 }
-input,
+input{
+	color: #000;
+	font-size: 30upx;
+	text-align: right;
+	position: absolute;
+	right: 0;
+}
 .cists {
 	font-size: 26upx;
 	font-weight: 400;
@@ -449,7 +469,7 @@ input,
 	position: absolute;
 	right: 0;
 	top: 22upx;
-	width: 162upx;
+	/* width: 162upx; */
 	height: 63upx;
 	border: 1upx solid rgba(205, 205, 205, 1);
 	border-radius: 5upx;
@@ -457,10 +477,8 @@ input,
 	font-weight: 400;
 	color: rgba(202, 202, 202, 1);
 	line-height: 63upx;
-	text-align: center;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	padding:0 30upx;
+	
 }
 .yjhs {
 	width: 689upx;

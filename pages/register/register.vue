@@ -51,9 +51,13 @@
 					{{picked.labels.join('-')}}
 				</view>
 			</cityPicker> -->
-			<picker mode="multiSelector" :range="array" range-key="label" @columnchange="columnchanges" :value="index" @change="bindTimeChange">
+			<!-- <picker mode="multiSelector" :range="array" range-key="label" @columnchange="columnchanges" :value="index" @change="bindTimeChange">
 				<view class="cists">{{form.city_name }}</view>
-			</picker>
+			</picker> -->
+			<view class="cists" @tap="openAddres">{{form.city_name ==null?'请选择':form.city_name}}</view>
+			<view class="content">
+				<simple-address ref="simpleAddress" :pickerValueDefault="cityPickerValueDefault" @onConfirm="onConfirm" themeColor='#007AFF'></simple-address>
+			</view>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -81,11 +85,14 @@
 </template>
 
 <script>
+	import simpleAddress from "@/components/simple-address/simple-address.nvue"
 import cityPicker from 'components/cityPicker';
 export default {
-	components: { cityPicker },
+	components: { cityPicker,simpleAddress},
 	data() {
 		return {
+			cityPickerValueDefault: [0, 0, 1],
+			             pickerText: '',
 			tempArray: [],
 			array: [[{ label: '请选择' }], [{ label: '请选择' }]],
 			index: [0, 0],
@@ -191,6 +198,7 @@ export default {
 				}
 				console.log(res);
 				this.check = res.data.data;
+				
 				if (res.data.data == 1) {
 					uni.request({
 						url: 'http://zc.demo.yudw.com/api/user/getUser', //请求接口
@@ -205,7 +213,7 @@ export default {
 								const url = uni.getStorageSync('url');
 								// window.location.href= url
 							}
-							console.log(res);
+							console.log(res.data.date);
 							this.form = res.data.date;
 						},
 						fail: res => {
@@ -224,30 +232,39 @@ export default {
 		});
 	},
 	methods: {
+		openAddres() {
+			this.$refs.simpleAddress.open();
+		},
+		onConfirm(e) {
+			console.log(e)
+			this.form.city_name = e.label
+			console.log(e.cityCode)
+			this.form.city = e.cityCode
+		},
 		back() {
 			uni.reLaunch({
 				url: '/pages/index/home/home'
 			});
 		},
-		bindTimeChange(e) {
-			console.log('picker发送选择改变，携带值为', e.target.value);
-			this.index = e.target.value;
-			this.form.city = this.array[1][this.index[1]].value;
-			this.form.city_name = this.array[0][this.index[0]].label + this.array[1][this.index[1]].label;
-		},
-		columnchanges(event) {
-			let tempArray = []
-			console.log('picker发送选择改变，携带值为', event.detail);
-			tempArray = this.tempArray[event.detail.value].children.map(item => {
-				return { label: item.label, value: item.value };
-			});
-			this.$set(this.array,1,tempArray)
-		},
-		endCity(picked) {
-			this.city = picked.value;
-			console.log(picked.value);
-			this.picked = picked;
-		},
+		// bindTimeChange(e) {
+		// 	console.log('picker发送选择改变，携带值为', e.target.value);
+		// 	this.index = e.target.value;
+		// 	this.form.city = this.array[1][this.index[1]].value;
+		// 	this.form.city_name = this.array[0][this.index[0]].label + this.array[1][this.index[1]].label;
+		// },
+		// columnchanges(event) {
+		// 	let tempArray = []
+		// 	console.log('picker发送选择改变，携带值为', event.detail);
+		// 	tempArray = this.tempArray[event.detail.value].children.map(item => {
+		// 		return { label: item.label, value: item.value };
+		// 	});
+		// 	this.$set(this.array,1,tempArray)
+		// },
+		// endCity(picked) {
+		// 	this.form.city = picked.value;
+		// 	console.log(picked.value);
+		// 	this.picked = picked;
+		// },
 		// 处理数据
 		formate(datas) {
 			let arr = [];
@@ -256,10 +273,10 @@ export default {
 			}
 			return arr;
 		},
-		bindPickerChange: function(e) {
-			console.log('picker发送选择改变，携带值为', e.target.value);
-			this.index = e.target.value;
-		},
+		// bindPickerChange: function(e) {
+		// 	console.log('picker发送选择改变，携带值为', e.target.value);
+		// 	this.index = e.target.value;
+		// },
 		save() {
 			const token = uni.getStorageSync('token');
 			let _than = this;
@@ -275,7 +292,8 @@ export default {
 					position: this.form.position,
 					city: this.form.city,
 					code: this.form.code,
-					desc: this.form.desc
+					desc: this.form.desc,
+					city_name:this.form.city_name
 				},
 				dataType: 'json',
 				success: res => {
@@ -330,7 +348,12 @@ export default {
 									uni.switchTab({
 										url: '../index/my/my'
 									});
+									let page = getCurrentPages().pop(); //跳转页面成功之后
+									 if (!page) return;  
+									 page.onLoad(); //重新刷新页面
 								}, 2000);
+								
+								
 							}
 						});
 					} else {
