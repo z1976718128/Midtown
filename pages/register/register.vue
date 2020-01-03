@@ -346,14 +346,11 @@ export default {
 							success() {
 								setTimeout(function() {
 									uni.switchTab({
-										url: '../index/my/my'
+										url: '/pages/index/my/my',
+										success() {
+										}
 									});
-									let page = getCurrentPages().pop(); //跳转页面成功之后
-									 if (!page) return;  
-									 page.onLoad(); //重新刷新页面
 								}, 2000);
-								
-								
 							}
 						});
 					} else {

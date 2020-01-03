@@ -31,11 +31,10 @@
 				tempArr:[]
 			}
 		},
-		mounted() {
+		onShow() {
 			this.getnewList()
 		},
-		onTabItemTap(){
-			uni.navigateBack();  
+		mounted() {
 		},
 		onReachBottom() {
 			if(this.tempArr.length < this.num){

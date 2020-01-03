@@ -43,9 +43,23 @@
 				tempArr:[]
 			}
 		},
-		onTabItemTap(){
-			uni.navigateBack();  
+		onShow() {
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/news/index', //请求接口
+				method:'GET',
+				dataType:'json',
+				success: (res) => {
+					console.log(res,"活动")
+					this.bannerList = res.data.data
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
+			})
+			
+			this.getnewList()
 		},
+		
 		onReachBottom() {
 			if(this.tempArr.length < this.num){
 				this.loadingText = '没有更多数据了'
@@ -88,22 +102,7 @@
 				
 			}
 		},
-		mounted() {
-			uni.request({
-				url: 'http://zc.demo.yudw.com/api/news/index', //请求接口
-				method:'GET',
-				dataType:'json',
-				success: (res) => {
-					console.log(res,"活动")
-					this.bannerList = res.data.data
-				},
-				fail:(res) =>{//请求失败后返回
-					console.log(res);
-				}
-			})
-			
-			this.getnewList()
-		},
+		
 		  
 	}
 </script>
@@ -125,7 +124,7 @@
 	vertical-align: middle;
 }
 .hd{
-	font-size:32upx;
+	font-size:34upx;
 	font-weight:bold;
 	color:rgba(70,79,87,1);
 }

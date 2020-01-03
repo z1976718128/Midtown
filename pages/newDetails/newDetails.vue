@@ -247,6 +247,8 @@
 	height: 149upx;
 	background-repeat: no-repeat;
 	background-size: contain;
+	vertical-align: middle;
+	background-position:center;
 	/* transform: scale(.8); */
 	/* background-position-x: 10upx; */
 }

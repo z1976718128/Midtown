@@ -3,7 +3,6 @@
 		<view class="bans" >
 			<banner :banner-list="bannerList" :tabs="tabs" :swiper-config="swiperConfig"></banner>
 		</view>
-	
 		<view class="newsiwper" >
 			<view class="xixun">喜讯</view>
 			<text class="shux"></text>
@@ -19,7 +18,6 @@
 				</view>
 			</view>
 		</view>
-
 		<!-- 头部 -->
 		<view class="navbar" :class="phoneHeight>200?'fx':''">
 			<view v-for="(item, index) in field" :key="index" class="nav-item">
@@ -398,26 +396,28 @@
 		display: inline-block;
 		/* width:59upx; */
 		/* height:29upx; */
-		font-size: 35upx;
+		font-size:30upx;
 		font-weight: 400;
 		color: rgba(222, 177, 86, 1);
 		line-height: 38upx;
 		/* padding:29upx 29upx 32upx 38upx; */
-		margin: 13px 0 0 13px;
+		margin: 30upx 0 0 26upx;
 	}
 
 	.shux {
-		margin: 13px 0 0 10px;
+		margin: 30upx 0 0 20upx;
 	}
 
 	.swiper-item {
-		font-size: 28upx;
+		font-size: 26.5upx;
 		font-weight: 400;
 		color: rgba(68, 68, 68, 1);
 		width: 550upx;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
+		padding-top:4upx;
+		margin-left:5upx;
 	}
 
 	.navbar {
@@ -440,7 +440,7 @@
 
 	.nav-item text {
 		color: #999;
-		font-size: 30upx;
+		font-size: 32upx;
 	}
 
 	.current {

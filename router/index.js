@@ -10,12 +10,13 @@ const router = new Router()
 // 路由全局拦截器 在这里处理登录、授权等相关操作
 router.beforeEach(function(to, from, next) {
 			console.log(from)
-
 			// 是否关注
 			if(from.page == "/pages/index/home/home" || from.page == "/pages/index/investment/investment" ||
 			 from.page == "/pages/index/find/find" || from.page == "/pages/index/my/my" 
 			 ||  from.page == "/pages/details/details" || from.page == "/pages/findDetails/findDetails" 
 			 || from.page == "/pages/newDetails/newDetails" || from.page == "/pages/submitBP/submitBP"
+			 || from.page == "/pages/findDetails/findDetails" || from.page == "/pages/details/details"
+			 || from.page == "/pages/bpDetails/bpDetails"
 			  && !to.page){
 				console.log(from.page)
 				const token = uni.getStorageSync("token");

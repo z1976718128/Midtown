@@ -18,20 +18,20 @@
 		<view class="user_xm">
 			<navigator url="/pages/project/project">
 				<view class="user_xm_list">
-					<view class="ic"><image class="icfon" src="../../../static/img/xm.png" mode=""></image></view>
+					<view class="ic"><image class="icfon ic1"  src="../../../static/img/xm.png" mode=""></image></view>
 					<view class="icont_text"><text class="shux"></text><text class="hd">我的项目</text></view>
 				</view>
 			</navigator>
 			<view class="user_xm_list" @tap="guanyu">
-				<view class="ic"><image class="icfon" src="../../../static/img/gy.png" mode=""></image></view>
+				<view class="ic"><image class="icfon ic2"  src="../../../static/img/gy.png" mode=""></image></view>
 				<view class="icont_text"><text class="shux"></text><text class="hd">关于我们</text></view>
 			</view>
 			<view class="user_xm_list" @tap="lxzc">
-				<view class="ic"><image class="icfon" src="../../../static/img/lx.png" mode=""></image></view>
+				<view class="ic"><image class="icfon ic3" src="../../../static/img/lx.png" mode=""></image></view>
 				<view class="icont_text"><text class="shux"></text><text class="hd">联系中城</text></view>
 			</view>
 			<view class="user_xm_list" @tap="yaoqing">
-				<view class="ic"><image  class="icfon" src="../../../static/img/fx.png" mode=""></image></view>
+				<view class="ic"><image  class="icfon ic4" src="../../../static/img/fx.png" mode=""></image></view>
 				<view class="icont_text"><text class="shux"></text><text class="hd">邀请好友</text></view>
 			</view>
 		</view>
@@ -69,16 +69,7 @@
 				hr:""
 			}
 		},
-		onLaunch: function() {
-			console.log('App Launch')
-		},
 		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		},
-		mounted() {
 			const token=uni.getStorageSync("token");
 			let _than = this;
 			uni.request({
@@ -136,10 +127,67 @@
 					console.log(res);
 				}
 			})
-			
+			uni.request({
+				url: 'http://zc.demo.yudw.com/api/user/checkRegist', //请求接口
+				method:'GET',
+				data:{
+					token:token
+				},
+				dataType:'json',
+				success: (res) => {
+					if (res.data.status == 403){
+						let url = window.location.href;
+						if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/get_code_url', //获取连接
+								method: 'get',
+								data: {
+									baseUrl: url
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res)
+									_than.hr =res.data.data
+									window.location.href = res.data.data;
+								}
+							})
+						} else {
+							//如果有带code
+							let code = this.getQueryString("code");
+							uni.request({
+								url: 'http://zc.demo.yudw.com/api/login/login', //登录
+								method: 'get',
+								data: {
+									code: code
+								},
+								dataType: 'json',
+								success: (res) => {
+									console.log(res, 7897894566)
+									if (res.data.status == 1) {
+										console.log("登录成功");
+										console.log("token:", res.data.data.token);
+										uni.setStorageSync("token", res.data.data.token)
+									}
+								},
+								fail: (res) => { //请求失败后返回
+									console.log(res);
+								}
+							})
+						}
+					}
+					if(res.data.data == 0){
+						uni.navigateTo({
+							url:"/pages/register/register"
+						})
+					}
+				},
+				fail:(res) =>{//请求失败后返回
+					console.log(res);
+				}
+			})
 		},
-		onBackPress(event){
-			// console.log(111)
+		mounted() {
+			
 		},
 		onLoad() {
 			const token=uni.getStorageSync("token");
@@ -204,9 +252,6 @@
 				}
 			})
 		},
-		onTabItemTap(){
-			
-		},
 		methods:{
 			getQueryString(name) {
 				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -249,7 +294,9 @@
 </script>
 
 <style scoped>
-
+.hd{
+	color: #444;
+}
 .user{
 	display: flex;
 	align-items: center;
@@ -273,15 +320,15 @@
 	margin-right: 19upx;
 }
 .user_name{
-	font-size:32upx;
-	font-weight:400;
-	color:rgba(58,58,58,1);
+	font-size:34upx;
+	font-weight:600;
+	color:#444;
 }
 .user_id{
-	font-size:26upx;
+	font-size:26.5upx;
 	font-weight:400;
-	color:rgba(222,165,50,1);
-	margin-top: 23upx;
+	color:#666;
+	margin-top: 10upx;
 }
 .user_type{
 	display: inline-block;
@@ -302,7 +349,7 @@
 	flex-wrap: wrap;
 }
 .xg{
-	font-size:26upx;
+	font-size:30upx;
 	font-weight:400;
 	color:rgba(222,177,86,1);
 	line-height:65upx;
@@ -311,12 +358,27 @@
 	right:40upx;
 	top: 33%;
 }
-.ic{
+.ic1{
+	width: 120upx;
+	height:56upx;
+	
+}
+.ic2{
+	width: 120upx;
+	height:56upx;
+	transform: scale(1.1);
+}
+.ic3{
+	width: 120upx;
+	height:56upx;
+	transform: scale(1.1);
+}
+.ic4{
+	width: 120upx;
+	height:56upx;
 }
 .icfon{
-	width:100upx;
-	height:50upx;
-	margin:27upx 0 160upx 0upx;
+	margin:34upx 0upx 146upx 10upx;
 }
 .icont_text{
 	margin-left: 29upx;

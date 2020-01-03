@@ -63,7 +63,7 @@
 
 	.new {
 		display: flex;
-		border-bottom: 1upx solid #F1F1F1;
+		border-bottom: 2upx solid #F1F1F1;
 		padding-bottom: 41upx;
 		margin: 30upx;
 	}
@@ -88,7 +88,7 @@
 
 	.new_deso {
 		width:402upx;
-		height:130upx;
+		height:80upx;
 		font-size:30upx;
 		font-weight:bold;
 		color:rgba(82,91,99,1);
@@ -100,6 +100,7 @@
 		  -webkit-line-clamp: 2;
 		  line-clamp: 2;
 		  -webkit-box-orient: vertical;
+		  margin-bottom: 50upx;
 	}
 
 	.new_time {

@@ -9,7 +9,7 @@
 			
 		},
 		mounted() {
-			this.back();
+			// this.back();
 		},
 		beforeMount() {
 			// #ifndef H5
@@ -100,12 +100,6 @@
 <style>
 	page{
 		min-height: 100vw;
-		padding-bottom:env(safe-area-inset-bottom) ;
-	}
-	@supports(bottom:env(safe-area-inset-bottom) ) {
-		.uni-tabbar{
-			margin-bottom: env(safe-area-inset-bottom);
-		}
 	}
 	/*每个页面公共css */
 	.models {
@@ -120,7 +114,7 @@
 		transform: translate(-50%, -50%);
 		z-index: 60;
 	}
-
+	
 	.info {
 		width: 246upx;
 		height: 70upx;
@@ -172,7 +166,10 @@
 	.uni-swiper-dots-horizontal {
 		bottom: 66upx !important;
 	}
-
+	uni-tabbar .uni-tabbar__bd{
+	  height: inherit;
+	  justify-content:flex-start;
+	 }
 	uni-tabbar .uni-tabbar__label {
 		position: relative;
 		top: -10upx;
@@ -195,7 +192,7 @@
 	}
 
 	.hd {
-		font-size: 32upx;
+		font-size: 34upx;
 		font-weight: bold;
 		color: rgba(70, 79, 87, 1);
 	}
@@ -253,7 +250,7 @@
 
 	.title {
 		width: 576upx;
-		font-size: 35upx;
+		font-size: 30upx;
 		font-weight: bold;
 		color: rgba(82, 91, 99, 1);
 		line-height: 65upx;
@@ -290,7 +287,7 @@
 
 	.time,
 	.ll {
-		font-size: 30upx;
+		font-size: 24upx;
 		font-weight: 400;
 		color: rgba(181, 181, 181, 1);
 	}
@@ -306,7 +303,7 @@
 		background: rgba(241, 241, 241, 1);
 		position: fixed;
 		z-index: 99;
-		top: 86upx;
+		/* top: 86upx; */
 	}
 
 	.bule {

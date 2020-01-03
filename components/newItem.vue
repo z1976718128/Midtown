@@ -67,8 +67,12 @@
 	object-fit:cover; 
 	background-repeat: no-repeat;
 	background-size: contain;
+	border-radius:10upx;
+	background-color:#fff ;
 	/* transform: scale(.8); */
 	/* background-position-x: 10upx; */
+	vertical-align: middle;
+	background-position:center;
 
 }
 .new_title{
@@ -76,12 +80,13 @@
 	height: 29upx;
 	font-size:30upx;
 	font-weight:bold;
+	margin:6upx 0 0 0;
 	color:rgba(82,91,99,1);
 }
 .new_deso{
 	width:496upx;
 	height:80upx;
-	font-size:26upx;
+	font-size:26.5upx;
 	font-weight:400;
 	color:rgba(94,94,94,1);
 	margin:40upx 0 0 0;

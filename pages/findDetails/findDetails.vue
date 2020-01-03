@@ -100,7 +100,7 @@
 	border-radius:10upx;
 }
 .head_fx{
-	top: 88upx;
+	top: 80upx;
 	margin-bottom: 30upx;
 }
 </style>

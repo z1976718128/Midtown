@@ -96,7 +96,7 @@
         ,{
             "path" : "pages/register/register",
             "style" : {
-				"navigationBarTitleText": "注册/修改",
+				"navigationBarTitleText": "我的资料",
 				"navigationBarTextStyle": "black"
 			}
         }
