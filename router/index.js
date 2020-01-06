@@ -1,16 +1,20 @@
 import Vue from 'vue'
 import Router from './bobo-router'
 import wx from "../wechat.js"
+import MtaH5 from "mta-h5-analysis";
 
 Vue.use(Router)
 
+
 // 路由配置 页面中全部使用this.$Router来操作路由，以实现路由的全局管理
 const router = new Router()
+
 
 // 路由全局拦截器 在这里处理登录、授权等相关操作
 router.beforeEach(function(to, from, next) {
 			console.log(from)
 			// 是否关注
+			 MtaH5.pgv();
 			if(from.page == "/pages/index/home/home" || from.page == "/pages/index/investment/investment" ||
 			 from.page == "/pages/index/find/find" || from.page == "/pages/index/my/my" 
 			 ||  from.page == "/pages/details/details" || from.page == "/pages/findDetails/findDetails" 
@@ -18,6 +22,7 @@ router.beforeEach(function(to, from, next) {
 			 || from.page == "/pages/findDetails/findDetails" || from.page == "/pages/details/details"
 			 || from.page == "/pages/bpDetails/bpDetails"
 			  && !to.page){
+				  MtaH5.pgv();
 				console.log(from.page)
 				const token = uni.getStorageSync("token");
 				let _than = this
@@ -86,11 +91,6 @@ router.beforeEach(function(to, from, next) {
 						console.log(res.data.data.subscribe)
 						if (res.data.data.subscribe == 0) {
 							location.replace("https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA")
-							  // WeixinJSBridge.call('hideToolbar');   
-							// history.pushState(null, null, document.URL); //禁止网页返回上一页
-							//   window.addEventListener('popstate', function() { 
-							// 	  WeixinJSBridge.call('closeWindow');//微信 
-							//   });
 							function pushHistory() {
 							//写入空白历史路径
 							  let state = {
@@ -177,15 +177,16 @@ router.beforeEach(function(to, from, next) {
 			}
 })
 
-		// 路由后置拦截器
-		router.afterEach(function(to, from) {
-			console.log('后置守卫')
-		})
+// 路由后置拦截器
+router.afterEach(function() {
+	console.log('后置守卫')
+	 MtaH5.pgv();
+})
 
-		// 路由跳转出错处理
-		router.onError(function(e) {
-			console.log('错误：', e.message || '路由跳转失败')
-		})
+// 路由跳转出错处理
+router.onError(function(e) {
+	console.log('错误：', e.message || '路由跳转失败')
+})
 
 
-		export default router
+export default router
