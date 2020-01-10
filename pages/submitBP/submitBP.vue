@@ -6,7 +6,7 @@
 				项目名称
 				<text class="req">*</text>
 			</label>
-			<input v-model="title" type="text" value="" :adjust-position="false" placeholder="请填写项目名称" />
+			<input v-model="title" type="text" value="" :adjust-position="false" placeholder="请填写项目名称" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -14,7 +14,7 @@
 				公司全称
 				<text class="req">*</text>
 			</label>
-			<input v-model="company_name" type="text" value="" :adjust-position="false" placeholder="请填写公司全称" />
+			<input v-model="company_name" type="text" value="" :adjust-position="false" placeholder="请填写公司全称" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>

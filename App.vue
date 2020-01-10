@@ -98,6 +98,9 @@
 </script>
 
 <style>
+	.w_input{
+		width:500upx !important;
+	}
 	page{
 		min-height: 100vw;
 	}

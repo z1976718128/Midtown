@@ -6,7 +6,7 @@
 				姓名
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.nickname" type="text" :adjust-position="false" />
+			<input v-model="form.nickname" type="text" :adjust-position="false" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -14,7 +14,7 @@
 				手机号码
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.phone" type="number" :adjust-position="false" />
+			<input v-model="form.phone" type="number" :adjust-position="false" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -22,7 +22,7 @@
 				工作邮箱
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.email" type="text" :adjust-position="false" />
+			<input v-model="form.email" type="text" :adjust-position="false" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -30,7 +30,7 @@
 				公司名称
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.company_name" type="text" :adjust-position="false" />
+			<input v-model="form.company_name" type="text" :adjust-position="false" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -38,7 +38,7 @@
 				职位
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.position" type="text" :adjust-position="false" />
+			<input v-model="form.position" type="text" :adjust-position="false" class="w_input"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -475,6 +475,7 @@ export default {
 </script>
 
 <style scoped>
+	
 .uni-common-mt {
 	margin: 0 30upx;
 	padding-bottom: 250upx;
