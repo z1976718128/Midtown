@@ -6,7 +6,7 @@
 				姓名
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.nickname" type="text" :adjust-position="false" class="w_input"/>
+			<input v-model="form.nickname" type="text" :adjust-position="false" class="w_input" placeholder="请输入姓名"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -14,7 +14,7 @@
 				手机号码
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.phone" type="number" :adjust-position="false" class="w_input"/>
+			<input v-model="form.phone" type="number" :adjust-position="false" class="w_input" placeholder="请输入手机号码"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -22,7 +22,7 @@
 				工作邮箱
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.email" type="text" :adjust-position="false" class="w_input"/>
+			<input v-model="form.email" type="text" :adjust-position="false" class="w_input" placeholder="请输入工作邮箱"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -30,7 +30,7 @@
 				公司名称
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.company_name" type="text" :adjust-position="false" class="w_input"/>
+			<input v-model="form.company_name" type="text" :adjust-position="false" class="w_input" placeholder="请输入公司名称"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -38,7 +38,7 @@
 				职位
 				<text class="req">*</text>
 			</label>
-			<input v-model="form.position" type="text" :adjust-position="false" class="w_input"/>
+			<input v-model="form.position" type="text" :adjust-position="false" class="w_input" placeholder="请输入职位"/>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>

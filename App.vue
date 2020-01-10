@@ -31,7 +31,7 @@
 						success: (res) => {
 							console.log(res)
 							_than.hr =res.data.data
-							window.location.href = res.data.data;
+							// window.location.href = res.data.data;
 						}
 					})
 				} else {
@@ -591,22 +591,24 @@
 	}
 
 	@media (min-width: 750px) {
-		page {
+		body{
 			left: 0;
 			width: 750px;
 			position: absolute;
 			right: 0;
 			padding-top: 46px;
-			margin: 0 auto;
+			margin:auto;
 			border: 1px solid red;
 		}
-
+		uni-app{
+			/* margin:0 200px; */
+		}
 		.bans {
 			width: 750px;
-			height: 270px;
+			height: 270px !important;
 			left: 0;
 			right: 0;
-			margin: 0 auto;
+			margin:auto;
 		}
 
 		.sbmit {
@@ -660,7 +662,7 @@
 		.title {
 			width: 470px !important;
 			height: auto !important;
-			font-size: 28px !important;
+			font-size: 20px !important;
 			font-weight: bold;
 			color: rgba(82, 91, 99, 1);
 		}
@@ -677,7 +679,7 @@
 		}
 
 		.pric {
-			font-size: 50px;
+			font-size: 30px;
 			font-weight: bold;
 			color: rgba(243, 140, 55, 1);
 		}
@@ -711,6 +713,35 @@
 		,
 		.uni-tabbar .uni-tabbar__icon {
 			height: auto !important;
+		}
+		uni-tabbar .uni-tabbar__label{
+			font-size: 20px !important;
+			top: auto;
+		}
+		.button{
+			width:211px !important;
+			height:53px !important;
+			font-size: 20px;
+			bottom: 50px !important;
+			line-height: 60px !important;
+		}
+		.type{
+			line-height: 42px !important;
+			font-size: 16px;
+		}
+		.tost {
+			font-size: 18px;
+		}
+		.banner-container .image-container .slide-image{
+			width:auto !important;
+			height:300px !important;
+		}
+		uni-image>div, uni-image>img{
+			width: 500px !important;
+			height: 300px !important;
+		}
+		.banner-container .item-right,.banner-container .item-center,.banner-container .item-left{
+			padding:0 !important;
 		}
 	}
 </style>
