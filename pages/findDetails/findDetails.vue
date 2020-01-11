@@ -7,7 +7,7 @@
 				<text>浏览量:{{arr.volume_num}}</text>
 			</view>
 			<view class="find_titles">
-				<text>{{arr.title}}</text>
+				<text class="find_titles_text">{{arr.title}}</text>
 			</view>
 			<view class="findeta_img">
 				<image :src="arr.img" mode=""></image>
@@ -102,5 +102,30 @@
 .head_fx{
 	top: 80upx;
 	margin-bottom: 30upx;
+}
+@media (min-width:750px) {
+	.findeta_num{
+		font-size: 20px;
+	}
+	.find_titles{
+		font-size: 25px !important;
+	}
+	.findeta_img{
+	}
+	.findeta_cont text{
+		font-size: 25px !important;
+	}
+	.head_fx{
+		top: 45px;
+		height:11px;
+	}
+	.findeta{
+		margin:30px !important;
+	}
+	.findeta_img uni-image{
+		width: 400px !important;
+		height: 200px !important;
+	}
+	
 }
 </style>

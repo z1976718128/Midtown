@@ -87,7 +87,4 @@
 	justify-content: space-around;
 	margin:34upx 0 57upx 0;
 }
-@media (min-width: 750px){
-	
-}
 </style>

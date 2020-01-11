@@ -658,5 +658,88 @@
 		.hd{
 			font-size: 20px !important;
 		}
+		.new_title{
+			font-size: 25px !important;
+		}
+		.new_deso{
+			font-size: 25px !important;
+		}
+		.tost{
+			font-size: 25px !important;
+		}
+		.new_deso{
+			width: 400px !important;
+			font-size: 20px !important;
+			margin:0  !important;
+		}
+		.new_img{
+			width: 150px !important;
+			height: 150px !important;
+			margin-right:17px !important ;
+		}
+		.new_title{
+				font-size: 25px !important;
+				height: auto !important;
+				margin: 0 !important;
+			}
+		.projectBrief_text,.company_title,.company_jan,.company_nr,.financing_text,.business_wj{
+			font-size: 22px;
+		}
+		.company_name{
+			font-size: 25px;
+		}
+		.company-desc{
+			font-size: 20px;
+		}
+		.new_time{
+			width: 400px !important;
+			font-size: 25px !important;
+		}
+		.new_imgs{
+			width: 357p !important;
+			height: 184px !important;
+		}
+		.find_titles_text{
+			font-size: 25px !important;
+		}
+		.uni-input{
+			font-size: 16px !important;
+		}
+		.uni-picker{
+			width: 750px !important;
+			left:30.5% !important;
+		}
+		.uni-picker-view-wrapper{
+			width: 750px !important;
+		}
+		.simple-address-view{
+			width: 750px !important;
+			height: 300px !important;
+		}
+		.picker-item{
+			font-size: 16px !important;
+		}
+		.simple-address-view{
+			position: relative;
+			bottom: 0;
+			left: 0;
+			width: 750px;
+			height: 170px;
+			background-color:none;
+		}
+		.simple-address__header-btn-box{
+			height: 50px !important;
+			
+		}
+		.simple-address-content{
+			width: 750px;
+			left: 30.5% !important;
+		}
+		.simple-address__header-text{
+			font-size: 16px !important;
+		}
+		.simple-address--fixed{
+			left: 585px;
+		}
 	}
 </style>
