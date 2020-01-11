@@ -158,7 +158,7 @@ export default {
 								success: res => {
 									console.log(res);
 									_than.hr = res.data.data;
-									window.location.href = res.data.data;
+									// window.location.href = res.data.data;
 								}
 							});
 						} else {
@@ -225,7 +225,7 @@ export default {
 											success: res => {
 												console.log(res);
 												_than.hr = res.data.data;
-												window.location.href = res.data.data;
+												// window.location.href = res.data.data;
 											}
 										});
 									} else {
@@ -316,5 +316,53 @@ export default {
 }
 .company_nr {
 	top: 0;
+}
+@media (min-width:750px) {
+	.company_name{
+		font-size: 25px;
+	}
+	.company-desc{
+		font-size: 20px;
+	}
+	.BP_hd_last_item_name{
+		font-size: 20px;
+	}
+	.BP_hd_last_item_js{
+		font-size: 18px;
+	}
+	.gan{
+		height: 80px;
+	}
+	.projectBrief_text,.company_title,.company_jan,.company_nr,.financing_text,.business_wj{
+		font-size: 22px;
+	}
+	.business_wj{
+		margin-left:300px;
+	}
+	.company_logo{
+		width: 150px;
+		height: 150px;
+	}
+	.company-desc{
+		line-height:inherit !important;
+	}
+	.company_name{
+		    margin: 70px 0 0px 0;
+	}
+	.button{
+		width: 211px !important; 
+		 height: 53px !important; 
+		 font-size: 20px; 
+		line-height: 60px !important; 
+		margin-bottom:0 ;
+	}
+	.company_nr{
+		width: 600px;
+	}
+	.models{
+		top: -30% !important;
+		left: 17% !important;
+		transform: scale(.2);
+	}
 }
 </style>

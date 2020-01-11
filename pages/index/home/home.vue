@@ -477,4 +477,64 @@
 		margin-top: 0px;
 		padding-top: 0px;
 	}
+	@media (min-width:750px) {
+		.button{
+			width: 211px !important;
+			height: 53px !important;
+			font-size: 20px;
+			line-height: 60px !important;
+			bottom: 0 !important;
+		}
+		.title{
+			width: 355px !important;
+			font-size: 25px !important;
+			line-height: 50px;
+		}
+		.name{
+			font-size: 20px;
+			width: 91px;
+			height: 42px;
+			line-height: 42px;
+			margin-bottom: 0;
+		}
+		.pric{
+			font-size: 30px;
+			position: relative;
+			top: -66px;
+		}
+		.type{
+			width: 113px;
+			height: 42px;
+			line-height: 0px;
+		}
+		.type_size{
+			font-size: 18px;
+		}
+		.newsiwper{
+			transform: scale(.3);
+			left: -530px;
+		}
+		.nav-item uni-text{
+			font-size: 18px;
+		}
+		.navbar uni-view{
+			margin:0 60px;
+		}
+		.current{
+			border-bottom: 4px solid #DEB156;
+			border-radius: 2px;
+			padding-bottom: 5px;
+		}
+		.list_item{
+			margin: 0 30px;
+		}
+		.navbar{
+			border-top: 11px solid #F1F1F1;
+			margin-top:50px;
+			padding-top:25px;
+		}
+		.time, .ll{
+			font-size: 16px;
+		}
+	}
 </style>

@@ -509,4 +509,37 @@ input{
 .button {
 	margin: 68upx 0 200upx 0;
 }
+@media (min-width:750px) {
+	.w_input,uni-label{
+		font-size: 16px;
+	}
+	.log{
+		font-size: 16px;
+		height: 40px;
+		line-height: 40px;
+	}
+	.yjhs{
+		width: 628px;
+		font-size: 16px;
+	}
+	.yjh{
+		width: 628px;
+		height: 220px;
+		font-size: 16px;
+	}
+	.cists,.uni-input{
+		font-size: 16px !important;
+	}
+	.sc{
+		font-size: 16px;
+		height: 60px;
+		line-height: 60px;
+	}
+	.scpdf{
+		font-size: 16px;
+	}
+	.button{
+		transform: translateX(-50%) scale(.4);
+	}
+}
 </style>

@@ -8,7 +8,7 @@
 					<!-- <text v-if="check == 1"></text>
 					<text v-else class="user_type">未注册</text> -->
 				</view>
-				<view class="user_id" v-if="check==1">{{user.phone}}</view>
+				<view class="user_id" v-if="check==1">{{user.phone}}123123</view>
 				<!-- <view class="user_id" v-else>ID:{{user.id}}</view> -->
 				<navigator url="../../register/register">
 					<view class="xg" v-if="check==1">修改<text>></text></view>
@@ -93,7 +93,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									window.location.href = res.data.data;
+									// window.location.href = res.data.data;
 								}
 							})
 						} else {
@@ -148,7 +148,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									window.location.href = res.data.data;
+									// window.location.href = res.data.data;
 								}
 							})
 						} else {
@@ -213,7 +213,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									window.location.href = res.data.data;
+									// window.location.href = res.data.data;
 								}
 							})
 						} else {
@@ -395,5 +395,54 @@
 .haibao_img{
 	width:409upx;
 	height:546upx;
+}
+@media (min-width:750px) {
+	.user{
+		height: 250px;
+		border-bottom: 11px solid #F1F1F1;
+	}
+	.user_img{
+		width: 100px !important;
+		height: 100px !important;
+	}
+	.user_xm_list{
+		width: 250px;
+		height: 272px;
+	}
+	.icfon{
+		margin: 28px 0px 40px 25px !important;
+	}
+	.ic1{
+		width: 76px !important;
+		height:41px !important;
+		
+	}
+	.ic2{
+		width:85px !important;
+		height:41px !important;
+		transform: scale(1.1);
+	}
+	.ic3{
+		width:80px !important;
+		height:41px !important;
+		transform: scale(1.1);
+	}
+	.ic4{
+		width:80px !important;
+		height:41px !important;
+	}
+	.user_name{
+		font-size: 20px !important;
+	}
+	.xg{
+		font-size: 18px !important;
+	}
+	.icont_text {
+	    margin-left: 50px;
+	}
+	.shux{
+		top: 18px;
+	}
+	
 }
 </style>

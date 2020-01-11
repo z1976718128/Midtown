@@ -107,7 +107,7 @@
 	}
 </script>
 
-<style scoped>
+<style>
 	.br{
 		border-top: 13upx solid #F1F1F1;
 	}
@@ -173,5 +173,17 @@
 		font-weight:400;
 		color:rgba(181,181,181,1);
 		line-height:26upx;
+	}
+	@media (min-width: 750px) {
+		.new_deso{
+			width:400px !important ;
+		}
+		.new_time{
+			width: auto !important;
+		}
+		.new_imgs{
+			width: 245px;
+			height: 163px;
+		}
 	}
 </style>

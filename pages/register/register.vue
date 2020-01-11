@@ -168,7 +168,7 @@ export default {
 							success: res => {
 								console.log(res);
 								_than.hr = res.data.data;
-								window.location.href = res.data.data;
+								// window.location.href = res.data.data;
 							}
 						});
 					} else {
@@ -310,7 +310,7 @@ export default {
 								success: res => {
 									console.log(res);
 									_than.hr = res.data.data;
-									window.location.href = res.data.data;
+									// window.location.href = res.data.data;
 								}
 							});
 						} else {
@@ -398,7 +398,7 @@ export default {
 									success: res => {
 										console.log(res);
 										_than.hr = res.data.data;
-										window.location.href = res.data.data;
+										// window.location.href = res.data.data;
 									}
 								});
 							} else {
@@ -560,5 +560,40 @@ input,
 .buus view {
 	text-align: center;
 	margin: 0 25upx;
+}
+@media (min-width:750px) {
+	.w_input,uni-label,.cists{
+		font-size: 16px;
+	}
+	.uni-form-item{
+		padding:24px 0;
+	}
+	.yjh{
+		width: 584px;
+		height: 170px;
+		font-size: 16px;
+		margin-top: 10px;
+	}
+	.button{
+		width: 211px !important;
+		height: 53px !important;
+		font-size: 20px;
+		line-height: 60px !important;
+		margin-bottom: 0;
+	}
+	.get_vcode{
+		font-size: 16px;
+		width: 135px;
+		height: 35px;
+		line-height: 35px;
+		border:2px solid rgba(182, 0, 14, 1);
+	}
+	.smscode{
+		width: 264px;
+		font-size: 16px;
+	}
+	.shux{
+		top: 0px;
+	}
 }
 </style>

@@ -255,5 +255,33 @@
 .company_name {
     margin: 56upx 0 6upx 0;
 }
-
+@media (min-width:750px) {
+	.projectBrief_text{
+		width: 630px;
+	}
+	.button{
+		width: 211px !important;
+		height: 53px !important;
+		font-size: 20px;
+		line-height: 60px !important;
+		margin-bottom: 0;
+	}
+	.company_logo{
+		width: 150px;
+	}
+	.company_logo_img{
+		padding: 0;
+	}
+	.company-desc{
+		line-height: 0;
+	}
+	.company_name{
+		 margin:50px 0 11px 0;
+	}
+	.models{
+		top: -30% !important;
+		left: 17% !important;
+		transform: scale(.2);
+	}
+}
 </style>
