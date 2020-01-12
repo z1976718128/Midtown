@@ -22,7 +22,7 @@
 				上传LOGO
 				<text class="req">*</text>
 			</label>
-			<view class="log" @tap="logoUp">{{ logo == '' ? files : '已上传点击修改' }}</view>
+			<view class="log" @tap="logoUp" >{{asv2&&asv2!=100?asv2+"%":logoFiles}}</view>
 		</view>
 		<view class="uni-form-item uni-row">
 			<label>
@@ -99,8 +99,9 @@
 			</label>
 		</view>
 		<view class="sc_item">
-			<view class="sc" @tap="fileUp">{{ field_name == '' ? files : '已上传点击修改' }}</view>
+			<view class="sc" @tap="fileUp">{{asv&&asv!=100?asv+"%":files}}</view>
 			<view class="scpdf">仅限上传PDF类型的文件（单个文件不超过20M）</view>
+			
 		</view>
 		<view class="button" @tap="save">提交</view>
 	</view>
@@ -122,14 +123,14 @@ export default {
 	},
 	data() {
 		return {
-			   cityPickerValueDefault: [0, 0, 1],
-			                pickerText: '',
+			clor:"red",
+			cityPickerValueDefault: [0, 0, 1],
+			pickerText: '',
 			city_name: '请选择>',
 			tempArray: [],
 			array: [[{ label: '请选择' }], [{ label: '请选择' }]],
 			index: [0, 0],
 			logos: '上传图片+',
-			files: '选择文件+',
 			indicatorStyle: '',
 			visible: true,
 			code: '',
@@ -141,6 +142,7 @@ export default {
 			title: '',
 			company_name: '',
 			logo: '',
+			logoFiles:"选择文件+",
 			one_desc: '',
 			field_id: '',
 			city_id: '',
@@ -148,11 +150,14 @@ export default {
 			capital_id: '',
 			stage_id: '',
 			file: '',
+			files:"选择文件+",
 			financing: '',
 			field_name: '',
 			picked: {
 				labels: ['选择>']
-			}
+			},
+			asv:"",
+			asv2:""
 		};
 	},
 	mounted() {
@@ -200,11 +205,15 @@ export default {
 		},
 		logoUp() {
 			let than = this;
+			let time2 = null;
+			than.asv2 = 0
+			than.logoFiles = "文件上传中";
 			uni.chooseImage({
 				success: function(chooseImageRes) {
 					const tempFilePaths = chooseImageRes.tempFiles;
 					let nar = tempFilePaths[0].name.split('.');
-					uni.uploadFile({
+					let names = tempFilePaths[0].name
+					const uploadTask =uni.uploadFile({
 						url: 'http://zc.demo.yudw.com/api/Upload/upload_file',
 						filePath: tempFilePaths[0].path,
 						name: 'file',
@@ -212,30 +221,50 @@ export default {
 							let arr = res.data;
 							than.logos = tempFilePaths[0].name;
 							than.logo = JSON.parse(arr).data;
+							clearInterval(time2)
+							time2 = null;
+							than.$nextTick(function(){
+								than.logoFiles = names
+								
+							})
 						}
 					});
-					// if(nar[1] == "jpg" || nar[1] == "png" || nar[1] == "jpeg"){
-
-					// }
+					time2 = setInterval(()=>{
+						console.log(111)
+						uploadTask.onProgressUpdate(function (res) {
+							than.asv2 =res.progress
+						});
+					},45)
 				}
 			});
 		},
 		fileUp() {
 			let than = this;
+			let time = null;
+			than.asv = 0
+			than.files = "文件上传中";
 			uni.chooseImage({
+				fail:function(resa){
+					console.log(2222)
+				},
 				success: function(chooseImageRes) {
 					const tempFilePaths = chooseImageRes.tempFiles;
 					let nar = tempFilePaths[0].name.split('.');
 					console.log(tempFilePaths[0].name);
-					than.field_name = tempFilePaths[0].name;
-					uni.uploadFile({
+					let names = tempFilePaths[0].name
+					const uploadTask = uni.uploadFile({
 						url: 'http://zc.demo.yudw.com/api/Upload/upload_file',
 						filePath: tempFilePaths[0].path,
 						name: 'file',
 						success: function(res) {
 							let arr = res.data;
-							than.files = tempFilePaths[0].name;
 							than.file = JSON.parse(arr).data;
+							clearInterval(time)
+							time = null;
+							than.$nextTick(function(){
+								than.files = names
+								
+							})
 						}
 					});
 					// if(nar[1] == "pdf"){
@@ -246,6 +275,21 @@ export default {
 					// 		icon: 'none'
 					// 	})
 					// }
+					time = setInterval(()=>{
+						console.log(111)
+						uploadTask.onProgressUpdate(function (res) {
+							than.asv =res.progress
+							// console.log('上传进度' + res.progress);
+							// console.log('已经上传的数据长度' + res.totalBytesSent);
+							// console.log('预期需要上传的数据总长度' + res.totalBytesExpectedToSend);
+									 
+							// 测试条件，取消上传任务。
+							// if (res.progress > 50) {
+							// 	uploadTask.abort();
+							// }
+						});
+					},45)
+					
 				}
 			});
 		},
@@ -283,7 +327,7 @@ export default {
 				method: 'GET',
 				data: {
 					token: token,
-					field_name: this.field_name,
+					field_name: this.asv,
 					title: this.title,
 					company_name: this.company_name,
 					logo: this.logo,

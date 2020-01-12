@@ -11,6 +11,17 @@
 		mounted() {
 			// this.back();
 		},
+		onLaunch(){
+			uni.getSystemInfo({
+			    success(e){
+			        /* 窗口宽度 大于420px且不在PC页面时，跳转至PC页面 */
+			        if(e.windowWidth>420 && !window.top.isPC){
+			            window.location.pathname = '/static/html/pc.html';
+			        }
+			    }
+			})
+		},
+		
 		beforeMount() {
 			// #ifndef H5
 			// #endif
@@ -589,157 +600,8 @@
 		color: #444;
 		font-size: 32upx;
 	}
-
+	.uni-body::-webkit-scrollbar {display:none}
 	@media (min-width: 750px) {
-		uni-app{
-			left: 0;
-			width: 750px;
-			position: absolute;
-			right: 0;
-			/* padding-top: 46px; */
-			margin:auto;
-			border: 1px solid red;
-			overflow-x: hidden;
-		}
-		.uni-tabbar,
-		uni-tabbar {
-			width: 750px !important;
-			height: 80px !important;
-			/* left: -198px !important; */
-			right: 0;
-			margin: 0 auto;
-
-		}
-		.uni-tabbar .uni-tabbar__icon {
-			height: auto !important;
-		}
-		uni-tabbar .uni-tabbar__label{
-			font-size: 20px !important;
-			top: auto;
-		}
-		uni-page-head .uni-page-head{
-			width: 750px;
-			margin: 0 auto;
-			left: initial;
-		}
-		.head_fx{
-			width: 750px;
-		}
-		.bans{
-			/* transform: scale(.5); */
-		}
-		.banner-container{
-			/* width: 600px !important; */
-			height:300px !important;
-			background: red;
-		}
-		uni-swiper{
-			height:300px !important;
-		}
-		.banner-container .image-container .slide-image{
-			transform: scale(.3) !important;
-			position: relative;
-			top: -383px;
-			left: -569px;
-			
-		}
-		uni-swiper .uni-swiper-dots-horizontal{
-			left: 20%;
-		}
-		.uni-swiper-dots-horizontal {
-		    bottom: 17px !important;
-		}
-		.shux{
-			width: 4px !important;
-			height: 26px !important;
-			position: relative;
-			top: 10px;
-		}
-		.hd{
-			font-size: 20px !important;
-		}
-		.new_title{
-			font-size: 25px !important;
-		}
-		.new_deso{
-			font-size: 25px !important;
-		}
-		.tost{
-			font-size: 25px !important;
-		}
-		.new_deso{
-			width: 400px !important;
-			font-size: 20px !important;
-			margin:0  !important;
-		}
-		.new_img{
-			width: 150px !important;
-			height: 150px !important;
-			margin-right:17px !important ;
-		}
-		.new_title{
-				font-size: 25px !important;
-				height: auto !important;
-				margin: 0 !important;
-			}
-		.projectBrief_text,.company_title,.company_jan,.company_nr,.financing_text,.business_wj{
-			font-size: 22px;
-		}
-		.company_name{
-			font-size: 25px;
-		}
-		.company-desc{
-			font-size: 20px;
-		}
-		.new_time{
-			width: 400px !important;
-			font-size: 25px !important;
-		}
-		.new_imgs{
-			width: 357p !important;
-			height: 184px !important;
-		}
-		.find_titles_text{
-			font-size: 25px !important;
-		}
-		.uni-input{
-			font-size: 16px !important;
-		}
-		.uni-picker{
-			width: 750px !important;
-			left:30.5% !important;
-		}
-		.uni-picker-view-wrapper{
-			width: 750px !important;
-		}
-		.simple-address-view{
-			width: 750px !important;
-			height: 300px !important;
-		}
-		.picker-item{
-			font-size: 16px !important;
-		}
-		.simple-address-view{
-			position: relative;
-			bottom: 0;
-			left: 0;
-			width: 750px;
-			height: 170px;
-			background-color:none;
-		}
-		.simple-address__header-btn-box{
-			height: 50px !important;
-			
-		}
-		.simple-address-content{
-			width: 750px;
-			left: 30.5% !important;
-		}
-		.simple-address__header-text{
-			font-size: 16px !important;
-		}
-		.simple-address--fixed{
-			left: 585px;
-		}
+		
 	}
 </style>
