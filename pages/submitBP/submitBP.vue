@@ -224,7 +224,7 @@ export default {
 							clearInterval(time2)
 							time2 = null;
 							than.$nextTick(function(){
-								than.logoFiles = names
+								than.logoFiles = "文件上传完成"
 								
 							})
 						}
@@ -262,7 +262,7 @@ export default {
 							clearInterval(time)
 							time = null;
 							than.$nextTick(function(){
-								than.files = names
+								than.files = "文件上传完成"
 								
 							})
 						}
