@@ -31,11 +31,15 @@
 			gotoDetails(item) {
 				console.log(item)
 				if(item.href == ""){
-					uni.navigateTo({
+					uni.redirectTo({
 						url: "/pages/findDetails/findDetails?id=" +item.id
 					})
 				}else{
-					window.location.href = item.href;
+					// window.location.href=item.href
+					// window.parent.frames.location.href = item.href;
+					window.open(item.href,"_blank")
+					// window.location.replace(item.href)
+					console.log(item.href)
 					uni.request({
 						url:'http://zc.demo.yudw.com/api/news/newInc', //请求接口
 						method:'GET',

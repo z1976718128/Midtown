@@ -48,6 +48,7 @@ router.beforeEach(function(to, from, next) {
 										console.log(res)
 										_than.hr = res.data.data
 										// window.location.href = res.data.data;
+										// window.open(res.data.data,"_self")
 									}
 								})
 							} else {
@@ -137,7 +138,7 @@ router.beforeEach(function(to, from, next) {
 									success: (res) => {
 										console.log(res)
 										_than.hr =res.data.data
-										// window.location.href = res.data.data;
+										window.location.href = res.data.data;
 									}
 								})
 							} else {

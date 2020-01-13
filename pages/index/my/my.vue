@@ -93,7 +93,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									// window.location.href = res.data.data;
+									window.location.href = res.data.data;
 								}
 							})
 						} else {
@@ -148,7 +148,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									// window.location.href = res.data.data;
+									window.location.href = res.data.data;
 								}
 							})
 						} else {
@@ -213,7 +213,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									// window.location.href = res.data.data;
+									window.location.href = res.data.data;
 								}
 							})
 						} else {
