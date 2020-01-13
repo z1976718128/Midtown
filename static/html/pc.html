@@ -38,12 +38,12 @@
             window.isPC = true;
 			
             /* 窗口宽度 小于或等于420px 时，跳转回H5页面 */
-            // if(window.innerWidth <= 420){
-            //     window.location.pathname = '/';
-            // }
+            if(window.innerWidth <= 420){
+                window.location.pathname = '/';
+            }
         </script>
 	</head>
 	<body>
-		<!-- <iframe src="/" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups" target="self"></iframe> -->
+		<iframe src="/" security="restricted" sandbox="allow-scripts allow-same-origin allow-popups" target="self"></iframe>
 	</body>
 </html>
