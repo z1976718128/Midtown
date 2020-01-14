@@ -48,9 +48,9 @@ router.beforeEach(function(to, from, next) {
 										console.log(res)
 										_than.hr = res.data.data
 										// window.location.href = res.data.data;
-										uni.navigateTo({
-											url:"/pages/webview/webview?a="+res.data.data
-										})
+										// uni.navigateTo({
+										// 	url:"/pages/webview/webview?a="+res.data.data
+										// })
 										// window.open(res.data.data,"_self")
 									}
 								})
