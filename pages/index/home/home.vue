@@ -477,64 +477,31 @@
 		margin-top: 0px;
 		padding-top: 0px;
 	}
-	@media (min-width:750px) {
-		.button{
-			width: 211px !important;
-			height: 53px !important;
-			font-size: 20px;
-			line-height: 60px !important;
-			bottom: 0 !important;
+	@media (min-width: 750px) {
+		.fx{
+			width: 750px;
+			line-height: 0;
 		}
 		.title{
-			width: 355px !important;
-			font-size: 25px !important;
-			line-height: 50px;
-		}
-		.name{
-			font-size: 20px;
-			width: 91px;
-			height: 42px;
-			line-height: 42px;
-			margin-bottom: 0;
+			position: relative;
+			top: 10px;
 		}
 		.pric{
-			font-size: 30px;
 			position: relative;
-			top: -66px;
+			top: -40px;
 		}
 		.type{
-			width: 113px;
-			height: 42px;
-			line-height: 0px;
+			line-height: 0;
 		}
-		.type_size{
-			font-size: 18px;
+		.type_size span{
+			vertical-align: super;
 		}
-		.newsiwper{
-			transform: scale(.3);
-			left: -530px;
-		}
-		.nav-item uni-text{
-			font-size: 18px;
-		}
-		.navbar uni-view{
-			margin:0 60px;
-		}
-		.current{
-			border-bottom: 4px solid #DEB156;
-			border-radius: 2px;
-			padding-bottom: 5px;
+		.list_item_last{
+			position: relative;
+			top: -36px;
 		}
 		.list_item{
-			margin: 0 30px;
-		}
-		.navbar{
-			border-top: 11px solid #F1F1F1;
-			margin-top:50px;
-			padding-top:25px;
-		}
-		.time, .ll{
-			font-size: 16px;
+			margin: 0px 20px;
 		}
 	}
 </style>

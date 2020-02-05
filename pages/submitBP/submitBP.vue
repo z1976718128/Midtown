@@ -583,7 +583,7 @@ input{
 		font-size: 16px;
 	}
 	.button{
-		transform: translateX(-50%) scale(.4);
+		/* transform: translateX(-50%) scale(.4); */
 	}
 }
 </style>

@@ -1,3 +1,4 @@
+import '@/uilt/pc'
 import Vue from 'vue'
 import App from './App'
 import router from '@/router/index.js'
@@ -6,6 +7,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 let wx = require('jweixin-module')
 let url =window.location.href;
+
 
  MtaH5.init({
     sid: "500708274", //必填，统计用的appid

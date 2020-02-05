@@ -317,7 +317,7 @@ export default {
 .company_nr {
 	top: 0;
 }
-@media (min-width:750px) {
+/* @media (min-width:750px) {
 	.company_name{
 		font-size: 25px;
 	}
@@ -364,5 +364,5 @@ export default {
 		left: 17% !important;
 		transform: scale(.2);
 	}
-}
+} */
 </style>

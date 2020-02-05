@@ -255,7 +255,7 @@
 .company_name {
     margin: 56upx 0 6upx 0;
 }
-@media (min-width:750px) {
+/* @media (min-width:750px) {
 	.projectBrief_text{
 		width: 630px;
 	}
@@ -283,5 +283,5 @@
 		left: 17% !important;
 		transform: scale(.2);
 	}
-}
+} */
 </style>

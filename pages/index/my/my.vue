@@ -92,8 +92,7 @@
 								dataType: 'json',
 								success: (res) => {
 									console.log(res)
-									_than.hr =res.data.data
-									window.location.href = res.data.data;
+									location.href = res.data.data;
 								}
 							})
 						} else {
@@ -148,7 +147,7 @@
 								success: (res) => {
 									console.log(res)
 									_than.hr =res.data.data
-									window.location.href = res.data.data;
+									location.href = res.data.data;
 								}
 							})
 						} else {
@@ -212,7 +211,6 @@
 								dataType: 'json',
 								success: (res) => {
 									console.log(res)
-									_than.hr =res.data.data
 									window.location.href = res.data.data;
 								}
 							})
@@ -444,5 +442,11 @@
 		top: 18px;
 	}
 	
+	@media (min-width: 750px) {
+		.user_img uni-image{
+			width: 100px;
+			height: 100px;
+		}
+	}
 }
 </style>

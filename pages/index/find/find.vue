@@ -1,7 +1,9 @@
 <template>
 	<view>
 		<view class="find_title"><text class="shux"></text><text class="hd">热门活动</text></view>
-		<banner :banner-list="bannerList" :swiper-config="swiperConfig"></banner>
+		<view class="bans" >
+			<banner :banner-list="bannerList"  :swiper-config="swiperConfig"></banner>
+		</view>
 		<view class="br">
 			<view class="find_title "><text class="shux"></text><text class="hd">新闻资讯</text></view>
 			<findItem :itenArr="itenArr"></findItem>
@@ -25,22 +27,24 @@
 				list: [],
 				bannerList: [],
 				swiperConfig: {
-				    indicatorDots: true,
-				    indicatorColor: 'rgba(255, 255, 255, .4)',
-				    indicatorActiveColor: 'rgba(255, 255, 255, 1)',
-				    autoplay: false,
-				    interval: 3000,
-				    duration: 300,
-				    circular: true,
-				    previousMargin: '58rpx',
-				    nextMargin: '58rpx'
+					indicatorDots: true,
+					indicatorColor: 'rgba(255, 255, 255, .4)',
+					indicatorActiveColor: 'rgba(255, 255, 255, 1)',
+					autoplay: true,
+					interval: 3000,
+					duration: 300,
+					circular: true,
+					previousMargin: '58rpx',
+					nextMargin: '58rpx'
 				},
+		
 				itenArr:[],
 				page:1,
 				num:2,
 				loadingText:'上拉加载更多数据',
 				oldArr:[],
-				tempArr:[]
+				tempArr:[],
+				
 			}
 		},
 		onShow() {

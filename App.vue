@@ -15,7 +15,7 @@
 			    success(e){
 			        /* 窗口宽度 大于420px且不在PC页面时，跳转至PC页面 */
 			        if(e.windowWidth>420 && !window.top.isPC){
-			            window.location.pathname = '/static/html/pc.html';
+			            // window.location.pathname = '/static/html/pc.html';
 			        }
 			    }
 			})
@@ -41,7 +41,7 @@
 						success: (res) => {
 							console.log(res)
 							_than.hr =res.data.data
-							// window.location.href = res.data.data;
+							// location.href = res.data.data;
 						}
 					})
 				} else {
@@ -601,5 +601,27 @@
 	}
 	.uni-body::-webkit-scrollbar {display:none}
 	@media (min-width: 750px) {
+		body{
+			background-color: #ccc !important;
+		}
+	 uni-app{
+		  width: 750px;
+		  background-color: #fff;
+		  margin:auto;
+	  }
+	 uni-tabbar,.uni-tabbar{
+		 left: 50% !important;
+		 transform: translateX(-50%);
+		  width: 750px !important;
+		  margin: 0 auto;
+	  }
+	  .bans .uni-swiper-wrapper{
+		  width: 52% !important;
+	  }
+	  .head_fx,uni-page-head .uni-page-head{
+		  left: 50% !important;
+		  transform: translateX(-50%);
+		  width: 750px !important;
+	  }
 	}
 </style>

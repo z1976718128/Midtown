@@ -46,8 +46,8 @@ router.beforeEach(function(to, from, next) {
 									dataType: 'json',
 									success: (res) => {
 										console.log(res)
-										_than.hr = res.data.data
-										// window.location.href = res.data.data;
+										// _than.hr = res.data.data
+										// location.href = res.data.data;
 										// uni.navigateTo({
 										// 	url:"/pages/webview/webview?a="+res.data.data
 										// })
@@ -140,8 +140,8 @@ router.beforeEach(function(to, from, next) {
 									dataType: 'json',
 									success: (res) => {
 										console.log(res)
-										_than.hr =res.data.data
-										window.location.href = res.data.data;
+										_than.hr =res.data.data;
+										location.href = res.data.data;
 									}
 								})
 							} else {
