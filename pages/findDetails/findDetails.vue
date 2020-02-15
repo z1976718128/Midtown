@@ -105,7 +105,7 @@
 }
 @media (min-width:750px) {
 	.findeta_num{
-		font-size: 20px;
+		font-size: 16px;
 	}
 	.find_titles{
 		font-size: 25px !important;
@@ -113,19 +113,19 @@
 	.findeta_img{
 	}
 	.findeta_cont text{
-		font-size: 25px !important;
+		font-size: 16px !important;
 	}
 	.head_fx{
 		top: 45px;
 		height:11px;
 	}
 	.findeta{
-		margin:30px !important;
+		margin:12px 30px !important;
 	}
-	.findeta_img uni-image{
+	/* .findeta_img uni-image{
 		width: 400px !important;
 		height: 200px !important;
-	}
+	} */
 	
 }
 </style>

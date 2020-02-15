@@ -41,7 +41,7 @@
 						success: (res) => {
 							console.log(res)
 							_than.hr =res.data.data
-							// location.href = res.data.data;
+							location.href = res.data.data;
 						}
 					})
 				} else {
@@ -69,7 +69,6 @@
 				}
 			
 			}
-		
 				// uni.setStorageSync("token", 1)
 		},
 		methods: {
@@ -605,23 +604,50 @@
 			background-color: #ccc !important;
 		}
 	 uni-app{
-		  width: 750px;
+		  width: 375px;
 		  background-color: #fff;
 		  margin:auto;
 	  }
 	 uni-tabbar,.uni-tabbar{
 		 left: 50% !important;
 		 transform: translateX(-50%);
-		  width: 750px !important;
+		  width: 375px !important;
 		  margin: 0 auto;
 	  }
 	  .bans .uni-swiper-wrapper{
-		  width: 52% !important;
+		  width: 27% !important;
 	  }
 	  .head_fx,uni-page-head .uni-page-head{
 		  left: 50% !important;
 		  transform: translateX(-50%);
-		  width: 750px !important;
+		  width: 375px !important;
 	  }
+	  .fx{
+		  width: 375px !important;
+	  }
+	  .uni-picker-container .uni-picker{
+		  width: 375px !important;
+		  left: 36.4%;
+	  }
+	  .simple-address--fixed{
+		  width: 375px !important;
+		  left: 36.4% !important;
+	  }
+	  .list_item{
+		  height: 120px;
+		  overflow: hidden;
+	  }
+	  .list_frist{
+		  margin-top: -38px !important;
+	  }
+	  .list_nth{
+		  margin-top: -15px !important;
+	  }
+	  	.shux {
+			vertical-align: initial;
+		}
+		.content{
+			margin-top: 17px;
+		}
 	}
 </style>

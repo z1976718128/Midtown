@@ -57,5 +57,33 @@
 	}
 </script>
 
+<style scoped>
+	.list_item{
+		border-bottom: 1px solid #ccc;
+	}
+	@media (min-width: 750px){
+		.list_nth {
+			margin-top: -50px !important;
+		}
+		.bule{
+			margin-top: 56px;
+		}
+		.type_size{
+			position: relative;
+			    top: -17px;
+		}
+		.type{
+			position: relative;
+			    top: 17px;
+		}
+		.title{
+			margin-top: 25px;
+		}
+		.list_item{
+			margin:0 13px;
+		}	
+	}
+</style>
+
 
 

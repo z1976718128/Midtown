@@ -484,14 +484,15 @@
 		}
 		.title{
 			position: relative;
-			top: 10px;
+			top: 14px;
 		}
 		.pric{
 			position: relative;
 			top: -40px;
 		}
-		.type{
-			line-height: 0;
+		.type_size{
+			position: relative;
+			top: -19px;
 		}
 		.type_size span{
 			vertical-align: super;
@@ -502,6 +503,13 @@
 		}
 		.list_item{
 			margin: 0px 20px;
+		}
+		.nav-item text{
+			vertical-align: text-top;
+		}
+		.navbar{
+			height: 40px;
+			line-height: 40px;
 		}
 	}
 </style>

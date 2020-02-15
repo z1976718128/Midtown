@@ -365,4 +365,16 @@ export default {
 		transform: scale(.2);
 	}
 } */
+ @media (min-width:750px) {
+	 .find_title{
+	 	margin-top: -35px;
+	 	height: 20px;
+	 }
+	 .company_nr{
+	     top: -22px;
+	 }
+	 .financing_text:first-child{
+	 	margin-top: 52px;
+	 }
+ }
 </style>

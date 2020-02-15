@@ -46,19 +46,11 @@ router.beforeEach(function(to, from, next) {
 									dataType: 'json',
 									success: (res) => {
 										console.log(res)
-										// _than.hr = res.data.data
-										// location.href = res.data.data;
-										// uni.navigateTo({
-										// 	url:"/pages/webview/webview?a="+res.data.data
-										// })
-										// window.open(res.data.data,"_self")
+										location.href = res.data.data;
 									}
 								})
 							} else {
 								//如果有带code
-								// getQueryString(name) {
-				
-								// }
 								function getQueryString(name) {
 									let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 									let r = window.location.search.substr(1).match(reg);
@@ -91,7 +83,6 @@ router.beforeEach(function(to, from, next) {
 								})
 							}
 						}
-						// alert(res.data.data.subscribe)
 						console.log(res.data.data.subscribe)
 						if (res.data.data.subscribe == 0) {
 							location.replace("https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA")

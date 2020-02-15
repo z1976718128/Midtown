@@ -284,4 +284,22 @@
 		transform: scale(.2);
 	}
 } */
+@media (min-width:750px) {
+	.company_logo_img{
+		padding: 0;
+	}
+	.find_title{
+		margin-top: -10px;
+		/* height: 20px; */
+	}
+	.company_nr{
+	    top: -22px;
+	}
+	.financing_text:first-child{
+		margin-top: 52px;
+	}
+	.BP{
+		padding-bottom:0 ;
+	}
+}
 </style>

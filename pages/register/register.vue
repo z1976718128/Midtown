@@ -67,7 +67,7 @@
 		</view>
 		<view class=""><textarea v-model="form.desc" class="yjh" /></view>
 		<view class="uni-form-item uni-row">
-			<label>
+			<label class="codeF">
 				<text class="shux"></text>
 				短信验证码
 			</label>
@@ -566,24 +566,17 @@ input,
 		font-size: 16px;
 	}
 	.uni-form-item{
-		padding:24px 0;
+		padding:15px 0;
 	}
 	.yjh{
-		width: 584px;
-		height: 170px;
+		width: 350px;
+		height: 100px;
 		font-size: 16px;
 		margin-top: 10px;
 	}
-	.button{
-		width: 211px !important;
-		height: 53px !important;
-		font-size: 20px;
-		line-height: 60px !important;
-		margin-bottom: 0;
-	}
 	.get_vcode{
 		font-size: 16px;
-		width: 135px;
+		width: 190px;
 		height: 35px;
 		line-height: 35px;
 		border:2px solid rgba(182, 0, 14, 1);
@@ -594,6 +587,9 @@ input,
 	}
 	.shux{
 		top: 0px;
+	}
+	.codeF{
+		width: 200px;
 	}
 }
 </style>

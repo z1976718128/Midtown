@@ -189,5 +189,8 @@
 			width: 245px;
 			height: 163px;
 		}
+		.shux{
+			vertical-align: initial;
+		}
 	}
 </style>

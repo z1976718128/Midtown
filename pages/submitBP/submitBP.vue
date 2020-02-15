@@ -207,7 +207,7 @@ export default {
 			let than = this;
 			let time2 = null;
 			than.asv2 = 0
-			than.logoFiles = "文件上传中";
+			// than.logoFiles = "文件上传中";
 			uni.chooseImage({
 				success: function(chooseImageRes) {
 					const tempFilePaths = chooseImageRes.tempFiles;
@@ -242,7 +242,7 @@ export default {
 			let than = this;
 			let time = null;
 			than.asv = 0
-			than.files = "文件上传中";
+			// than.files = "文件上传中";
 			uni.chooseImage({
 				fail:function(resa){
 					console.log(2222)
@@ -563,16 +563,13 @@ input{
 		line-height: 40px;
 	}
 	.yjhs{
-		width: 628px;
+		width: 350px;
 		font-size: 16px;
 	}
 	.yjh{
-		width: 628px;
-		height: 220px;
+		width: 350px;
+		height: 120px;
 		font-size: 16px;
-	}
-	.cists,.uni-input{
-		font-size: 16px !important;
 	}
 	.sc{
 		font-size: 16px;
